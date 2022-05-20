@@ -1,1 +1,3 @@
 liteluna.egg-info/
+**/*.v
+**/__pycache__/

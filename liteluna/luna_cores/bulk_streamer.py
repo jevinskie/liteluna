@@ -6,14 +6,33 @@
 # Copyright (c) 2022 Jevin Sweval <jevinsweval@gmail.com>
 # SPDX-License-Identifier: BSD-3-Clause
 
+import amaranth.cli
 from amaranth import Cat, Elaboratable, Module
+from luna.gateware.interface.ulpi import ULPIInterface
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
 
+from liteluna.luna_cores.external_car import ExternalClockAndResetController
 
-class USBStreamerDevice(Elaboratable):
+
+class USBBulkStreamerDevice(Elaboratable):
     BULK_ENDPOINT_NUMBER = 1
     MAX_BULK_PACKET_SIZE = 512
+
+    def __init__(self):
+        self.stream_out_ep = USBStreamOutEndpoint(
+            endpoint_number=self.BULK_ENDPOINT_NUMBER,
+            max_packet_size=self.MAX_BULK_PACKET_SIZE,
+        )
+        self.stream_out = self.stream_out_ep.stream
+
+        self.stream_in_ep = USBStreamInEndpoint(
+            endpoint_number=self.BULK_ENDPOINT_NUMBER,
+            max_packet_size=self.MAX_BULK_PACKET_SIZE,
+        )
+        self.stream_in = self.stream_in_ep.stream
+
+        self.ulpi = ULPIInterface()
 
     def create_descriptors(self):
         descriptors = DeviceDescriptorCollection()
@@ -45,31 +64,21 @@ class USBStreamerDevice(Elaboratable):
     def elaborate(self, platform):
         m = Module()
 
-        m.submodules.car = platform.clock_domain_generator()
+        m.submodules.car = ExternalClockAndResetController()
 
-        ulpi = platform.request(platform.default_usb_connection)
-        m.submodules.usb = usb = USBDevice(bus=ulpi)
+        m.submodules.usb = usb = USBDevice(bus=self.ulpi, handle_clocking=False)
 
         descriptors = self.create_descriptors()
         usb.add_standard_control_endpoint(descriptors)
 
-        stream_out_ep = USBStreamOutEndpoint(
-            endpoint_number=self.BULK_ENDPOINT_NUMBER,
-            max_packet_size=self.MAX_BULK_PACKET_SIZE,
-        )
-        usb.add_endpoint(stream_out_ep)
+        usb.add_endpoint(self.stream_out_ep)
+        usb.add_endpoint(self.stream_in_ep)
 
-        stream_in_ep = USBStreamInEndpoint(
-            endpoint_number=self.BULK_ENDPOINT_NUMBER,
-            max_packet_size=self.MAX_BULK_PACKET_SIZE,
-        )
-        usb.add_endpoint(stream_in_ep)
-
-        stream_in = stream_in_ep.stream
-        stream_out = stream_out_ep.stream
+        stream_in = self.stream_in
+        stream_out = self.stream_out
 
         m.d.comb += [
-            stream_in.payload.eq(~stream_out.payload),
+            stream_in.payload.eq(stream_out.payload),
             stream_in.valid.eq(stream_out.valid),
             stream_in.first.eq(stream_out.first),
             stream_in.last.eq(stream_out.last),
@@ -77,8 +86,13 @@ class USBStreamerDevice(Elaboratable):
             usb.connect.eq(1),
         ]
 
+        print(m)
+
         return m
 
 
 if __name__ == "__main__":
-    pass
+    streamer = USBBulkStreamerDevice()
+    amaranth.cli.main(
+        streamer, ports=[streamer.ulpi.data.i, streamer.stream_in.payload]
+    )
