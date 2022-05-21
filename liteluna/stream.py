@@ -8,10 +8,22 @@ from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 
 
 class USBStreamer(Module):
-    def __init__(self, platform, ulpi: ULPIInterface, with_blinky=False):
+    def __init__(self, platform, pads, with_blinky=False):
         self.platform = platform
-        self.ulpi = ulpi
+        self.ulpi = ULPIInterface()
         self.with_blinky = with_blinky
+
+        data_ts = TSTriple(8)
+        self.specials += data_ts.get_tristate(pads.data)
+
+        self.comb += [
+            ulpi.data_i.eq(data_ts.i),
+            data_ts.o.eq(ulpi.data_o),
+            data_ts.oe.eq(ulpi.data_oe),
+            ulpi.nxt.eq(pads.nxt),
+            pads.stp.eq(ulpi.stp),
+            ulpi.dir.eq(pads.dir),
+        ]
 
         self.stream_to_host = s2h = stream.Endpoint([("data", 8)])
         self.stream_to_device = s2d = stream.Endpoint([("data", 8)])
@@ -42,6 +54,7 @@ class USBStreamer(Module):
         self.specials += Instance("bulk_streamer", **port_map)
 
     def do_finalize(self):
+        super().do_finalize()
         verilog_filename = os.path.join(self.platform.output_dir, "gateware", "luna_usbstreamer.v")
         bulk_streamer.USBBulkStreamerDevice.emit_verilog(
             verilog_filename, with_blinky=self.with_blinky
