@@ -26,6 +26,15 @@ class USBStreamer(Module):
             o_ulpi_stp=ulpi.stp,
             i_ulpi_dir=ulpi.dir,
             o_stream_out_payload=s2d.payload.data,
+            o_stream_out_valid=s2d.valid,
+            i_stream_out_ready=s2d.ready,
+            o_stream_out_first=s2d.first,
+            o_stream_out_last=s2d.last,
+            i_stream_in_payload=s2h.payload.data,
+            i_stream_in_valid=s2h.valid,
+            o_stream_in_ready=s2h.ready,
+            i_stream_in_first=s2h.first,
+            i_stream_in_last=s2h.last,
         )
 
     def do_finalize(self):
