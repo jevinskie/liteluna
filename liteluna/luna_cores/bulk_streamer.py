@@ -12,8 +12,6 @@ from luna.gateware.interface.ulpi import ULPIInterface
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
 
-from liteluna.luna_cores.external_car import ExternalClockAndResetController
-
 
 class USBBulkStreamerDevice(Elaboratable):
     BULK_ENDPOINT_NUMBER = 1
