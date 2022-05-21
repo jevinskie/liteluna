@@ -1,8 +1,10 @@
+import os
+
 from litex.soc.interconnect import stream
 from migen import *
 
 from liteluna.luna_cores import bulk_streamer
-from liteluna.ulpi import ULPIInterface
+from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 
 
 class USBStreamer(Module):
@@ -23,7 +25,7 @@ class USBStreamer(Module):
             i_ulpi_nxt=ulpi.nxt,
             o_ulpi_stp=ulpi.stp,
             i_ulpi_dir=ulpi.dir,
-            o_stream_out_payload=s2d.payload,
+            o_stream_out_payload=s2d.payload.data,
         )
 
     def do_finalize(self):

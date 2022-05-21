@@ -15,3 +15,17 @@ class ULPIInterface(Record):
                 ("dir", 1),
             ]
         )
+
+
+class ULPIPHYInterface(Record):
+    def __init__(self):
+        super().__init__(
+            [
+                ("clk", 1),
+                ("rst", 1),
+                ("data", 8),
+                ("nxt", 1),
+                ("stp", 1),
+                ("dir", 1),
+            ]
+        )

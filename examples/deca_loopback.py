@@ -17,6 +17,7 @@ from migen import *
 from migen.genlib.cdc import AsyncResetSynchronizer
 
 from liteluna.stream import USBStreamer
+from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 
 # Bench SoC ----------------------------------------------------------------------------------------
 
@@ -43,7 +44,7 @@ class BenchSoC(SoCCore):
         self.add_jtagbone()
 
         # USBbone ----------------------------------------------------------------------------------
-        self.submodules.usb = USBStreamer(platform, self.ulpi)
+        self.submodules.usb = USBStreamer(platform, ULPIInterface())
 
         # scope ------------------------------------------------------------------------------------
         if with_analyzer:
