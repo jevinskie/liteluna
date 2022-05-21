@@ -1,3 +1,7 @@
 liteluna.egg-info/
 **/*.v
 **/__pycache__/
+**/build/*
+**/csr.csv
+**/analyzer.csv
+**/*.vcd
