@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import amaranth.cli
-from amaranth import Cat, Elaboratable, Module, Signal
+from amaranth import Cat, ClockSignal, Elaboratable, Module, ResetSignal, Signal
 from luna.gateware.interface.ulpi import ULPIInterface
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
@@ -42,11 +42,9 @@ class USBBulkStreamerDevice(Elaboratable):
         self.ulpi_data_i = Signal(8)
         self.ulpi_data_o = Signal(8)
         self.ulpi_data_oe = Signal()
-        self.ulpi_clk = Signal()
         self.ulpi_nxt = Signal()
         self.ulpi_stp = Signal()
         self.ulpi_dir = Signal()
-        self.ulpi_rst = Signal()
 
         self.connect = Signal()
 
@@ -93,31 +91,32 @@ class USBBulkStreamerDevice(Elaboratable):
 
         m.d.comb += usb.connect.eq(self.connect)
 
+        ulpi = self.ulpi
+
         m.d.comb += [
-            self.ulpi_data_i.eq(self.ulpi.data.i),
-            self.ulpi_data_o.eq(self.ulpi.data.o),
-            self.ulpi_data_oe.eq(self.ulpi.data.oe),
-            self.ulpi_clk.eq(self.ulpi.clk),
-            self.ulpi_nxt.eq(self.ulpi.nxt),
-            self.ulpi_stp.eq(self.ulpi.stp),
-            self.ulpi_dir.eq(self.ulpi.dir.i),
-            self.ulpi_rst.eq(self.ulpi.rst),
+            ulpi.data.i.eq(self.ulpi_data_i),
+            self.ulpi_data_o.eq(ulpi.data.o),
+            self.ulpi_data_oe.eq(ulpi.data.oe),
+            ulpi.clk.eq(ClockSignal("usb")),
+            ulpi.nxt.eq(self.ulpi_nxt),
+            self.ulpi_stp.eq(ulpi.stp),
+            ulpi.dir.i.eq(self.ulpi_dir),
         ]
 
         m.d.comb += [
             self.stream_out_payload.eq(stream_out.payload),
             self.stream_out_valid.eq(stream_out.valid),
-            self.stream_out_ready.eq(stream_out.ready),
+            stream_out.ready.eq(self.stream_out_ready),
             self.stream_out_first.eq(stream_out.first),
             self.stream_out_last.eq(stream_out.last),
         ]
 
         m.d.comb += [
-            self.stream_in_payload.eq(stream_in.payload),
-            self.stream_in_valid.eq(stream_in.valid),
+            stream_in.payload.eq(self.stream_in_payload),
+            stream_in.valid.eq(self.stream_in_valid),
             self.stream_in_ready.eq(stream_in.ready),
-            self.stream_in_first.eq(stream_in.first),
-            self.stream_in_last.eq(stream_in.last),
+            stream_in.first.eq(self.stream_in_first),
+            stream_in.last.eq(self.stream_in_last),
         ]
 
         return m
@@ -129,8 +128,6 @@ if __name__ == "__main__":
         streamer,
         name="bulk_streamer",
         ports=[
-            streamer.ulpi_clk,
-            streamer.ulpi_rst,
             streamer.ulpi_data_i,
             streamer.ulpi_data_o,
             streamer.ulpi_data_oe,

@@ -5,3 +5,5 @@ liteluna.egg-info/
 **/csr.csv
 **/analyzer.csv
 **/*.vcd
+**/prog/
+**/stream.cfg
