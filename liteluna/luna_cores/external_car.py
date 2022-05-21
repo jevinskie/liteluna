@@ -10,6 +10,10 @@ from amaranth import *
 class ExternalClockAndResetController(Elaboratable):
     """Controller for external clocking and global resets."""
 
+    def __init__(self):
+        self.usb_clk = Signal()
+        self.usb_rst = Signal()
+
     def elaborate(self, platform):
         m = Module()
 
@@ -17,6 +21,9 @@ class ExternalClockAndResetController(Elaboratable):
         # m.domains.sync   = ClockDomain()
         m.domains.usb = ClockDomain()
 
-        # m.d.comb += ClockSignal("sync").eq(ClockSignal("usb"))
+        m.d.comb += [
+            ClockSignal("usb").eq(self.usb_clk),
+            ResetSignal("usb").eq(self.usb_rst),
+        ]
 
         return m
