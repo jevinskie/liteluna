@@ -8,6 +8,7 @@ import argparse
 import os
 
 from litex.soc.cores.clock import *
+from litex.soc.cores.led import LedChaser
 from litex.soc.integration.builder import *
 from litex.soc.integration.soc_core import *
 from litex.soc.interconnect.csr import *
@@ -44,8 +45,14 @@ class BenchSoC(SoCCore):
         self.add_jtagbone()
 
         # USBbone ----------------------------------------------------------------------------------
-        self.submodules.usb = usb = USBStreamer(platform, ULPIInterface())
+        self.submodules.usb = usb = USBStreamer(platform, ULPIInterface(), with_blinky=True)
         usb.stream_to_host.connect(usb.stream_to_device)
+
+        led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)
+        self.submodules.led_usb = ClockDomainsRenamer("usb")(led_usb)
+
+        # 1 led padding between USB blinky and LiteX chaser
+        self.comb += platform.request("user_led").eq(1)
 
         # scope ------------------------------------------------------------------------------------
         if with_analyzer:
@@ -61,10 +68,8 @@ class BenchSoC(SoCCore):
             )
 
         # LEDs -------------------------------------------------------------------------------------
-        from litex.soc.cores.led import LedChaser
-
         self.submodules.leds = LedChaser(
-            pads=platform.request_all("user_led"), sys_clk_freq=sys_clk_freq
+            pads=platform.request_remaining("user_led"), sys_clk_freq=sys_clk_freq
         )
 
 

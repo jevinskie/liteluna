@@ -13,11 +13,34 @@ from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
 
 
+class StandaloneBlinky(Elaboratable):
+    def __init__(self, leds: Signal):
+        self.leds = leds
+
+    def elaborate(self, platform):
+        m = Module()
+
+        clk_freq = 60e6
+        timer = Signal(range(int(clk_freq // 2)), reset=int(clk_freq // 2) - 1)
+        flops = Signal(len(self.leds))
+
+        m.d.comb += Cat(self.leds).eq(flops)
+        with m.If(timer == 0):
+            m.d.usb += timer.eq(timer.reset)
+            m.d.usb += flops.eq(~flops)
+        with m.Else():
+            m.d.usb += timer.eq(timer - 1)
+
+        return m
+
+
 class USBBulkStreamerDevice(Elaboratable):
     BULK_ENDPOINT_NUMBER = 1
     MAX_BULK_PACKET_SIZE = 512
 
-    def __init__(self):
+    def __init__(self, with_blinky=False):
+        self.with_blinky = with_blinky
+
         self.stream_out_ep = USBStreamOutEndpoint(
             endpoint_number=self.BULK_ENDPOINT_NUMBER,
             max_packet_size=self.MAX_BULK_PACKET_SIZE,
@@ -47,6 +70,9 @@ class USBBulkStreamerDevice(Elaboratable):
         self.ulpi_dir = Signal()
 
         self.connect = Signal()
+
+        if with_blinky:
+            self.led = Signal()
 
     def create_descriptors(self):
         descriptors = DeviceDescriptorCollection()
@@ -79,6 +105,9 @@ class USBBulkStreamerDevice(Elaboratable):
         m = Module()
 
         m.submodules.usb = usb = USBDevice(bus=self.ulpi, handle_clocking=False)
+
+        if self.with_blinky:
+            m.submodules.blinky = StandaloneBlinky(self.led)
 
         descriptors = self.create_descriptors()
         usb.add_standard_control_endpoint(descriptors)
@@ -122,8 +151,8 @@ class USBBulkStreamerDevice(Elaboratable):
         return m
 
     @staticmethod
-    def get_instance_and_ports():
-        streamer = USBBulkStreamerDevice()
+    def get_instance_and_ports(with_blinky=False):
+        streamer = USBBulkStreamerDevice(with_blinky)
         streamer_ports = [
             streamer.ulpi_data_i,
             streamer.ulpi_data_o,
@@ -144,11 +173,15 @@ class USBBulkStreamerDevice(Elaboratable):
             streamer.stream_in_first,
             streamer.stream_in_last,
         ]
+        if with_blinky:
+            streamer_ports.append(streamer.led)
         return (streamer, streamer_ports)
 
     @staticmethod
-    def emit_verilog(path):
-        streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports()
+    def emit_verilog(path, with_blinky=False):
+        streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports(
+            with_blinky=with_blinky
+        )
         parser = amaranth.cli.main_parser()
         args = parser.parse_args(["generate", "-t", "v", path])
         amaranth.cli.main_runner(parser, args, streamer, name="bulk_streamer", ports=streamer_ports)
