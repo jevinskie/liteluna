@@ -16,12 +16,16 @@ from litex_boards.targets.terasic_deca import _CRG
 from migen import *
 from migen.genlib.cdc import AsyncResetSynchronizer
 
+from liteluna.stream import USBStreamer
+
 # Bench SoC ----------------------------------------------------------------------------------------
 
 
 class BenchSoC(SoCCore):
     def __init__(self, with_analyzer=False, sys_clk_freq=int(100e6)):
         platform = terasic_deca.Platform()
+
+        self.ulpi = platform.request("ulpi")
 
         # SoCMini ----------------------------------------------------------------------------------
         SoCMini.__init__(
@@ -33,10 +37,13 @@ class BenchSoC(SoCCore):
         )
 
         # CRG --------------------------------------------------------------------------------------
-        self.submodules.crg = _CRG(platform, sys_clk_freq)
+        self.submodules.crg = _CRG(platform, sys_clk_freq, with_usb_pll=True, ulpi=self.ulpi)
 
         # JTAGbone ---------------------------------------------------------------------------------
         self.add_jtagbone()
+
+        # USBbone ----------------------------------------------------------------------------------
+        self.submodules.usb = USBStreamer(platform, self.ulpi)
 
         # scope ------------------------------------------------------------------------------------
         if with_analyzer:

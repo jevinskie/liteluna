@@ -121,13 +121,10 @@ class USBBulkStreamerDevice(Elaboratable):
 
         return m
 
-
-if __name__ == "__main__":
-    streamer = USBBulkStreamerDevice()
-    amaranth.cli.main(
-        streamer,
-        name="bulk_streamer",
-        ports=[
+    @staticmethod
+    def get_instance_and_ports():
+        streamer = USBBulkStreamerDevice()
+        streamer_ports = [
             streamer.ulpi_data_i,
             streamer.ulpi_data_o,
             streamer.ulpi_data_oe,
@@ -146,5 +143,21 @@ if __name__ == "__main__":
             streamer.stream_in_ready,
             streamer.stream_in_first,
             streamer.stream_in_last,
-        ],
+        ]
+        return (streamer, streamer_ports)
+
+    @staticmethod
+    def emit_verilog(path):
+        streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports()
+        parser = amaranth.cli.main_parser()
+        args = parser.parse_args(["generate", "-t", "v", path])
+        main_runner(parser, args, name="bulk_streamer", ports=streamer_ports)
+
+
+if __name__ == "__main__":
+    streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports()
+    amaranth.cli.main(
+        streamer,
+        name="bulk_streamer",
+        ports=streamer_ports,
     )
