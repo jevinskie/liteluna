@@ -10,8 +10,26 @@ from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 class USBStreamer(Module):
     def __init__(self, platform, pads, with_blinky=False):
         self.platform = platform
-        self.ulpi = ULPIInterface()
+        self.ulpi = ulpi = ULPIInterface()
         self.with_blinky = with_blinky
+
+        inverted_reset = False
+        if not set(["rst", "reset"]).isdisjoint(set(dir(pads))):
+            try:
+                pad_reset = getattr(pads, "rst")
+            except AttributeError:
+                pad_reset = getattr(pads, "reset")
+        else:
+            inverted_reset = True
+            try:
+                pad_reset = getattr(pads, "rst_n")
+            except AttributeError:
+                pad_reset = getattr(pads, "reset_n")
+
+        if not inverted_reset:
+            self.comb += pad_reset.eq(ulpi.rst)
+        else:
+            self.comb += pad_reset.eq(~ulpi.rst)
 
         data_ts = TSTriple(8)
         self.specials += data_ts.get_tristate(pads.data)
@@ -37,6 +55,7 @@ class USBStreamer(Module):
             "i_ulpi_nxt": ulpi.nxt,
             "o_ulpi_stp": ulpi.stp,
             "i_ulpi_dir": ulpi.dir,
+            "o_ulpi_rst": ulpi.rst,
             "o_stream_out_payload": s2d.payload.data,
             "o_stream_out_valid": s2d.valid,
             "i_stream_out_ready": s2d.ready,

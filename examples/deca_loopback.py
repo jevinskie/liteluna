@@ -45,7 +45,7 @@ class BenchSoC(SoCCore):
         self.add_jtagbone()
 
         # USBbone ----------------------------------------------------------------------------------
-        self.submodules.usb = usb = USBStreamer(platform, ULPIInterface(), with_blinky=True)
+        self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
         usb.stream_to_host.connect(usb.stream_to_device)
 
         led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)

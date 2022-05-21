@@ -68,6 +68,7 @@ class USBBulkStreamerDevice(Elaboratable):
         self.ulpi_nxt = Signal()
         self.ulpi_stp = Signal()
         self.ulpi_dir = Signal()
+        self.ulpi_rst = Signal()
 
         self.connect = Signal()
 
@@ -130,6 +131,7 @@ class USBBulkStreamerDevice(Elaboratable):
             ulpi.nxt.eq(self.ulpi_nxt),
             self.ulpi_stp.eq(ulpi.stp),
             ulpi.dir.i.eq(self.ulpi_dir),
+            self.ulpi_rst.eq(ulpi.rst),
         ]
 
         m.d.comb += [
@@ -160,6 +162,7 @@ class USBBulkStreamerDevice(Elaboratable):
             streamer.ulpi_nxt,
             streamer.ulpi_stp,
             streamer.ulpi_dir,
+            streamer.ulpi_rst,
             streamer.connect,
             streamer.stream_out_payload,
             streamer.stream_out_valid,
