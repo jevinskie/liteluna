@@ -47,9 +47,10 @@ class BenchSoC(SoCCore):
 
         # USBbone ----------------------------------------------------------------------------------
         self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
-        self.comb += self.ulpi.reset_n.eq(
-            ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
-        )
+        # self.comb += self.ulpi.reset_n.eq(
+        #     ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
+        # )
+        self.comb += self.ulpi.reset_n.eq(1)
         usb.stream_to_host.connect(usb.stream_to_device)
         self.comb += usb.connect.eq(1)
 

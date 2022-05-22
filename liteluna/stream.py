@@ -26,10 +26,10 @@ class USBStreamer(Module):
             except AttributeError:
                 pad_reset = getattr(pads, "reset_n")
 
-        if not self.inverted_reset:
-            self.comb += pad_reset.eq(ulpi.rst)
-        else:
-            self.comb += pad_reset.eq(~ulpi.rst)
+        # if not self.inverted_reset:
+        #     self.comb += pad_reset.eq(ulpi.rst)
+        # else:
+        #     self.comb += pad_reset.eq(~ulpi.rst)
 
         data_ts = TSTriple(8)
         self.specials += data_ts.get_tristate(pads.data)
@@ -58,7 +58,7 @@ class USBStreamer(Module):
             "o_ulpi_stp": ulpi.stp,
             "i_ulpi_dir": ulpi.dir,
             "o_ulpi_rst": ulpi.rst,
-            # "i_connect": self.connect, # breaks clocking???
+            "i_connect": self.connect,  # breaks clocking???
             "o_stream_out_payload": s2d.payload.data,
             "o_stream_out_valid": s2d.valid,
             "i_stream_out_ready": s2d.ready,
