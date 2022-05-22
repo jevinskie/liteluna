@@ -58,7 +58,7 @@ class USBStreamer(Module):
             "o_ulpi_stp": ulpi.stp,
             "i_ulpi_dir": ulpi.dir,
             "o_ulpi_rst": ulpi.rst,
-            "i_connect": self.connect,  # breaks clocking???
+            "i_connect": self.connect,
             "o_stream_out_payload": s2d.payload.data,
             "o_stream_out_valid": s2d.valid,
             "i_stream_out_ready": s2d.ready,
