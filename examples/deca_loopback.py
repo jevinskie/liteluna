@@ -22,12 +22,15 @@ from migen.genlib.cdc import AsyncResetSynchronizer
 
 from liteluna.stream import USBStreamer
 from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
+from liteluna.usbbone import add_usbbone
 
 # Bench SoC ----------------------------------------------------------------------------------------
 
 
 class BenchSoC(SoCCore):
-    def __init__(self, with_jtagbone=False, with_analyzer=False, sys_clk_freq=int(125e6)):
+    def __init__(
+        self, with_usbbone=False, with_jtagbone=False, with_analyzer=False, sys_clk_freq=int(125e6)
+    ):
         platform = terasic_deca.Platform()
 
         self.ulpi = platform.request("ulpi")
@@ -49,20 +52,23 @@ class BenchSoC(SoCCore):
             self.add_jtagbone()
 
         # USBbone ----------------------------------------------------------------------------------
-        self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
-        # self.comb += self.ulpi.reset_n.eq(
-        #     ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
-        # )
-        self.comb += self.ulpi.reset_n.eq(1)
+        if with_usbbone:
+            add_usbbone(self, self.ulpi, with_blinky=True)
+        else:
+            self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
+            # self.comb += self.ulpi.reset_n.eq(
+            #     ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
+            # )
+            self.comb += self.ulpi.reset_n.eq(1)
 
-        self.submodules.stream_inverter = StreamPayloadInverter()
-        self.submodules.pipeline = stream.Pipeline(
-            usb.stream_to_device,
-            self.stream_inverter,
-            usb.stream_to_host,
-        )
+            self.submodules.stream_inverter = StreamPayloadInverter()
+            self.submodules.pipeline = stream.Pipeline(
+                usb.sink,
+                self.stream_inverter,
+                usb.source,
+            )
 
-        self.comb += usb.connect.eq(1)
+            self.comb += usb.connect.eq(1)
 
         led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)
         self.submodules.led_usb = ClockDomainsRenamer("usb")(led_usb)
@@ -114,9 +120,14 @@ def main():
     parser.add_argument("--load", action="store_true", help="Load bitstream")
     parser.add_argument("--with-jtagbone", action="store_true", help="Enable JTAGbone")
     parser.add_argument("--with-analyzer", action="store_true", help="Enable litescope")
+    parser.add_argument("--with-usbbone", action="store_true", help="Enable USBbone")
     args = parser.parse_args()
 
-    soc = BenchSoC(with_jtagbone=args.with_jtagbone, with_analyzer=args.with_analyzer)
+    soc = BenchSoC(
+        with_usbbone=args.with_usbbone,
+        with_jtagbone=args.with_jtagbone,
+        with_analyzer=args.with_analyzer,
+    )
     builder = Builder(soc, csr_csv="csr.csv")
     builder.build(run=args.build)
 

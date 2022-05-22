@@ -43,8 +43,8 @@ class USBStreamer(Module):
             ulpi.dir.eq(pads.dir),
         ]
 
-        self.stream_to_host = s2h = stream.Endpoint([("data", 8)])
-        self.stream_to_device = s2d = stream.Endpoint([("data", 8)])
+        self.source = s2h = stream.Endpoint([("data", 8)])
+        self.sink = s2d = stream.Endpoint([("data", 8)])
 
         self.connect = Signal()
 
