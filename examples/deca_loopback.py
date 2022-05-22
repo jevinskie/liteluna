@@ -60,7 +60,10 @@ class BenchSoC(SoCCore):
         #     usb.stream_to_host,
         # )
 
-        self.comb += usb.stream_to_device.connect(usb.stream_to_host)
+        self.comb += self.stream_inverter.sink.connect(usb.stream_to_host)
+        self.comb += usb.stream_to_device.connect(self.stream_inverter.source)
+
+        # self.comb += usb.stream_to_device.connect(usb.stream_to_host)
         self.comb += usb.connect.eq(1)
 
         led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)
