@@ -55,14 +55,14 @@ class BenchSoC(SoCCore):
         # )
         self.comb += self.ulpi.reset_n.eq(1)
         self.submodules.stream_inverter = StreamPayloadInverter()
-        # self.submodules.pipeline = stream.Pipeline(
-        #     usb.stream_to_device,
-        #     self.stream_inverter,
-        #     usb.stream_to_host,
-        # )
+        self.submodules.pipeline = stream.Pipeline(
+            usb.stream_to_device,
+            # self.stream_inverter,
+            usb.stream_to_host,
+        )
 
-        self.comb += self.stream_inverter.sink.connect(usb.stream_to_host)
-        self.comb += usb.stream_to_device.connect(self.stream_inverter.source)
+        # self.comb += self.stream_inverter.sink.connect(usb.stream_to_host)
+        # self.comb += usb.stream_to_device.connect(self.stream_inverter.source)
 
         # self.comb += usb.stream_to_device.connect(usb.stream_to_host)
         self.comb += usb.connect.eq(1)
