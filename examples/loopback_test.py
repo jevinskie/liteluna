@@ -22,14 +22,14 @@ with usb1.USBContext() as context:
         i = 0
         while True:
             obuf = random.randbytes(512)
-            # print(f"obuf:     {obuf.hex()}")
+            print(f"obuf:     {obuf.hex()}")
             handle.bulkWrite(1, obuf, timeout=1000)
             ibuf = handle.bulkRead(1, 512, timeout=1000)
-            # print(f"ibuf:     {ibuf.hex()}")
-            assert ibuf == obuf
-            # ibuf_inv = bytes([b ^ 0xFF for b in ibuf])
+            print(f"ibuf:     {ibuf.hex()}")
+            # assert ibuf == obuf
+            ibuf_inv = bytes([b ^ 0xFF for b in ibuf])
             # print(f"ibuf_inv: {ibuf_inv.hex()}")
-            # assert ibuf_inv == obuf
+            assert ibuf_inv == obuf
             if i % 1024 == 0:
                 print(".", end="", flush=True)
             i += 1

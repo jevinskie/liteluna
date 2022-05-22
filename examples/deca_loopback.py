@@ -27,7 +27,7 @@ from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 
 
 class BenchSoC(SoCCore):
-    def __init__(self, with_analyzer=False, sys_clk_freq=int(125e6)):
+    def __init__(self, with_jtagbone=False, with_analyzer=False, sys_clk_freq=int(125e6)):
         platform = terasic_deca.Platform()
 
         self.ulpi = platform.request("ulpi")
@@ -45,7 +45,8 @@ class BenchSoC(SoCCore):
         self.submodules.crg = _CRG(platform, sys_clk_freq, with_usb_pll=True, ulpi=self.ulpi)
 
         # JTAGbone ---------------------------------------------------------------------------------
-        self.add_jtagbone()
+        if with_jtagbone:
+            self.add_jtagbone()
 
         # USBbone ----------------------------------------------------------------------------------
         self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
@@ -77,8 +78,6 @@ class BenchSoC(SoCCore):
         if with_analyzer:
             from litescope import LiteScopeAnalyzer
 
-            usb_clk_cnt = Signal(4)
-            self.sync.usb += usb_clk_cnt.eq(usb_clk_cnt + 1)
             usb_rst = Signal()
             self.comb += [
                 usb_rst.eq(ResetSignal("usb")),
@@ -93,7 +92,6 @@ class BenchSoC(SoCCore):
                 *get_signals(self.stream_inverter),
                 # *get_signals(usb.stream_to_host),
                 # *get_signals(usb.stream_to_device),
-                usb_clk_cnt,
                 usb_rst,
                 self.crg.usb_pll.locked,
             ]
@@ -118,10 +116,11 @@ def main():
     parser = argparse.ArgumentParser(description="LiteLUNA looopback example on on MAX10 DECA")
     parser.add_argument("--build", action="store_true", help="Build bitstream")
     parser.add_argument("--load", action="store_true", help="Load bitstream")
+    parser.add_argument("--with-jtagbone", action="store_true", help="Enable JTAGbone")
     parser.add_argument("--with-analyzer", action="store_true", help="Enable litescope")
     args = parser.parse_args()
 
-    soc = BenchSoC(with_analyzer=args.with_analyzer)
+    soc = BenchSoC(with_jtagbone=args.with_jtagbone, with_analyzer=args.with_analyzer)
     builder = Builder(soc, csr_csv="csr.csv")
     builder.build(run=args.build)
 
