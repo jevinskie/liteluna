@@ -54,22 +54,18 @@ class BenchSoC(SoCCore):
         #     ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
         # )
         self.comb += self.ulpi.reset_n.eq(1)
+
         self.submodules.stream_inverter = StreamPayloadInverter()
         self.submodules.pipeline = stream.Pipeline(
             usb.stream_to_device,
-            # self.stream_inverter,
+            self.stream_inverter,
             usb.stream_to_host,
         )
 
-        # self.comb += self.stream_inverter.sink.connect(usb.stream_to_host)
-        # self.comb += usb.stream_to_device.connect(self.stream_inverter.source)
-
-        # self.comb += usb.stream_to_device.connect(usb.stream_to_host)
         self.comb += usb.connect.eq(1)
 
         led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)
         self.submodules.led_usb = ClockDomainsRenamer("usb")(led_usb)
-        # self.submodules.led_usb = led_usb
 
         # 1 led padding between USB blinky and LiteX chaser
         self.comb += platform.request("user_led").eq(1)
