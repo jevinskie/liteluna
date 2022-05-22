@@ -24,7 +24,7 @@ from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 
 
 class BenchSoC(SoCCore):
-    def __init__(self, with_analyzer=False, sys_clk_freq=int(100e6)):
+    def __init__(self, with_analyzer=False, sys_clk_freq=int(125e6)):
         platform = terasic_deca.Platform()
 
         self.ulpi = platform.request("ulpi")
@@ -50,6 +50,7 @@ class BenchSoC(SoCCore):
 
         led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)
         self.submodules.led_usb = ClockDomainsRenamer("usb")(led_usb)
+        # self.submodules.led_usb = led_usb
 
         # 1 led padding between USB blinky and LiteX chaser
         self.comb += platform.request("user_led").eq(1)
@@ -58,7 +59,7 @@ class BenchSoC(SoCCore):
         if with_analyzer:
             from litescope import LiteScopeAnalyzer
 
-            analyzer_signals = []
+            analyzer_signals = [self.ulpi]
             self.submodules.analyzer = LiteScopeAnalyzer(
                 analyzer_signals,
                 depth=512,
