@@ -13,6 +13,7 @@ from litex.soc.cores.clock import *
 from litex.soc.cores.led import LedChaser
 from litex.soc.integration.builder import *
 from litex.soc.integration.soc_core import *
+from litex.soc.interconnect import stream
 from litex.soc.interconnect.csr import *
 from litex_boards.platforms import terasic_deca
 from litex_boards.targets.terasic_deca import _CRG
@@ -52,6 +53,13 @@ class BenchSoC(SoCCore):
         #     ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
         # )
         self.comb += self.ulpi.reset_n.eq(1)
+        self.submodules.stream_inverter = StreamPayloadInverter()
+        # self.submodules.pipeline = stream.Pipeline(
+        #     usb.stream_to_device,
+        #     self.stream_inverter,
+        #     usb.stream_to_host,
+        # )
+
         self.comb += usb.stream_to_device.connect(usb.stream_to_host)
         self.comb += usb.connect.eq(1)
 
@@ -78,7 +86,8 @@ class BenchSoC(SoCCore):
 
             analyzer_signals = [
                 *ulpi_sigs,
-                *get_signals(usb, recurse=True),
+                *get_signals(usb, recurse=False),
+                *get_signals(self.stream_inverter),
                 # *get_signals(usb.stream_to_host),
                 # *get_signals(usb.stream_to_device),
                 usb_clk_cnt,
