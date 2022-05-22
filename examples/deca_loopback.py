@@ -7,6 +7,7 @@
 import argparse
 import os
 
+from litex.gen.fhdl.utils import get_signals
 from litex.soc.cores.clock import *
 from litex.soc.cores.led import LedChaser
 from litex.soc.integration.builder import *
@@ -46,6 +47,9 @@ class BenchSoC(SoCCore):
 
         # USBbone ----------------------------------------------------------------------------------
         self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
+        self.comb += self.ulpi.reset_n.eq(
+            ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
+        )
         usb.stream_to_host.connect(usb.stream_to_device)
 
         led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)
@@ -59,7 +63,17 @@ class BenchSoC(SoCCore):
         if with_analyzer:
             from litescope import LiteScopeAnalyzer
 
-            analyzer_signals = [self.ulpi]
+            usb_clk_cnt = Signal(4)
+            self.sync.usb += usb_clk_cnt.eq(usb_clk_cnt + 1)
+            usb_rst = Signal()
+            self.comb += [
+                usb_rst.eq(ResetSignal("usb")),
+            ]
+
+            ulpi_sigs = get_signals(self.ulpi)
+            ulpi_sigs.remove(self.ulpi.clk)
+
+            analyzer_signals = [*ulpi_sigs, usb_clk_cnt, usb_rst, self.crg.usb_pll.locked]
             self.submodules.analyzer = LiteScopeAnalyzer(
                 analyzer_signals,
                 depth=512,

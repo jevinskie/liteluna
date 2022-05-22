@@ -13,20 +13,20 @@ class USBStreamer(Module):
         self.ulpi = ulpi = ULPIInterface()
         self.with_blinky = with_blinky
 
-        inverted_reset = False
+        self.inverted_reset = False
         if not set(["rst", "reset"]).isdisjoint(set(dir(pads))):
             try:
                 pad_reset = getattr(pads, "rst")
             except AttributeError:
                 pad_reset = getattr(pads, "reset")
         else:
-            inverted_reset = True
+            self.inverted_reset = True
             try:
                 pad_reset = getattr(pads, "rst_n")
             except AttributeError:
                 pad_reset = getattr(pads, "reset_n")
 
-        if not inverted_reset:
+        if not self.inverted_reset:
             self.comb += pad_reset.eq(ulpi.rst)
         else:
             self.comb += pad_reset.eq(~ulpi.rst)
