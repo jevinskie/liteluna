@@ -46,6 +46,8 @@ class USBStreamer(Module):
         self.stream_to_host = s2h = stream.Endpoint([("data", 8)])
         self.stream_to_device = s2d = stream.Endpoint([("data", 8)])
 
+        self.connect = Signal()
+
         port_map = {
             "i_usb_clk": ClockSignal("usb"),
             "i_usb_rst": ResetSignal("usb"),
@@ -56,6 +58,7 @@ class USBStreamer(Module):
             "o_ulpi_stp": ulpi.stp,
             "i_ulpi_dir": ulpi.dir,
             "o_ulpi_rst": ulpi.rst,
+            # "i_connect": self.connect, # breaks clocking???
             "o_stream_out_payload": s2d.payload.data,
             "o_stream_out_valid": s2d.valid,
             "i_stream_out_ready": s2d.ready,

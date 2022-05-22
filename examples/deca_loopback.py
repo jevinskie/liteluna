@@ -51,6 +51,7 @@ class BenchSoC(SoCCore):
             ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
         )
         usb.stream_to_host.connect(usb.stream_to_device)
+        self.comb += usb.connect.eq(1)
 
         led_usb = LedChaser(pads=platform.request("user_led"), sys_clk_freq=60e6)
         self.submodules.led_usb = ClockDomainsRenamer("usb")(led_usb)
