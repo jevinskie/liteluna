@@ -55,7 +55,9 @@ class BenchSoC(SoCCore):
         if False:
             add_usbbone(self, self.ulpi, with_blinky=True)
         else:
-            self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
+            self.submodules.usb = usb = USBStreamer(
+                platform, self.ulpi, with_blinky=True, with_utmi_la=True
+            )
             # self.comb += self.ulpi.reset_n.eq(
             #     ~(ResetSignal("sys") | (~self.ulpi.reset_n & self.crg.usb_pll.locked))
             # )
@@ -80,27 +82,28 @@ class BenchSoC(SoCCore):
         if with_analyzer:
             from litescope import LiteScopeAnalyzer
 
-            usb_rst = Signal()
-            self.comb += [
-                usb_rst.eq(ResetSignal("usb")),
-            ]
-
-            ulpi_sigs = get_signals(self.ulpi)
-            ulpi_sigs.remove(self.ulpi.clk)
+            # usb_rst = Signal()
+            # self.comb += [
+            #     usb_rst.eq(ResetSignal("usb")),
+            # ]
+            # ulpi_sigs = get_signals(self.ulpi)
+            # ulpi_sigs.remove(self.ulpi.clk)
 
             analyzer_signals = [
-                *ulpi_sigs,
-                *get_signals(usb, recurse=False),
-                *get_signals(self.stream_inverter),
+                self.usb.utmi,
+                self.usb.utmi_rx_data32,
+                # *ulpi_sigs,
+                # *get_signals(usb, recurse=False),
+                # *get_signals(self.stream_inverter),
                 # *get_signals(usb.stream_to_host),
                 # *get_signals(usb.stream_to_device),
-                usb_rst,
-                self.crg.usb_pll.locked,
+                # usb_rst,
+                # self.crg.usb_pll.locked,
             ]
             self.submodules.analyzer = LiteScopeAnalyzer(
                 analyzer_signals,
-                depth=512,
-                clock_domain="sys",
+                depth=4096,
+                clock_domain="usb",
                 register=True,
                 csr_csv="analyzer.csv",
             )

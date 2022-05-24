@@ -9,6 +9,7 @@
 import amaranth.cli
 from amaranth import Cat, ClockSignal, Elaboratable, Module, ResetSignal, Signal
 from luna.gateware.interface.ulpi import ULPIInterface
+from luna.gateware.interface.utmi import UTMIInterface
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
 
@@ -38,8 +39,9 @@ class USBBulkStreamerDevice(Elaboratable):
     BULK_ENDPOINT_NUMBER = 1
     MAX_BULK_PACKET_SIZE = 512
 
-    def __init__(self, with_blinky=False):
+    def __init__(self, with_blinky=False, with_utmi_la=False):
         self.with_blinky = with_blinky
+        self.with_utmi_la = with_utmi_la
 
         self.stream_out_ep = USBStreamOutEndpoint(
             endpoint_number=self.BULK_ENDPOINT_NUMBER,
@@ -71,6 +73,10 @@ class USBBulkStreamerDevice(Elaboratable):
         self.ulpi_rst = Signal()
 
         self.connect = Signal()
+
+        if with_utmi_la:
+            for name, nbit, _ in UTMIInterface().layout:
+                setattr(self, f"utmi_{name}", Signal(nbit, name=f"utmi_{name}"))
 
         if with_blinky:
             self.led = Signal()
@@ -150,11 +156,15 @@ class USBBulkStreamerDevice(Elaboratable):
             stream_in.last.eq(self.stream_in_last),
         ]
 
+        if self.with_utmi_la:
+            for name, _, _ in UTMIInterface().layout:
+                m.d.comb += getattr(self, f"utmi_{name}").eq(getattr(usb.utmi, name))
+
         return m
 
     @staticmethod
-    def get_instance_and_ports(with_blinky=False):
-        streamer = USBBulkStreamerDevice(with_blinky)
+    def get_instance_and_ports(with_blinky=False, with_utmi_la=False):
+        streamer = USBBulkStreamerDevice(with_blinky=with_blinky, with_utmi_la=with_utmi_la)
         streamer_ports = [
             streamer.ulpi_data_i,
             streamer.ulpi_data_o,
@@ -176,14 +186,17 @@ class USBBulkStreamerDevice(Elaboratable):
             streamer.stream_in_first,
             streamer.stream_in_last,
         ]
+        if with_utmi_la:
+            for name, _, _ in UTMIInterface().layout:
+                streamer_ports.append(getattr(streamer, f"utmi_{name}"))
         if with_blinky:
             streamer_ports.append(streamer.led)
         return (streamer, streamer_ports)
 
     @staticmethod
-    def emit_verilog(path, with_blinky=False):
+    def emit_verilog(path, with_blinky=False, with_utmi_la=False):
         streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports(
-            with_blinky=with_blinky
+            with_blinky=with_blinky, with_utmi_la=with_utmi_la
         )
         parser = amaranth.cli.main_parser()
         args = parser.parse_args(["generate", "-t", "v", path])
@@ -191,7 +204,7 @@ class USBBulkStreamerDevice(Elaboratable):
 
 
 if __name__ == "__main__":
-    streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports()
+    streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports(with_utmi_la=True)
     amaranth.cli.main(
         streamer,
         name="bulk_streamer",

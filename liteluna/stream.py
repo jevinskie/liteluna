@@ -5,13 +5,15 @@ from migen import *
 
 from liteluna.luna_cores import bulk_streamer
 from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
+from liteluna.utmi import UTMIInterface
 
 
 class USBStreamer(Module):
-    def __init__(self, platform, pads, with_blinky=False):
+    def __init__(self, platform, pads, with_blinky=False, with_utmi_la=False):
         self.platform = platform
         self.ulpi = ulpi = ULPIInterface()
         self.with_blinky = with_blinky
+        self.with_utmi_la = with_utmi_la
 
         self.inverted_reset = False
         if not set(["rst", "reset"]).isdisjoint(set(dir(pads))):
@@ -73,12 +75,26 @@ class USBStreamer(Module):
         if with_blinky:
             port_map["o_led"] = platform.request("user_led")
 
+        if with_utmi_la:
+            self.utmi = UTMIInterface()
+            for name, _ in self.utmi.layout:
+                port_map[f"o_utmi_{name}"] = getattr(self.utmi, name)
+            self.utmi_rx_data32 = Signal(32)
+            self.sync.usb += [
+                self.utmi_rx_data32[0:8].eq(self.utmi.rx_data),
+                self.utmi_rx_data32[8:16].eq(self.utmi_rx_data32[0:8]),
+                self.utmi_rx_data32[16:24].eq(self.utmi_rx_data32[8:16]),
+                self.utmi_rx_data32[24:32].eq(self.utmi_rx_data32[16:24]),
+            ]
+
         self.specials += Instance("bulk_streamer", **port_map)
 
     def do_finalize(self):
         super().do_finalize()
         verilog_filename = os.path.join(self.platform.output_dir, "gateware", "luna_usbstreamer.v")
         bulk_streamer.USBBulkStreamerDevice.emit_verilog(
-            verilog_filename, with_blinky=self.with_blinky
+            verilog_filename,
+            with_blinky=self.with_blinky,
+            with_utmi_la=self.with_utmi_la,
         )
         self.platform.add_source(verilog_filename)
