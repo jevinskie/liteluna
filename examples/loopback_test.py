@@ -32,4 +32,6 @@ with usb1.USBContext() as context:
             assert ibuf_inv == obuf
             if i % 1024 == 0:
                 print(".", end="", flush=True)
+            # if i == 12:
+            #     break
             i += 1

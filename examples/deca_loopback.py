@@ -52,7 +52,7 @@ class BenchSoC(SoCCore):
             self.add_jtagbone()
 
         # USBbone ----------------------------------------------------------------------------------
-        if with_usbbone:
+        if False:
             add_usbbone(self, self.ulpi, with_blinky=True)
         else:
             self.submodules.usb = usb = USBStreamer(platform, self.ulpi, with_blinky=True)
