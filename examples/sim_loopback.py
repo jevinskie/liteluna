@@ -105,7 +105,7 @@ class SimSoC(SoCCore):
         # self.comb += self.stream_inverter.sink.connect(usb_sim_phy.source)
         # self.comb += usb_sim_phy.sink.connect(self.stream_inverter.source)
         # self.comb += usb_sim_phy.sink.connect(usb_sim_phy.source)
-        # self.comb  += usb_sim_phy.source.connect(usb_sim_phy.sink)
+        self.comb += usb_sim_phy.source.connect(usb_sim_phy.sink)
         # self.submodules.pipeline = stream.Pipeline(
         #     usb_sim_phy.source,
         #     usb_sim_phy.sink,
@@ -118,6 +118,7 @@ class SimSoC(SoCCore):
         from litescope import LiteScopeAnalyzer
 
         analyzer_signals = [
+            serial2udp_pads,
             *get_signals(usb_sim_phy, recurse=True),
         ]
         self.submodules.analyzer = LiteScopeAnalyzer(
@@ -142,7 +143,8 @@ def main():
     sim_config = SimConfig()
     sim_config.add_clocker("sys_clk", freq_hz=sys_clk_freq)
     sim_config.add_module("ethernet", "eth", args={"interface": "tap0", "ip": "192.168.42.100"})
-    sim_config.add_module("serial2udp", "serial_udp", args={"port": "2443", "bind_ip": "127.0.0.1"})
+    # sim_config.add_module("serial2udp", "serial_udp", args={"port": "2443", "bind_ip": "127.0.0.1"})
+    sim_config.add_module("serial2tcp", "serial_udp", args={"port": "2444"})
 
     soc_kwargs = soc_core_argdict(args)
     builder_kwargs = builder_argdict(args)
