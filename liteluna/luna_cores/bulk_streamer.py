@@ -8,6 +8,7 @@
 
 import amaranth.cli
 from amaranth import Cat, ClockSignal, Elaboratable, Module, ResetSignal, Signal
+from amaranth.hdl.rec import Direction
 from luna.gateware.interface.ulpi import ULPIInterface
 from luna.gateware.interface.utmi import UTMIInterface
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
@@ -39,7 +40,8 @@ class USBBulkStreamerDevice(Elaboratable):
     BULK_ENDPOINT_NUMBER = 1
     MAX_BULK_PACKET_SIZE = 512
 
-    def __init__(self, with_blinky=False, with_utmi_la=False):
+    def __init__(self, with_utmi=False, with_blinky=False, with_utmi_la=False):
+        self.with_utmi = with_utmi
         self.with_blinky = with_blinky
         self.with_utmi_la = with_utmi_la
 
@@ -63,20 +65,27 @@ class USBBulkStreamerDevice(Elaboratable):
         self.stream_in_first = Signal()
         self.stream_in_last = Signal()
 
-        self.ulpi = ULPIInterface()
-        self.ulpi_data_i = Signal(8)
-        self.ulpi_data_o = Signal(8)
-        self.ulpi_data_oe = Signal()
-        self.ulpi_nxt = Signal()
-        self.ulpi_stp = Signal()
-        self.ulpi_dir = Signal()
-        self.ulpi_rst = Signal()
+        if not with_utmi:
+            self.ulpi = ULPIInterface()
+            self.bus = self.ulpi
+            self.ulpi_data_i = Signal(8)
+            self.ulpi_data_o = Signal(8)
+            self.ulpi_data_oe = Signal()
+            self.ulpi_nxt = Signal()
+            self.ulpi_stp = Signal()
+            self.ulpi_dir = Signal()
+            self.ulpi_rst = Signal()
+        else:
+            self.utmi = UTMIInterface()
+            self.bus = self.utmi
+            for name, nbit, _ in self.utmi.layout:
+                setattr(self, f"utmi_{name}", Signal(nbit, name=f"utmi_{name}"))
 
         self.connect = Signal()
 
         if with_utmi_la:
             for name, nbit, _ in UTMIInterface().layout:
-                setattr(self, f"utmi_{name}", Signal(nbit, name=f"utmi_{name}"))
+                setattr(self, f"utmi_la_{name}", Signal(nbit, name=f"utmi_la_{name}"))
 
         if with_blinky:
             self.led = Signal()
@@ -111,7 +120,7 @@ class USBBulkStreamerDevice(Elaboratable):
     def elaborate(self, platform):
         m = Module()
 
-        m.submodules.usb = usb = USBDevice(bus=self.ulpi, handle_clocking=False)
+        m.submodules.usb = usb = USBDevice(bus=self.bus, handle_clocking=False)
 
         if self.with_blinky:
             m.submodules.blinky = StandaloneBlinky(self.led)
@@ -127,18 +136,26 @@ class USBBulkStreamerDevice(Elaboratable):
 
         m.d.comb += usb.connect.eq(self.connect)
 
-        ulpi = self.ulpi
-
-        m.d.comb += [
-            ulpi.data.i.eq(self.ulpi_data_i),
-            self.ulpi_data_o.eq(ulpi.data.o),
-            self.ulpi_data_oe.eq(ulpi.data.oe),
-            ulpi.clk.eq(ClockSignal("usb")),
-            ulpi.nxt.eq(self.ulpi_nxt),
-            self.ulpi_stp.eq(ulpi.stp),
-            ulpi.dir.i.eq(self.ulpi_dir),
-            self.ulpi_rst.eq(ulpi.rst),
-        ]
+        if not self.with_utmi:
+            ulpi = self.ulpi
+            m.d.comb += [
+                ulpi.data.i.eq(self.ulpi_data_i),
+                self.ulpi_data_o.eq(ulpi.data.o),
+                self.ulpi_data_oe.eq(ulpi.data.oe),
+                ulpi.clk.eq(ClockSignal("usb")),
+                ulpi.nxt.eq(self.ulpi_nxt),
+                self.ulpi_stp.eq(ulpi.stp),
+                ulpi.dir.i.eq(self.ulpi_dir),
+                self.ulpi_rst.eq(ulpi.rst),
+            ]
+        else:
+            for name, _, sdir in self.utmi.layout:
+                sname = f"utmi_{name}"
+                if sdir == Direction.FANIN:
+                    stmt = getattr(self.utmi, name).eq(getattr(self, sname))
+                else:
+                    stmt = getattr(self, sname).eq(getattr(self.utmi, name))
+                m.d.comb += stmt
 
         m.d.comb += [
             self.stream_out_payload.eq(stream_out.payload),
@@ -158,21 +175,16 @@ class USBBulkStreamerDevice(Elaboratable):
 
         if self.with_utmi_la:
             for name, _, _ in UTMIInterface().layout:
-                m.d.comb += getattr(self, f"utmi_{name}").eq(getattr(usb.utmi, name))
+                m.d.comb += getattr(self, f"utmi_la_{name}").eq(getattr(usb.utmi, name))
 
         return m
 
     @staticmethod
-    def get_instance_and_ports(with_blinky=False, with_utmi_la=False):
-        streamer = USBBulkStreamerDevice(with_blinky=with_blinky, with_utmi_la=with_utmi_la)
+    def get_instance_and_ports(with_utmi=False, with_blinky=False, with_utmi_la=False):
+        streamer = USBBulkStreamerDevice(
+            with_utmi=with_utmi, with_blinky=with_blinky, with_utmi_la=with_utmi_la
+        )
         streamer_ports = [
-            streamer.ulpi_data_i,
-            streamer.ulpi_data_o,
-            streamer.ulpi_data_oe,
-            streamer.ulpi_nxt,
-            streamer.ulpi_stp,
-            streamer.ulpi_dir,
-            streamer.ulpi_rst,
             streamer.connect,
             streamer.stream_out_payload,
             streamer.stream_out_valid,
@@ -186,9 +198,22 @@ class USBBulkStreamerDevice(Elaboratable):
             streamer.stream_in_first,
             streamer.stream_in_last,
         ]
+        if not with_utmi:
+            streamer_ports += [
+                streamer.ulpi_data_i,
+                streamer.ulpi_data_o,
+                streamer.ulpi_data_oe,
+                streamer.ulpi_nxt,
+                streamer.ulpi_stp,
+                streamer.ulpi_dir,
+                streamer.ulpi_rst,
+            ]
+        else:
+            for name, _, _ in streamer.utmi.layout:
+                streamer_ports.append(getattr(streamer, f"utmi_{name}"))
         if with_utmi_la:
             for name, _, _ in UTMIInterface().layout:
-                streamer_ports.append(getattr(streamer, f"utmi_{name}"))
+                streamer_ports.append(getattr(streamer, f"utmi_la_{name}"))
         if with_blinky:
             streamer_ports.append(streamer.led)
         return (streamer, streamer_ports)
@@ -204,7 +229,9 @@ class USBBulkStreamerDevice(Elaboratable):
 
 
 if __name__ == "__main__":
-    streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports(with_utmi_la=True)
+    streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports(
+        with_utmi=True, with_blinky=False, with_utmi_la=False
+    )
     amaranth.cli.main(
         streamer,
         name="bulk_streamer",
