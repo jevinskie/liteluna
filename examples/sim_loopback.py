@@ -93,7 +93,7 @@ class SimSoC(SoCCore):
         serial2udp_pads = self.platform.request("serial_udp")
         self.submodules.usb_sim_phy = usb_sim_phy = RS232PHYModel(serial2udp_pads)
 
-        # self.submodules.stream_inverter = StreamPayloadInverter()
+        self.submodules.stream_inverter = StreamPayloadInverter()
         # self.submodules.pipeline = stream.Pipeline(
         #     usb_sim_phy.sink,
         #     # self.stream_inverter,
@@ -102,14 +102,11 @@ class SimSoC(SoCCore):
         #     # usb_sim_phy.sink,
         # )
 
-        # self.comb += self.stream_inverter.sink.connect(usb_sim_phy.source)
-        # self.comb += usb_sim_phy.sink.connect(self.stream_inverter.source)
-        # self.comb += usb_sim_phy.sink.connect(usb_sim_phy.source)
-        self.comb += usb_sim_phy.source.connect(usb_sim_phy.sink)
-        # self.submodules.pipeline = stream.Pipeline(
-        #     usb_sim_phy.source,
-        #     usb_sim_phy.sink,
-        # )
+        # self.comb += usb_sim_phy.source.connect(usb_sim_phy.sink)
+        self.submodules.pipeline = stream.Pipeline(
+            usb_sim_phy.source,
+            usb_sim_phy.sink,
+        )
 
         # Etherbone --------------------------------------------------------------------------------
         self.submodules.ethphy = LiteEthPHYModel(self.platform.request("eth"))
