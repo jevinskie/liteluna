@@ -144,7 +144,7 @@ def main():
     #     "serial2framed_tcp", "serial_framed_tcp", args={"port": "2443", "connect_ip": "127.0.0.1"}
     # )
     sim_config.add_module(
-        "serial2framed_tcp", "serial_framed_tcp", args={"port": "2443", "bind_ip": "127.0.0.1"}
+        "serial2framed_tcp", "serial_framed_tcp", args={"port": "2443", "connect_ip": "127.0.0.1"}
     )
 
     soc_kwargs = soc_core_argdict(args)
