@@ -90,7 +90,7 @@ class SimSoC(SoCCore):
             ResetSignal("usb").eq(ResetSignal()),
         ]
 
-        serial2udp_pads = self.platform.request("serial_udp")
+        serial2udp_pads = self.platform.request("serial_framed_tcp")
         self.submodules.usb_sim_phy = usb_sim_phy = RS232PHYModel(serial2udp_pads)
 
         self.submodules.stream_inverter = StreamPayloadInverter()
@@ -140,8 +140,11 @@ def main():
     sim_config = SimConfig()
     sim_config.add_clocker("sys_clk", freq_hz=sys_clk_freq)
     sim_config.add_module("ethernet", "eth", args={"interface": "tap0", "ip": "192.168.42.100"})
+    # sim_config.add_module(
+    #     "serial2framed_tcp", "serial_framed_tcp", args={"port": "2443", "connect_ip": "127.0.0.1"}
+    # )
     sim_config.add_module(
-        "serial2framed_tcp", "serial_framed_tcp", args={"port": "2443", "connect_ip": "127.0.0.1"}
+        "serial2framed_tcp", "serial_framed_tcp", args={"port": "2443", "bind_ip": "127.0.0.1"}
     )
 
     soc_kwargs = soc_core_argdict(args)
