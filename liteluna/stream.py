@@ -74,6 +74,7 @@ class USBStreamer(Module):
             "i_stream_in_first": s2h.first,
             "i_stream_in_last": s2h.last,
         }
+
         if not with_utmi:
             ulpi_map = {
                 "i_ulpi_data_i": ulpi.data_i,
@@ -95,16 +96,17 @@ class USBStreamer(Module):
                 else:
                     utmi_map[f"i_{sname}"] = sig
             port_map = dict(port_map, **utmi_map)
+
         if with_blinky:
             port_map["o_led"] = platform.request("user_led")
 
         if with_utmi_la:
-            self.utmi = UTMIInterface()
-            for name, _, _ in self.utmi.layout:
-                port_map[f"o_utmi_la_{name}"] = getattr(self.utmi, name)
+            self.utmi_la = UTMIInterface()
+            for name, _, _ in self.utmi_la.layout:
+                port_map[f"o_utmi_la_{name}"] = getattr(self.utmi_la, name)
             self.utmi_la_rx_data32 = Signal(32)
             self.sync.usb += [
-                self.utmi_la_rx_data32[0:8].eq(self.utmi.rx_data),
+                self.utmi_la_rx_data32[0:8].eq(self.utmi_la.rx_data),
                 self.utmi_la_rx_data32[8:16].eq(self.utmi_la_rx_data32[0:8]),
                 self.utmi_la_rx_data32[16:24].eq(self.utmi_la_rx_data32[8:16]),
                 self.utmi_la_rx_data32[24:32].eq(self.utmi_la_rx_data32[16:24]),

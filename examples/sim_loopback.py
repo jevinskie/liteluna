@@ -106,10 +106,10 @@ class SimSoC(SoCCore):
         # )
 
         # self.comb += usb_sim_phy.source.connect(usb_sim_phy.sink)
-        self.submodules.pipeline = stream.Pipeline(
-            usb_sim_phy.source,
-            usb_sim_phy.sink,
-        )
+        # self.submodules.pipeline = stream.Pipeline(
+        #     usb_sim_phy.source,
+        #     usb_sim_phy.sink,
+        # )
 
         self.utmi = UTMIInterface()
         self.submodules.usb = usb = USBStreamer(platform, self.utmi, with_utmi=True)
@@ -117,6 +117,7 @@ class SimSoC(SoCCore):
         self.comb += [
             self.utmi.rx_data.eq(usb_sim_phy.source.payload.data),
             self.utmi.rx_valid.eq(usb_sim_phy.source.valid),
+            usb_sim_phy.source.ready.eq(1),
             usb_sim_phy.sink.payload.data.eq(self.utmi.tx_data),
             usb_sim_phy.sink.valid.eq(self.utmi.tx_valid),
             self.utmi.tx_ready.eq(self.usb_sim_phy.sink.ready),
@@ -137,10 +138,15 @@ class SimSoC(SoCCore):
 
         from litescope import LiteScopeAnalyzer
 
-        analyzer_signals = [
-            serial2udp_pads,
-            # *get_signals(usb_sim_phy, recurse=True),
-        ]
+        analyzer_signals = list(
+            set(
+                [
+                    # serial2udp_pads,
+                    self.utmi,
+                    # *get_signals(usb_sim_phy, recurse=True),
+                ]
+            )
+        )
         self.submodules.analyzer = LiteScopeAnalyzer(
             analyzer_signals, depth=4096, clock_domain="usb", csr_csv="analyzer.csv"
         )

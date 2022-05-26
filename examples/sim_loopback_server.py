@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import socket
+import time
 
 serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serv_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -22,7 +23,17 @@ def write(buf):
     s.send(buf)
 
 
-while True:
-    rxb = read()
-    print(f"rx: {rxb.hex()}")
-    write(rxb)
+# while True:
+#     rxb = read()
+#     print(f"rx: {rxb.hex()}")
+#     write(rxb)
+
+# time.sleep(7)
+
+input("Press the ANY key\n")
+print("wrote")
+write(b"\xE1\x8B\x90")
+print("reading")
+rxb = read()
+print(f"rx: {rxb.hex()}")
+input("Waiting to close socket...\n")

@@ -90,8 +90,8 @@ class BenchSoC(SoCCore):
             # ulpi_sigs.remove(self.ulpi.clk)
 
             analyzer_signals = [
-                self.usb.utmi,
-                self.usb.utmi_rx_data32,
+                self.usb.utmi_la,
+                self.usb.utmi_la_rx_data32,
                 # *ulpi_sigs,
                 # *get_signals(usb, recurse=False),
                 # *get_signals(self.stream_inverter),
