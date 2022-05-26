@@ -219,9 +219,9 @@ class USBBulkStreamerDevice(Elaboratable):
         return (streamer, streamer_ports)
 
     @staticmethod
-    def emit_verilog(path, with_blinky=False, with_utmi_la=False):
+    def emit_verilog(path, with_utmi=False, with_blinky=False, with_utmi_la=False):
         streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports(
-            with_blinky=with_blinky, with_utmi_la=with_utmi_la
+            with_utmi=with_utmi, with_blinky=with_blinky, with_utmi_la=with_utmi_la
         )
         parser = amaranth.cli.main_parser()
         args = parser.parse_args(["generate", "-t", "v", path])

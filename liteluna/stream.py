@@ -11,6 +11,7 @@ from liteluna.utmi import UTMIInterface
 class USBStreamer(Module):
     def __init__(self, platform, pads, with_utmi=False, with_blinky=False, with_utmi_la=False):
         self.platform = platform
+        self.with_utmi = with_utmi
         self.ulpi = ulpi = ULPIInterface()
         self.with_blinky = with_blinky
         self.with_utmi_la = with_utmi_la
@@ -27,11 +28,6 @@ class USBStreamer(Module):
                 pad_reset = getattr(pads, "rst_n")
             except AttributeError:
                 pad_reset = getattr(pads, "reset_n")
-
-        # if not self.inverted_reset:
-        #     self.comb += pad_reset.eq(ulpi.rst)
-        # else:
-        #     self.comb += pad_reset.eq(~ulpi.rst)
 
         data_ts = TSTriple(8)
         self.specials += data_ts.get_tristate(pads.data)

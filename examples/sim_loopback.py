@@ -23,7 +23,7 @@ _io = [
     ("sys_clk", 0, Pins(1)),
     ("sys_rst", 0, Pins(1)),
     (
-        "serial_udp",
+        "serial_framed_tcp",
         0,
         Subsignal("source_valid", Pins(1)),
         Subsignal("source_ready", Pins(1)),
@@ -140,8 +140,9 @@ def main():
     sim_config = SimConfig()
     sim_config.add_clocker("sys_clk", freq_hz=sys_clk_freq)
     sim_config.add_module("ethernet", "eth", args={"interface": "tap0", "ip": "192.168.42.100"})
-    sim_config.add_module("serial2udp", "serial_udp", args={"port": "2443", "bind_ip": "127.0.0.1"})
-    # sim_config.add_module("serial2tcp", "serial_udp", args={"port": "2444"})
+    sim_config.add_module(
+        "serial2framed_tcp", "serial_framed_tcp", args={"port": "2443", "connect_ip": "127.0.0.1"}
+    )
 
     soc_kwargs = soc_core_argdict(args)
     builder_kwargs = builder_argdict(args)
