@@ -17,6 +17,9 @@ from litex.soc.integration.soc_core import *
 from litex.soc.interconnect import stream
 from migen import *
 
+from liteluna.stream import USBStreamer
+from liteluna.utmi import UTMIInterface
+
 # IOs ----------------------------------------------------------------------------------------------
 
 _io = [
@@ -93,7 +96,7 @@ class SimSoC(SoCCore):
         serial2udp_pads = self.platform.request("serial_framed_tcp")
         self.submodules.usb_sim_phy = usb_sim_phy = RS232PHYModel(serial2udp_pads)
 
-        self.submodules.stream_inverter = StreamPayloadInverter()
+        # self.submodules.stream_inverter = StreamPayloadInverter()
         # self.submodules.pipeline = stream.Pipeline(
         #     usb_sim_phy.sink,
         #     # self.stream_inverter,
@@ -108,6 +111,26 @@ class SimSoC(SoCCore):
             usb_sim_phy.sink,
         )
 
+        self.utmi = UTMIInterface()
+        self.submodules.usb = usb = USBStreamer(platform, self.utmi, with_utmi=True)
+
+        self.comb += [
+            self.utmi.rx_data.eq(usb_sim_phy.source.payload.data),
+            self.utmi.rx_valid.eq(usb_sim_phy.source.valid),
+            usb_sim_phy.sink.payload.data.eq(self.utmi.tx_data),
+            usb_sim_phy.sink.valid.eq(self.utmi.tx_valid),
+            self.utmi.tx_ready.eq(self.usb_sim_phy.sink.ready),
+        ]
+
+        # self.submodules.stream_inverter = StreamPayloadInverter()
+        self.submodules.pipeline = stream.Pipeline(
+            usb.sink,
+            # self.stream_inverter,
+            usb.source,
+        )
+
+        self.comb += usb.connect.eq(1)
+
         # Etherbone --------------------------------------------------------------------------------
         self.submodules.ethphy = LiteEthPHYModel(self.platform.request("eth"))
         self.add_etherbone(phy=self.ethphy, ip_address="192.168.42.50")
@@ -116,7 +139,7 @@ class SimSoC(SoCCore):
 
         analyzer_signals = [
             serial2udp_pads,
-            *get_signals(usb_sim_phy, recurse=True),
+            # *get_signals(usb_sim_phy, recurse=True),
         ]
         self.submodules.analyzer = LiteScopeAnalyzer(
             analyzer_signals, depth=4096, clock_domain="usb", csr_csv="analyzer.csv"
