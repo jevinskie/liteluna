@@ -14,3 +14,5 @@ with usb1.USBContext() as context:
     assert handle is not None
     with handle.claimInterface(0):
         handle.bulkWrite(1, b"\xaa\x55\x00\xff", timeout=1000)
+        ibuf = handle.bulkRead(1, 4, timeout=1000)
+        print(ibuf.hex())

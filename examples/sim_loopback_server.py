@@ -3,6 +3,8 @@
 import socket
 import time
 
+from usbip_toolkit.usb import *
+
 serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serv_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 serv_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
