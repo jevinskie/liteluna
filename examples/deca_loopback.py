@@ -102,7 +102,7 @@ class BenchSoC(SoCCore):
             ]
             self.submodules.analyzer = LiteScopeAnalyzer(
                 analyzer_signals,
-                depth=4096,
+                depth=7750 * 2,
                 clock_domain="usb",
                 register=True,
                 csr_csv="analyzer.csv",
