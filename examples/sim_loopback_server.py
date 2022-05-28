@@ -20,9 +20,13 @@ def read():
     return s.recv(sz)
 
 
-def write(buf):
-    buf = len(buf).to_bytes(4, "big") + buf
-    s.send(buf)
+def write(bufs):
+    if not isinstance(bufs, list):
+        bufs = [bufs]
+    out_buf = b""
+    for buf in bufs:
+        out_buf += len(buf).to_bytes(4, "big") + buf
+    s.send(out_buf)
 
 
 # while True:
@@ -32,10 +36,23 @@ def write(buf):
 
 # time.sleep(7)
 
-input("Press the ANY key\n")
-print("wrote")
-write(b"\xE1\x8B\x90")
-print("reading")
-rxb = read()
-print(f"rx: {rxb.hex()}")
-input("Waiting to close socket...\n")
+input("Press ANY key\n")
+
+odd = False
+
+sof1_packet = sof_packet(0)
+print(f"sof1_packet: {sof1_packet.hex()}")
+sof2_packet = sof_packet(1)
+print(f"sof2_packet: {sof2_packet.hex()}")
+
+setup_token_packet = setup_packet(0, 0)
+print(f"setup_token_packet: {setup_token_packet.hex()}")
+
+setup_buf = bytes.fromhex("8006000100004000")
+setup_data_packet, odd = data_packet(setup_buf, odd=odd)
+print(f"setup_data_packet: {setup_data_packet.hex()}")
+
+write([sof1_packet, sof2_packet, setup_token_packet, setup_data_packet])
+
+in_buf = read()
+print(f"in_buf: {in_buf.hex()}")

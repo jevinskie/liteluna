@@ -121,6 +121,9 @@ class SimSoC(SoCCore):
             usb_sim_phy.sink.payload.data.eq(self.utmi.tx_data),
             usb_sim_phy.sink.valid.eq(self.utmi.tx_valid),
             self.utmi.tx_ready.eq(self.usb_sim_phy.sink.ready),
+            # etc
+            self.utmi.vbus_valid.eq(1),
+            self.utmi.rx_active.eq(self.utmi.rx_valid),
         ]
 
         # self.submodules.stream_inverter = StreamPayloadInverter()
