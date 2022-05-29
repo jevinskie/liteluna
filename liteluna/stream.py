@@ -122,10 +122,14 @@ class USBStreamer(Module):
             self.td_la_speed = Signal(2)
             self.td_la_address = Signal(7)
             self.td_la_cnt_dbg = Signal(8)
+            self.td_la_state = Signal(8)
+            self.td_la_rx_data = Signal(8)
             port_map.update(
                 o_td_la_speed=self.td_la_speed,
                 o_td_la_address=self.td_la_address,
                 o_td_la_cnt_dbg=self.td_la_cnt_dbg,
+                o_td_la_state=self.td_la_state,
+                o_td_la_rx_data=self.td_la_rx_data,
             )
 
         self.specials += Instance("bulk_streamer", **port_map)
