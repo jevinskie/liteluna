@@ -49,12 +49,10 @@ class USBStreamer(Module):
             self.utmi = utmi = UTMIInterface()
             for name, nbit, sdir in utmi.layout:
                 sname = f"utmi_{name}"
-                sig = Signal(nbit, name=sname)
-                setattr(self, sname, sig)
                 if sdir == DIR_M_TO_S:
-                    self.comb += getattr(utmi, name).eq(sig)
+                    self.comb += getattr(utmi, name).eq(getattr(pads, name))
                 else:
-                    self.comb += sig.eq(getattr(utmi, name))
+                    self.comb += getattr(pads, name).eq(getattr(utmi, name))
 
         self.source = s2h = stream.Endpoint([("data", 8)])
         self.sink = s2d = stream.Endpoint([("data", 8)])
@@ -94,9 +92,9 @@ class USBStreamer(Module):
                 sname = f"utmi_{name}"
                 sig = getattr(utmi, name)
                 if sdir == DIR_M_TO_S:
-                    utmi_map[f"o_{sname}"] = sig
-                else:
                     utmi_map[f"i_{sname}"] = sig
+                else:
+                    utmi_map[f"o_{sname}"] = sig
             port_map = dict(port_map, **utmi_map)
 
         if with_blinky:
