@@ -14,6 +14,8 @@ from luna.gateware.interface.utmi import UTMIInterface
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
 
+from liteluna.luna_cores.util import get_signals
+
 
 class StandaloneBlinky(Elaboratable):
     def __init__(self, leds: Signal):
@@ -81,11 +83,18 @@ class USBBulkStreamerDevice(Elaboratable):
             for name, nbit, _ in self.utmi.layout:
                 setattr(self, f"utmi_{name}", Signal(nbit, name=f"utmi_{name}"))
 
+        self.usb = USBDevice(bus=self.bus, handle_clocking=False)
+
         self.connect = Signal()
 
         if with_utmi_la:
             for name, nbit, _ in UTMIInterface().layout:
                 setattr(self, f"utmi_la_{name}", Signal(nbit, name=f"utmi_la_{name}"))
+            for attr_name in dir(self.usb):
+                attr = getattr(self.usb, attr_name)
+                if isinstance(attr, Signal):
+                    sig_name = f"dev_la_{attr_name}"
+                    setattr(self, sig_name, Signal(len(attr), name=sig_name))
 
         if with_blinky:
             self.led = Signal()
@@ -120,21 +129,21 @@ class USBBulkStreamerDevice(Elaboratable):
     def elaborate(self, platform):
         m = Module()
 
-        m.submodules.usb = usb = USBDevice(bus=self.bus, handle_clocking=False)
+        m.submodules.usb = self.usb
 
         if self.with_blinky:
             m.submodules.blinky = StandaloneBlinky(self.led)
 
         descriptors = self.create_descriptors()
-        usb.add_standard_control_endpoint(descriptors)
+        self.usb.add_standard_control_endpoint(descriptors)
 
-        usb.add_endpoint(self.stream_out_ep)
-        usb.add_endpoint(self.stream_in_ep)
+        self.usb.add_endpoint(self.stream_out_ep)
+        self.usb.add_endpoint(self.stream_in_ep)
 
         stream_out = self.stream_out_ep.stream
         stream_in = self.stream_in_ep.stream
 
-        m.d.comb += usb.connect.eq(self.connect)
+        m.d.comb += self.usb.connect.eq(self.connect)
 
         if not self.with_utmi:
             ulpi = self.ulpi
@@ -175,7 +184,11 @@ class USBBulkStreamerDevice(Elaboratable):
 
         if self.with_utmi_la:
             for name, _, _ in UTMIInterface().layout:
-                m.d.comb += getattr(self, f"utmi_la_{name}").eq(getattr(usb.utmi, name))
+                m.d.comb += getattr(self, f"utmi_la_{name}").eq(getattr(self.usb.utmi, name))
+            for attr_name in dir(self.usb):
+                attr = getattr(self.usb, attr_name)
+                if isinstance(attr, Signal):
+                    m.d.comb += getattr(self, f"dev_la_{attr_name}").eq(attr)
 
         return m
 
@@ -214,6 +227,10 @@ class USBBulkStreamerDevice(Elaboratable):
         if with_utmi_la:
             for name, _, _ in UTMIInterface().layout:
                 streamer_ports.append(getattr(streamer, f"utmi_la_{name}"))
+            for name in dir(streamer.usb):
+                attr = getattr(streamer, f"dev_la_{name}", None)
+                if isinstance(attr, Signal):
+                    streamer_ports.append(attr)
         if with_blinky:
             streamer_ports.append(streamer.led)
         return (streamer, streamer_ports)

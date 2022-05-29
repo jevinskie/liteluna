@@ -112,7 +112,9 @@ class SimSoC(SoCCore):
         # )
 
         self.utmi = UTMIInterface()
-        self.submodules.usb = usb = USBStreamer(platform, self.utmi, with_utmi=True)
+        self.submodules.usb = usb = USBStreamer(
+            platform, self.utmi, with_utmi=True, with_utmi_la=True
+        )
 
         self.comb += [
             self.utmi.rx_data.eq(usb_sim_phy.source.payload.data),
@@ -146,6 +148,7 @@ class SimSoC(SoCCore):
                 [
                     # serial2udp_pads,
                     self.utmi,
+                    self.usb.dev_la,
                     # *get_signals(usb_sim_phy, recurse=True),
                 ]
             )

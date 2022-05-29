@@ -40,19 +40,22 @@ input("Press ANY key\n")
 
 odd = False
 
-sof1_packet = sof_packet(0)
-print(f"sof1_packet: {sof1_packet.hex()}")
-sof2_packet = sof_packet(1)
-print(f"sof2_packet: {sof2_packet.hex()}")
+while True:
+    sof1_packet = sof_packet(0)
+    print(f"sof1_packet: {sof1_packet.hex()}")
+    sof2_packet = sof_packet(1)
+    print(f"sof2_packet: {sof2_packet.hex()}")
 
-setup_token_packet = setup_packet(0, 0)
-print(f"setup_token_packet: {setup_token_packet.hex()}")
+    setup_token_packet = setup_packet(0, 0)
+    print(f"setup_token_packet: {setup_token_packet.hex()}")
 
-setup_buf = bytes.fromhex("8006000100004000")
-setup_data_packet, odd = data_packet(setup_buf, odd=odd)
-print(f"setup_data_packet: {setup_data_packet.hex()}")
+    setup_buf = bytes.fromhex("8006000100004000")
+    setup_data_packet, odd = data_packet(setup_buf, odd=odd)
+    print(f"setup_data_packet: {setup_data_packet.hex()}")
 
-write([sof1_packet, sof2_packet, setup_token_packet, setup_data_packet])
+    write([sof1_packet, sof2_packet, setup_token_packet, setup_data_packet])
 
-in_buf = read()
-print(f"in_buf: {in_buf.hex()}")
+    # in_buf = read()
+    # print(f"in_buf: {in_buf.hex()}")
+
+    input("Press ANY key\n")

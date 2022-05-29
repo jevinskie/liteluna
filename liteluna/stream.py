@@ -4,6 +4,7 @@ from litex.soc.interconnect import stream
 from migen import *
 from migen.genlib.record import DIR_M_TO_S, DIR_S_TO_M, Record
 
+from liteluna.device import USBDeviceLAInterface
 from liteluna.luna_cores import bulk_streamer
 from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 from liteluna.utmi import UTMIInterface
@@ -111,6 +112,9 @@ class USBStreamer(Module):
                 self.utmi_la_rx_data32[16:24].eq(self.utmi_la_rx_data32[8:16]),
                 self.utmi_la_rx_data32[24:32].eq(self.utmi_la_rx_data32[16:24]),
             ]
+            self.dev_la = USBDeviceLAInterface()
+            for name, _ in self.dev_la.layout:
+                port_map[f"o_dev_la_{name}"] = getattr(self.dev_la, name)
 
         self.specials += Instance("bulk_streamer", **port_map)
 
