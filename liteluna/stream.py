@@ -119,6 +119,14 @@ class USBStreamer(Module):
             self.td_la = TokenDetectorInterface()
             for name, _, _ in self.td_la.layout:
                 port_map[f"o_td_la_{name}"] = getattr(self.td_la, name)
+            self.td_la_speed = Signal(2)
+            self.td_la_address = Signal(7)
+            self.td_la_cnt_dbg = Signal(8)
+            port_map.update(
+                o_td_la_speed=self.td_la_speed,
+                o_td_la_address=self.td_la_address,
+                o_td_la_cnt_dbg=self.td_la_cnt_dbg,
+            )
 
         self.specials += Instance("bulk_streamer", **port_map)
 

@@ -149,6 +149,10 @@ class SimSoC(SoCCore):
                     # serial2udp_pads,
                     self.utmi,
                     self.usb.dev_la,
+                    self.usb.td_la,
+                    self.usb.td_la_speed,
+                    self.usb.td_la_address,
+                    self.usb.td_la_cnt_dbg,
                     # *get_signals(usb_sim_phy, recurse=True),
                 ]
             )

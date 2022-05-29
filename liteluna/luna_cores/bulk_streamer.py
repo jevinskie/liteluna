@@ -100,6 +100,7 @@ class USBBulkStreamerDevice(Elaboratable):
                 setattr(self, f"td_la_{name}", Signal(nbit, name=f"td_la_{name}"))
             self.td_la_speed = Signal(2)
             self.td_la_address = Signal(7)
+            self.td_la_cnt_dbg = Signal(8)
 
         if with_blinky:
             self.led = Signal()
@@ -202,6 +203,7 @@ class USBBulkStreamerDevice(Elaboratable):
             m.d.comb += [
                 self.td_la_speed.eq(self.usb.token_detector.speed),
                 self.td_la_address.eq(self.usb.token_detector.address),
+                self.td_la_cnt_dbg.eq(self.usb.token_detector.cnt_dbg),
             ]
         return m
 
@@ -249,6 +251,7 @@ class USBBulkStreamerDevice(Elaboratable):
             streamer_ports += [
                 streamer.td_la_speed,
                 streamer.td_la_address,
+                streamer.td_la_cnt_dbg,
             ]
         if with_blinky:
             streamer_ports.append(streamer.led)
