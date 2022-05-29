@@ -11,6 +11,7 @@ from amaranth import Cat, ClockSignal, Elaboratable, Module, ResetSignal, Signal
 from amaranth.hdl.rec import Direction
 from luna.gateware.interface.ulpi import ULPIInterface
 from luna.gateware.interface.utmi import UTMIInterface
+from luna.gateware.usb.usb2.packet import TokenDetectorInterface
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
 
@@ -95,6 +96,10 @@ class USBBulkStreamerDevice(Elaboratable):
                 if isinstance(attr, Signal):
                     sig_name = f"dev_la_{attr_name}"
                     setattr(self, sig_name, Signal(len(attr), name=sig_name))
+            for name, nbit, _ in TokenDetectorInterface().layout:
+                setattr(self, f"td_la_{name}", Signal(nbit, name=f"td_la_{name}"))
+            self.td_la_speed = Signal(2)
+            self.td_la_address = Signal(7)
 
         if with_blinky:
             self.led = Signal()
@@ -127,6 +132,7 @@ class USBBulkStreamerDevice(Elaboratable):
         return descriptors
 
     def elaborate(self, platform):
+        print("ELABORATING BULK STREAMER")
         m = Module()
 
         m.submodules.usb = self.usb
@@ -189,7 +195,14 @@ class USBBulkStreamerDevice(Elaboratable):
                 attr = getattr(self.usb, attr_name)
                 if isinstance(attr, Signal):
                     m.d.comb += getattr(self, f"dev_la_{attr_name}").eq(attr)
-
+            for name, _, _ in TokenDetectorInterface().layout:
+                m.d.comb += getattr(self, f"td_la_{name}").eq(
+                    getattr(self.usb.token_detector.interface, name)
+                )
+            m.d.comb += [
+                self.td_la_speed.eq(self.usb.token_detector.speed),
+                self.td_la_address.eq(self.usb.token_detector.address),
+            ]
         return m
 
     @staticmethod
@@ -231,6 +244,12 @@ class USBBulkStreamerDevice(Elaboratable):
                 attr = getattr(streamer, f"dev_la_{name}", None)
                 if isinstance(attr, Signal):
                     streamer_ports.append(attr)
+            for name, _, _ in TokenDetectorInterface().layout:
+                streamer_ports.append(getattr(streamer, f"td_la_{name}"))
+            streamer_ports += [
+                streamer.td_la_speed,
+                streamer.td_la_address,
+            ]
         if with_blinky:
             streamer_ports.append(streamer.led)
         return (streamer, streamer_ports)
