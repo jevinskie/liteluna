@@ -18,7 +18,7 @@ from litex.soc.interconnect import stream
 from migen import *
 
 from liteluna.stream import USBStreamer
-from liteluna.utmi import UTMIInterface
+from liteluna.utmi import SimUTMIStreamFixup, UTMIInterface
 
 # IOs ----------------------------------------------------------------------------------------------
 
@@ -116,17 +116,7 @@ class SimSoC(SoCCore):
             platform, self.utmi, with_utmi=True, with_utmi_la=True
         )
 
-        self.comb += [
-            self.utmi.rx_data.eq(usb_sim_phy.source.payload.data),
-            self.utmi.rx_valid.eq(usb_sim_phy.source.valid),
-            usb_sim_phy.source.ready.eq(1),
-            usb_sim_phy.sink.payload.data.eq(self.utmi.tx_data),
-            usb_sim_phy.sink.valid.eq(self.utmi.tx_valid),
-            self.utmi.tx_ready.eq(self.usb_sim_phy.sink.ready),
-            # etc
-            self.utmi.vbus_valid.eq(1),
-            self.utmi.rx_active.eq(self.utmi.rx_valid),
-        ]
+        self.submodules.fixup = SimUTMIStreamFixup(self.utmi, usb_sim_phy)
 
         # self.submodules.stream_inverter = StreamPayloadInverter()
         self.submodules.pipeline = stream.Pipeline(
@@ -153,7 +143,8 @@ class SimSoC(SoCCore):
                     self.usb.td_la_speed,
                     self.usb.td_la_address,
                     self.usb.td_la_cnt_dbg,
-                    # *get_signals(usb_sim_phy, recurse=True),
+                    *get_signals(self.fixup, recurse=True),
+                    *get_signals(usb_sim_phy, recurse=True),
                 ]
             )
         )

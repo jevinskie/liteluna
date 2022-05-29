@@ -133,7 +133,6 @@ class USBBulkStreamerDevice(Elaboratable):
         return descriptors
 
     def elaborate(self, platform):
-        print("ELABORATING BULK STREAMER")
         m = Module()
 
         m.submodules.usb = self.usb
@@ -255,7 +254,6 @@ class USBBulkStreamerDevice(Elaboratable):
             ]
         if with_blinky:
             streamer_ports.append(streamer.led)
-        print(streamer_ports)
         return (streamer, streamer_ports)
 
     @staticmethod
