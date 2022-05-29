@@ -1,0 +1,10 @@
+{signal: [
+  {name: "clk",                wave: "P........"},
+  {name: "rx_valid_in",        wave: "0.1..0..."},
+  {name: "rx_data_in",         wave: "xx555xxxx", data: ["1", "2", "3"]},
+  {name: "rx_valid_out",       wave: "0..1..0.."},
+  {name: "rx_data_out",        wave: "xxx555xxx", data: ["1", "2", "3"]},
+  {name: "rx_active_out_ez",   wave: "0.1...0.."},
+  {name: "rx_active_out_prop", wave: "0.1....0."},
+]}
+

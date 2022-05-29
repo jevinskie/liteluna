@@ -255,6 +255,7 @@ class USBBulkStreamerDevice(Elaboratable):
             ]
         if with_blinky:
             streamer_ports.append(streamer.led)
+        print(streamer_ports)
         return (streamer, streamer_ports)
 
     @staticmethod
