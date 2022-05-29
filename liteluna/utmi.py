@@ -37,10 +37,12 @@ class UTMIInterface(Record):
 
 
 class SimUTMIStreamFixup(Module):
-    def __init__(self, utmi, usb_sim_phy):
+    def __init__(self, usb_sim_phy):
+        self.utmi = utmi = UTMIInterface()
         self.rx_data_out = rx_data_out = Signal(8)
         self.rx_valid_out = rx_valid_out = Signal()
         self.rx_active_out = rx_active_out = Signal()
+
         self.comb += [
             # source
             utmi.rx_data.eq(rx_data_out),

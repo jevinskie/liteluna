@@ -111,12 +111,10 @@ class SimSoC(SoCCore):
         #     usb_sim_phy.sink,
         # )
 
-        self.utmi = UTMIInterface()
+        self.submodules.fixup = SimUTMIStreamFixup(usb_sim_phy)
         self.submodules.usb = usb = USBStreamer(
-            platform, self.utmi, with_utmi=True, with_utmi_la=True
+            platform, self.fixup.utmi, with_utmi=True, with_utmi_la=True
         )
-
-        self.submodules.fixup = SimUTMIStreamFixup(self.usb.utmi, usb_sim_phy)
 
         # self.submodules.stream_inverter = StreamPayloadInverter()
         self.submodules.pipeline = stream.Pipeline(
@@ -137,7 +135,7 @@ class SimSoC(SoCCore):
             set(
                 [
                     # serial2udp_pads,
-                    self.utmi,
+                    self.fixup.utmi,
                     self.usb.dev_la,
                     self.usb.td_la,
                     self.usb.td_la_speed,
