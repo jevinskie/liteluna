@@ -40,6 +40,13 @@ def write(bufs):
     s.send(out_buf)
 
 
+def sof():
+    sof.num = getattr(sof, "num", 0)
+    num = sof.num
+    sof.num += 1
+    return sof_packet(num)
+
+
 # while True:
 #     rxb = read()
 #     print(f"rx: {rxb.hex()}")
@@ -50,9 +57,9 @@ def write(bufs):
 input("Press ANY key\n")
 
 while True:
-    sof1_packet = sof_packet(0)
+    sof1_packet = sof()
     print(f"sof1_packet: {sof1_packet.hex()}")
-    sof2_packet = sof_packet(1)
+    sof2_packet = sof()
     print(f"sof2_packet: {sof2_packet.hex()}")
 
     setup_token = setup_token_packet(0, 0)
@@ -66,7 +73,7 @@ while True:
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
 
-    sof3_packet = sof_packet(2)
+    sof3_packet = sof()
 
     in_token = in_token_packet(0, 0)
     print(f"in_token: {in_token.hex()}")
@@ -78,7 +85,7 @@ while True:
     write(ack_packet())
 
     print("get descriptor device")
-    sof4 = sof_packet(3)
+    sof4 = sof()
     setup_token = setup_token_packet(DEV_ADDR, 0)
     print(f"setup_token: {setup_token.hex()}")
     setup_data = setup_data_packet(
@@ -111,7 +118,7 @@ while True:
         Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.CONFIGURATION, 0, 9
     )
     print(f"setup_data: {setup_data.hex()}")
-    write([sof_packet(4), setup_token, setup_data])
+    write([sof(), setup_token, setup_data])
     get_odd(reset=True)
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
@@ -137,7 +144,111 @@ while True:
         Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.CONFIGURATION, 0, 32
     )
     print(f"setup_data: {setup_data.hex()}")
-    write([sof_packet(5), setup_token, setup_data])
+    write([sof(), setup_token, setup_data])
+    get_odd(reset=True)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    in_token = in_token_packet(DEV_ADDR, 0)
+    write(in_token)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+    write(ack_packet())
+
+    out_token = out_token_packet(DEV_ADDR, 0)
+    print(f"out_token: {out_token.hex()}")
+    out_packet = data_packet(b"", odd=get_odd())
+    print(f"out_packet: {out_packet.hex()}")
+    write([out_token, out_packet])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    print("get string 0")
+    setup_token = setup_token_packet(DEV_ADDR, 0)
+    print(f"setup_token: {setup_token.hex()}")
+    setup_data = setup_data_packet(
+        Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.STRING | 0, 0, 0xFF
+    )
+    print(f"setup_data: {setup_data.hex()}")
+    write([sof(), setup_token, setup_data])
+    get_odd(reset=True)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    in_token = in_token_packet(DEV_ADDR, 0)
+    write(in_token)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+    write(ack_packet())
+
+    out_token = out_token_packet(DEV_ADDR, 0)
+    print(f"out_token: {out_token.hex()}")
+    out_packet = data_packet(b"", odd=get_odd())
+    print(f"out_packet: {out_packet.hex()}")
+    write([out_token, out_packet])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    print("get string 2")
+    setup_token = setup_token_packet(DEV_ADDR, 0)
+    print(f"setup_token: {setup_token.hex()}")
+    setup_data = setup_data_packet(
+        Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.STRING | 2, 0x0409, 0xFF
+    )
+    print(f"setup_data: {setup_data.hex()}")
+    write([sof(), setup_token, setup_data])
+    get_odd(reset=True)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    in_token = in_token_packet(DEV_ADDR, 0)
+    write(in_token)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+    write(ack_packet())
+
+    out_token = out_token_packet(DEV_ADDR, 0)
+    print(f"out_token: {out_token.hex()}")
+    out_packet = data_packet(b"", odd=get_odd())
+    print(f"out_packet: {out_packet.hex()}")
+    write([out_token, out_packet])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    print("get string 1")
+    setup_token = setup_token_packet(DEV_ADDR, 0)
+    print(f"setup_token: {setup_token.hex()}")
+    setup_data = setup_data_packet(
+        Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.STRING | 1, 0x0409, 0xFF
+    )
+    print(f"setup_data: {setup_data.hex()}")
+    write([sof(), setup_token, setup_data])
+    get_odd(reset=True)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    in_token = in_token_packet(DEV_ADDR, 0)
+    write(in_token)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+    write(ack_packet())
+
+    out_token = out_token_packet(DEV_ADDR, 0)
+    print(f"out_token: {out_token.hex()}")
+    out_packet = data_packet(b"", odd=get_odd())
+    print(f"out_packet: {out_packet.hex()}")
+    write([out_token, out_packet])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    print("get string 3")
+    setup_token = setup_token_packet(DEV_ADDR, 0)
+    print(f"setup_token: {setup_token.hex()}")
+    setup_data = setup_data_packet(
+        Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.STRING | 3, 0x0409, 0xFF
+    )
+    print(f"setup_data: {setup_data.hex()}")
+    write([sof(), setup_token, setup_data])
     get_odd(reset=True)
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
