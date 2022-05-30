@@ -49,7 +49,8 @@ while True:
     setup_token_packet = setup_packet(0, 0)
     print(f"setup_token_packet: {setup_token_packet.hex()}")
 
-    setup_buf = bytes.fromhex("8006000100004000")
+    # setup_buf = bytes.fromhex("8006000100004000")
+    setup_buf = bytes.fromhex("00052B0000000000")
     setup_data_packet, odd = data_packet(setup_buf, odd=odd)
     print(f"setup_data_packet: {setup_data_packet.hex()}")
 
@@ -62,7 +63,11 @@ while True:
 
     in_token_packet = in_packet(0, 0)
     print(f"in_token_packet: {in_token_packet.hex()}")
-    write([sof3_packet, in_token_packet])
+    # write([sof3_packet, in_token_packet])
+    write(in_token_packet)
+
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
 
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")

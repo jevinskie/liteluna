@@ -135,17 +135,17 @@ class SimSoC(SoCCore):
             set(
                 [
                     # serial2udp_pads,
-                    self.fixup.utmi,
+                    # self.fixup.utmi,
                     self.usb.utmi,
                     self.usb.dev_la,
                     self.usb.td_la,
                     self.usb.td_la_speed,
                     self.usb.td_la_address,
-                    self.usb.td_la_cnt_dbg,
+                    # self.usb.td_la_cnt_dbg,
                     self.usb.td_la_state,
-                    self.usb.td_la_rx_data,
-                    *get_signals(self.fixup, recurse=True),
-                    *get_signals(usb_sim_phy, recurse=True),
+                    # self.usb.td_la_rx_data,
+                    # *get_signals(self.fixup, recurse=True),
+                    # *get_signals(usb_sim_phy, recurse=True),
                 ]
             )
         )
