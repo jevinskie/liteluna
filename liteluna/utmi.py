@@ -31,7 +31,6 @@ class UTMIInterface(Record):
                 ("session_end", 1, DIR_M_TO_S),
                 ("rx_error", 1, DIR_M_TO_S),
                 ("host_disconnect", 1, DIR_M_TO_S),
-                ("id_digital", 1, DIR_M_TO_S),
             ]
         )
 
