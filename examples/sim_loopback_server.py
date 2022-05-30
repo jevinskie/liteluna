@@ -55,7 +55,16 @@ while True:
 
     write([sof1_packet, sof2_packet, setup_token_packet, setup_data_packet])
 
-    # in_buf = read()
-    # print(f"in_buf: {in_buf.hex()}")
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    sof3_packet = sof_packet(2)
+
+    in_token_packet = in_packet(0, 0)
+    print(f"in_token_packet: {in_token_packet.hex()}")
+    write([sof3_packet, in_token_packet])
+
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
 
     input("Press ANY key\n")
