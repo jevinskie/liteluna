@@ -116,10 +116,10 @@ class SimSoC(SoCCore):
             platform, self.fixup.utmi, with_utmi=True, with_utmi_la=True
         )
 
-        # self.submodules.stream_inverter = StreamPayloadInverter()
+        self.submodules.stream_inverter = StreamPayloadInverter()
         self.submodules.pipeline = stream.Pipeline(
             usb.sink,
-            # self.stream_inverter,
+            self.stream_inverter,
             usb.source,
         )
 
