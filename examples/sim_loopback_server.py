@@ -58,12 +58,10 @@ while True:
     setup_token = setup_token_packet(0, 0)
     print(f"setup_token: {setup_token.hex()}")
 
-    # setup_buf = bytes.fromhex("8006000100004000")
-    setup_buf = bytes.fromhex("00052B0000000000")
-    setup_data_packet = data_packet(setup_buf, odd=False)
-    print(f"setup_data_packet: {setup_data_packet.hex()}")
+    setup_data = setup_data_packet(Recip.DEVICE, Dir.OUT, Req.SET_ADDRESS, DEV_ADDR, 0, 0)
+    print(f"setup_data: {setup_data.hex()}")
 
-    write([sof1_packet, sof2_packet, setup_token, setup_data_packet])
+    write([sof1_packet, sof2_packet, setup_token, setup_data])
 
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
@@ -77,10 +75,21 @@ while True:
 
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
-
     write(ack_packet())
 
-    # in_buf = read()
-    # print(f"in_buf: {in_buf.hex()}")
+    sof4 = sof_packet(3)
+    setup_token = setup_token_packet(DEV_ADDR, 0)
+    print(f"setup_token: {setup_token.hex()}")
+    setup_data = setup_data_packet(Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, 0x100, 0, 0x12)
+    print(f"setup_data: {setup_data.hex()}")
+    write([sof4, setup_token, setup_data])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    in_token = in_token_packet(DEV_ADDR, 0)
+    write(in_token)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+    write(ack_packet())
 
     input("Press ANY key\n")
