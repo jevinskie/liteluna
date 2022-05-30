@@ -77,12 +77,16 @@ while True:
     print(f"in_buf: {in_buf.hex()}")
     write(ack_packet())
 
+    print("get descriptor device")
     sof4 = sof_packet(3)
     setup_token = setup_token_packet(DEV_ADDR, 0)
     print(f"setup_token: {setup_token.hex()}")
-    setup_data = setup_data_packet(Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, 0x100, 0, 0x12)
+    setup_data = setup_data_packet(
+        Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.DEVICE, 0, 0x12
+    )
     print(f"setup_data: {setup_data.hex()}")
     write([sof4, setup_token, setup_data])
+    get_odd(reset=True)
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
 
@@ -91,5 +95,65 @@ while True:
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
     write(ack_packet())
+
+    out_token = out_token_packet(DEV_ADDR, 0)
+    print(f"out_token: {out_token.hex()}")
+    out_packet = data_packet(b"", odd=get_odd())
+    print(f"out_packet: {out_packet.hex()}")
+    write([out_token, out_packet])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    print("get descriptor config probe")
+    setup_token = setup_token_packet(DEV_ADDR, 0)
+    print(f"setup_token: {setup_token.hex()}")
+    setup_data = setup_data_packet(
+        Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.CONFIGURATION, 0, 9
+    )
+    print(f"setup_data: {setup_data.hex()}")
+    write([sof_packet(4), setup_token, setup_data])
+    get_odd(reset=True)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    in_token = in_token_packet(DEV_ADDR, 0)
+    write(in_token)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+    write(ack_packet())
+
+    out_token = out_token_packet(DEV_ADDR, 0)
+    print(f"out_token: {out_token.hex()}")
+    out_packet = data_packet(b"", odd=get_odd())
+    print(f"out_packet: {out_packet.hex()}")
+    write([out_token, out_packet])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    print("get descriptor config full")
+    setup_token = setup_token_packet(DEV_ADDR, 0)
+    print(f"setup_token: {setup_token.hex()}")
+    setup_data = setup_data_packet(
+        Recip.DEVICE, Dir.IN, Req.GET_DESCRIPTOR, DescType.CONFIGURATION, 0, 32
+    )
+    print(f"setup_data: {setup_data.hex()}")
+    write([sof_packet(5), setup_token, setup_data])
+    get_odd(reset=True)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+
+    in_token = in_token_packet(DEV_ADDR, 0)
+    write(in_token)
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
+    write(ack_packet())
+
+    out_token = out_token_packet(DEV_ADDR, 0)
+    print(f"out_token: {out_token.hex()}")
+    out_packet = data_packet(b"", odd=get_odd())
+    print(f"out_packet: {out_packet.hex()}")
+    write([out_token, out_packet])
+    in_buf = read()
+    print(f"in_buf: {in_buf.hex()}")
 
     input("Press ANY key\n")
