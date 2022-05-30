@@ -136,6 +136,7 @@ class SimSoC(SoCCore):
                 [
                     # serial2udp_pads,
                     self.fixup.utmi,
+                    self.usb.utmi,
                     self.usb.dev_la,
                     self.usb.td_la,
                     self.usb.td_la_speed,

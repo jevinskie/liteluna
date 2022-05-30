@@ -47,7 +47,7 @@ class USBStreamer(Module):
             ]
         else:
             self.utmi = utmi = UTMIInterface()
-            for name, nbit, sdir in utmi.layout:
+            for name, _, sdir in utmi.layout:
                 sname = f"utmi_{name}"
                 if sdir == DIR_M_TO_S:
                     self.comb += getattr(utmi, name).eq(getattr(pads, name))
@@ -96,6 +96,7 @@ class USBStreamer(Module):
                 else:
                     utmi_map[f"o_{sname}"] = sig
             port_map = dict(port_map, **utmi_map)
+            self.comb += utmi.rx_data.eq(pads.rx_data)
 
         if with_blinky:
             port_map["o_led"] = platform.request("user_led")

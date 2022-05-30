@@ -173,6 +173,7 @@ class USBBulkStreamerDevice(Elaboratable):
                 else:
                     stmt = getattr(self, sname).eq(getattr(self.utmi, name))
                 m.d.comb += stmt
+            m.d.comb += self.utmi.rx_data.eq(self.utmi_rx_data)
 
         m.d.comb += [
             self.stream_out_payload.eq(stream_out.payload),
