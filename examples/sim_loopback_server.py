@@ -28,7 +28,9 @@ def get_odd(reset=False):
 def read():
     sz_buf = s.recv(4)
     sz = int.from_bytes(sz_buf, "big")
-    return s.recv(sz)
+    buf = s.recv(sz)
+    print(f"d2h_raw: {buf.hex(' ')}", flush=True)
+    return buf
 
 
 def write(bufs):
@@ -37,6 +39,7 @@ def write(bufs):
     out_buf = b""
     for buf in bufs:
         out_buf += len(buf).to_bytes(4, "big") + buf
+        print(f"h2d_raw: {buf.hex(' ')}", flush=True)
     s.send(out_buf)
 
 
@@ -54,7 +57,7 @@ def sof():
 
 # time.sleep(7)
 
-input("Press ANY key\n")
+# input("Press ANY key\n")
 
 while True:
     sof1_packet = sof()
@@ -83,6 +86,8 @@ while True:
     in_buf = read()
     print(f"in_buf: {in_buf.hex()}")
     write(ack_packet())
+
+    # time.sleep(10)
 
     print("get descriptor device")
     sof4 = sof()
