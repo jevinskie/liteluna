@@ -11,6 +11,7 @@ from litex.build.generic_platform import *
 from litex.build.sim import SimPlatform
 from litex.build.sim.config import SimConfig
 from litex.gen.fhdl.utils import get_signals
+from litex.gen.fhdl.verilog import VerilogTime
 from litex.soc.cores.uart import RS232PHYModel
 from litex.soc.integration.builder import *
 from litex.soc.integration.soc_core import *
@@ -130,6 +131,16 @@ class SimSoC(SoCCore):
         self.add_etherbone(phy=self.ethphy, ip_address="192.168.42.50")
 
         from litescope import LiteScopeAnalyzer
+
+        td_state = self.usb.td_la_state
+        old_td_state = Signal.like(td_state)
+        self.sync += [
+            old_td_state.eq(td_state),
+            If(
+                old_td_state != td_state,
+                Display("time=%0t old_state: %d state: %d", VerilogTime(), old_td_state, td_state),
+            ),
+        ]
 
         analyzer_signals = list(
             set(
