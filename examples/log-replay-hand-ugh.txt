@@ -23,11 +23,24 @@ h2d: 69 06 90
 d2h: c3 00 00
 h2d: d2
 
+# zlp out packet?
+h2d: e1 06 90
+h2d: 4b 00 00
+d2h: d2
+
 # second get device descriptor
 h2d: a5 05 d0
 h2d: 2d 06 90
 h2d: c3 80 06 00 01 00 00 12 00 e0 f4
+# h2d: c3 80 06 00 01 00 00 40 00 dd 94
 d2h: d2
 
-# h2d: a5 06 90
+h2d: a5 06 90
 h2d: 69 06 90
+d2h: 4b 12 01 00 02 00 00 00 40 d0 16 3b 0f 00 00 01 02 03 01 93 54
+h2d: d2
+# correct size so no zlp read needed
+# but write zlp? i guess...
+h2d: e1 06 90
+h2d: 4b 00 00
+d2h: d2
