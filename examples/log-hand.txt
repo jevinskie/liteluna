@@ -1,0 +1,395 @@
+[serial2framed_tcp] loaded (0x55f14c9b2090)
+[spdeeprom] loaded (addr = 0x0)
+[serial2console] loaded (0x55f14c9b2090)
+[xgmii_ethernet] loaded (0x55f14c9b2090)
+[gmii_ethernet] loaded (0x55f14c9b2090)
+[clocker] loaded
+[serial2tcp] loaded (0x55f14c9b2090)
+[serial2udp] loaded (0x55f14c9b2090)
+[ethernet] loaded (0x55f14c9b2090)
+[clocker] sys_clk: freq_hz=20000000, phase_deg=0
+h2d_raw: a5 00 10 
+time=25125000 old_state:   0 state:   1
+time=25175000 old_state:   1 state:   2
+time=25225000 old_state:   2 state:   4
+time=25275000 old_state:   4 state:   5
+time=25325000 old_state:   5 state:   0
+h2d_raw: a5 01 e8 
+time=50125000 old_state:   0 state:   1
+time=50175000 old_state:   1 state:   2
+time=50225000 old_state:   2 state:   4
+time=50275000 old_state:   4 state:   5
+time=50325000 old_state:   5 state:   0
+h2d_raw: 2d 00 10 
+time=75125000 old_state:   0 state:   1
+time=75175000 old_state:   1 state:   2
+time=75225000 old_state:   2 state:   4
+time=75275000 old_state:   4 state:   5
+time=75325000 old_state:   5 state:   0
+h2d_raw: c3 00 05 2b 00 00 00 00 00 ec ef 
+time=100125000 old_state:   0 state:   1
+time=100175000 old_state:   1 state:   3
+time=100725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 02 a8 
+time=125125000 old_state:   0 state:   1
+time=125175000 old_state:   1 state:   2
+time=125225000 old_state:   2 state:   4
+time=125275000 old_state:   4 state:   5
+time=125325000 old_state:   5 state:   0
+h2d_raw: 69 00 10 
+time=150125000 old_state:   0 state:   1
+time=150175000 old_state:   1 state:   2
+time=150225000 old_state:   2 state:   4
+time=150275000 old_state:   4 state:   5
+time=150325000 old_state:   5 state:   0
+d2h_raw: 4b 00 00 
+h2d_raw: d2 
+time=175125000 old_state:   0 state:   1
+time=175175000 old_state:   1 state:   3
+time=175225000 old_state:   3 state:   0
+h2d_raw: a5 03 50 
+time=200125000 old_state:   0 state:   1
+time=200175000 old_state:   1 state:   2
+time=200225000 old_state:   2 state:   4
+time=200275000 old_state:   4 state:   5
+time=200325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=225125000 old_state:   0 state:   1
+time=225175000 old_state:   1 state:   2
+time=225225000 old_state:   2 state:   4
+time=225275000 old_state:   4 state:   5
+time=225325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 00 01 00 00 12 00 e0 f4 
+time=250125000 old_state:   0 state:   1
+time=250175000 old_state:   1 state:   3
+time=250725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=275125000 old_state:   0 state:   1
+time=275175000 old_state:   1 state:   2
+time=275225000 old_state:   2 state:   4
+time=275275000 old_state:   4 state:   5
+time=275325000 old_state:   5 state:   0
+d2h_raw: 4b 12 01 00 02 00 00 00 40 d0 16 3b 0f 00 00 01 02 03 01 93 54 
+h2d_raw: d2 
+time=300125000 old_state:   0 state:   1
+time=300175000 old_state:   1 state:   3
+time=300225000 old_state:   3 state:   0
+h2d_raw: e1 2b a8 
+time=325125000 old_state:   0 state:   1
+time=325175000 old_state:   1 state:   2
+time=325225000 old_state:   2 state:   4
+time=325275000 old_state:   4 state:   5
+time=325325000 old_state:   5 state:   0
+h2d_raw: 4b 00 00 
+time=350125000 old_state:   0 state:   1
+time=350175000 old_state:   1 state:   3
+time=350325000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 04 28 
+time=375125000 old_state:   0 state:   1
+time=375175000 old_state:   1 state:   2
+time=375225000 old_state:   2 state:   4
+time=375275000 old_state:   4 state:   5
+time=375325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=400125000 old_state:   0 state:   1
+time=400175000 old_state:   1 state:   2
+time=400225000 old_state:   2 state:   4
+time=400275000 old_state:   4 state:   5
+time=400325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 00 02 00 00 09 00 ae 04 
+time=425125000 old_state:   0 state:   1
+time=425175000 old_state:   1 state:   3
+time=425725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=450125000 old_state:   0 state:   1
+time=450175000 old_state:   1 state:   2
+time=450225000 old_state:   2 state:   4
+time=450275000 old_state:   4 state:   5
+time=450325000 old_state:   5 state:   0
+d2h_raw: 4b 09 02 20 00 01 01 00 80 fa e2 fb 
+h2d_raw: d2 
+time=475125000 old_state:   0 state:   1
+time=475175000 old_state:   1 state:   3
+time=475225000 old_state:   3 state:   0
+h2d_raw: e1 2b a8 
+time=500125000 old_state:   0 state:   1
+time=500175000 old_state:   1 state:   2
+time=500225000 old_state:   2 state:   4
+time=500275000 old_state:   4 state:   5
+time=500325000 old_state:   5 state:   0
+h2d_raw: 4b 00 00 
+time=525125000 old_state:   0 state:   1
+time=525175000 old_state:   1 state:   3
+time=525325000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 05 d0 
+time=550125000 old_state:   0 state:   1
+time=550175000 old_state:   1 state:   2
+time=550225000 old_state:   2 state:   4
+time=550275000 old_state:   4 state:   5
+time=550325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=575125000 old_state:   0 state:   1
+time=575175000 old_state:   1 state:   2
+time=575225000 old_state:   2 state:   4
+time=575275000 old_state:   4 state:   5
+time=575325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 00 02 00 00 20 00 b1 94 
+time=600125000 old_state:   0 state:   1
+time=600175000 old_state:   1 state:   3
+time=600725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=625125000 old_state:   0 state:   1
+time=625175000 old_state:   1 state:   2
+time=625225000 old_state:   2 state:   4
+time=625275000 old_state:   4 state:   5
+time=625325000 old_state:   5 state:   0
+d2h_raw: 4b 09 02 20 00 01 01 00 80 fa 09 04 00 00 02 ff ff ff 00 07 05 01 02 00 02 ff 07 05 81 02 00 02 ff a9 22 
+h2d_raw: d2 
+time=650125000 old_state:   0 state:   1
+time=650175000 old_state:   1 state:   3
+time=650225000 old_state:   3 state:   0
+h2d_raw: e1 2b a8 
+time=675125000 old_state:   0 state:   1
+time=675175000 old_state:   1 state:   2
+time=675225000 old_state:   2 state:   4
+time=675275000 old_state:   4 state:   5
+time=675325000 old_state:   5 state:   0
+h2d_raw: 4b 00 00 
+time=700125000 old_state:   0 state:   1
+time=700175000 old_state:   1 state:   3
+time=700325000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 06 90 
+time=725125000 old_state:   0 state:   1
+time=725175000 old_state:   1 state:   2
+time=725225000 old_state:   2 state:   4
+time=725275000 old_state:   4 state:   5
+time=725325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=750125000 old_state:   0 state:   1
+time=750175000 old_state:   1 state:   2
+time=750225000 old_state:   2 state:   4
+time=750275000 old_state:   4 state:   5
+time=750325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 00 03 00 00 ff 00 d4 64 
+time=775125000 old_state:   0 state:   1
+time=775175000 old_state:   1 state:   3
+time=775725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=800125000 old_state:   0 state:   1
+time=800175000 old_state:   1 state:   2
+time=800225000 old_state:   2 state:   4
+time=800275000 old_state:   4 state:   5
+time=800325000 old_state:   5 state:   0
+d2h_raw: 4b 04 03 09 04 09 78 
+h2d_raw: d2 
+time=825125000 old_state:   0 state:   1
+time=825175000 old_state:   1 state:   3
+time=825225000 old_state:   3 state:   0
+h2d_raw: e1 2b a8 
+time=850125000 old_state:   0 state:   1
+time=850175000 old_state:   1 state:   2
+time=850225000 old_state:   2 state:   4
+time=850275000 old_state:   4 state:   5
+time=850325000 old_state:   5 state:   0
+h2d_raw: 4b 00 00 
+time=875125000 old_state:   0 state:   1
+time=875175000 old_state:   1 state:   3
+time=875325000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 07 68 
+time=900125000 old_state:   0 state:   1
+time=900175000 old_state:   1 state:   2
+time=900225000 old_state:   2 state:   4
+time=900275000 old_state:   4 state:   5
+time=900325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=925125000 old_state:   0 state:   1
+time=925175000 old_state:   1 state:   2
+time=925225000 old_state:   2 state:   4
+time=925275000 old_state:   4 state:   5
+time=925325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 02 03 09 04 ff 00 97 db 
+time=950125000 old_state:   0 state:   1
+time=950175000 old_state:   1 state:   3
+time=950725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=975125000 old_state:   0 state:   1
+time=975175000 old_state:   1 state:   2
+time=975225000 old_state:   2 state:   4
+time=975275000 old_state:   4 state:   5
+time=975325000 old_state:   5 state:   0
+d2h_raw: 4b 2e 03 6c 00 69 00 74 00 65 00 6c 00 75 00 6e 00 61 00 20 00 62 00 75 00 6c 00 6b 00 20 00 73 00 74 00 72 00 65 00 61 00 6d 00 65 00 72 00 db 52 
+h2d_raw: d2 
+time=1000125000 old_state:   0 state:   1
+time=1000175000 old_state:   1 state:   3
+time=1000225000 old_state:   3 state:   0
+h2d_raw: e1 2b a8 
+time=1025125000 old_state:   0 state:   1
+time=1025175000 old_state:   1 state:   2
+time=1025225000 old_state:   2 state:   4
+time=1025275000 old_state:   4 state:   5
+time=1025325000 old_state:   5 state:   0
+h2d_raw: 4b 00 00 
+time=1050125000 old_state:   0 state:   1
+time=1050175000 old_state:   1 state:   3
+time=1050325000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 08 60 
+time=1075125000 old_state:   0 state:   1
+time=1075175000 old_state:   1 state:   2
+time=1075225000 old_state:   2 state:   4
+time=1075275000 old_state:   4 state:   5
+time=1075325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=1100125000 old_state:   0 state:   1
+time=1100175000 old_state:   1 state:   2
+time=1100225000 old_state:   2 state:   4
+time=1100275000 old_state:   4 state:   5
+time=1100325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 01 03 09 04 ff 00 97 e8 
+time=1125125000 old_state:   0 state:   1
+time=1125175000 old_state:   1 state:   3
+time=1125725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=1150125000 old_state:   0 state:   1
+time=1150175000 old_state:   1 state:   2
+time=1150225000 old_state:   2 state:   4
+time=1150275000 old_state:   4 state:   5
+time=1150325000 old_state:   5 state:   0
+d2h_raw: 4b 0c 03 4c 00 69 00 74 00 65 00 58 00 af b8 
+h2d_raw: d2 
+time=1175125000 old_state:   0 state:   1
+time=1175175000 old_state:   1 state:   3
+time=1175225000 old_state:   3 state:   0
+h2d_raw: e1 2b a8 
+time=1200125000 old_state:   0 state:   1
+time=1200175000 old_state:   1 state:   2
+time=1200225000 old_state:   2 state:   4
+time=1200275000 old_state:   4 state:   5
+time=1200325000 old_state:   5 state:   0
+h2d_raw: 4b 00 00 
+time=1225125000 old_state:   0 state:   1
+time=1225175000 old_state:   1 state:   3
+time=1225325000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 09 98 
+time=1250125000 old_state:   0 state:   1
+time=1250175000 old_state:   1 state:   2
+time=1250225000 old_state:   2 state:   4
+time=1250275000 old_state:   4 state:   5
+time=1250325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=1275125000 old_state:   0 state:   1
+time=1275175000 old_state:   1 state:   2
+time=1275225000 old_state:   2 state:   4
+time=1275275000 old_state:   4 state:   5
+time=1275325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 03 03 09 04 ff 00 96 0a 
+time=1300125000 old_state:   0 state:   1
+time=1300175000 old_state:   1 state:   3
+time=1300725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=1325125000 old_state:   0 state:   1
+time=1325175000 old_state:   1 state:   2
+time=1325225000 old_state:   2 state:   4
+time=1325275000 old_state:   4 state:   5
+time=1325325000 old_state:   5 state:   0
+d2h_raw: 4b 14 03 6e 00 6f 00 20 00 73 00 65 00 72 00 69 00 61 00 6c 00 77 93 
+h2d_raw: d2 
+time=1350125000 old_state:   0 state:   1
+time=1350175000 old_state:   1 state:   3
+time=1350225000 old_state:   3 state:   0
+h2d_raw: e1 2b a8 
+time=1375125000 old_state:   0 state:   1
+time=1375175000 old_state:   1 state:   2
+time=1375225000 old_state:   2 state:   4
+time=1375275000 old_state:   4 state:   5
+time=1375325000 old_state:   5 state:   0
+h2d_raw: 4b 00 00 
+time=1400125000 old_state:   0 state:   1
+time=1400175000 old_state:   1 state:   3
+time=1400325000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 0a d8 
+time=1425125000 old_state:   0 state:   1
+time=1425175000 old_state:   1 state:   2
+time=1425225000 old_state:   2 state:   4
+time=1425275000 old_state:   4 state:   5
+time=1425325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=1450125000 old_state:   0 state:   1
+time=1450175000 old_state:   1 state:   2
+time=1450225000 old_state:   2 state:   4
+time=1450275000 old_state:   4 state:   5
+time=1450325000 old_state:   5 state:   0
+h2d_raw: c3 80 09 01 00 00 00 00 00 2f 45 
+time=1475125000 old_state:   0 state:   1
+time=1475175000 old_state:   1 state:   3
+time=1475725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 2b a8 
+time=1500125000 old_state:   0 state:   1
+time=1500175000 old_state:   1 state:   2
+time=1500225000 old_state:   2 state:   4
+time=1500275000 old_state:   4 state:   5
+time=1500325000 old_state:   5 state:   0
+d2h_raw: 4b 00 00 
+h2d_raw: d2 
+time=1525125000 old_state:   0 state:   1
+time=1525175000 old_state:   1 state:   3
+time=1525225000 old_state:   3 state:   0
+h2d_raw: e1 ab 18 
+time=1550125000 old_state:   0 state:   1
+time=1550175000 old_state:   1 state:   2
+time=1550225000 old_state:   2 state:   4
+time=1550275000 old_state:   4 state:   5
+time=1550325000 old_state:   5 state:   0
+h2d_raw: c3 aa 55 00 ff 8e 53 
+time=1575125000 old_state:   0 state:   1
+time=1575175000 old_state:   1 state:   3
+time=1575525000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 ab 18 
+time=1600125000 old_state:   0 state:   1
+time=1600175000 old_state:   1 state:   2
+time=1600225000 old_state:   2 state:   4
+time=1600275000 old_state:   4 state:   5
+time=1600325000 old_state:   5 state:   0
+d2h_raw: c3 55 aa ff 00 8f c7 
+h2d_raw: d2 
+time=1625125000 old_state:   0 state:   1
+time=1625175000 old_state:   1 state:   3
+time=1625225000 old_state:   3 state:   0
+h2d_raw: e1 ab 18 
+time=1650125000 old_state:   0 state:   1
+time=1650175000 old_state:   1 state:   2
+time=1650225000 old_state:   2 state:   4
+time=1650275000 old_state:   4 state:   5
+time=1650325000 old_state:   5 state:   0
+h2d_raw: 4b de ea be ef d4 2b 
+time=1675125000 old_state:   0 state:   1
+time=1675175000 old_state:   1 state:   3
+time=1675525000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: 69 ab 18 
+time=1700125000 old_state:   0 state:   1
+time=1700175000 old_state:   1 state:   2
+time=1700225000 old_state:   2 state:   4
+time=1700275000 old_state:   4 state:   5
+time=1700325000 old_state:   5 state:   0
+d2h_raw: 4b 21 15 41 10 d5 bf 
+h2d_raw: d2 
+time=1725125000 old_state:   0 state:   1
+time=1725175000 old_state:   1 state:   3
+time=1725225000 old_state:   3 state:   0
