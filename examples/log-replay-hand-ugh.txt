@@ -1,0 +1,29 @@
+# setup addr (injected)
+h2d: a5 00 10
+h2d: a5 01 e8
+h2d: 2d 00 10
+h2d: c3 00 05 06 00 00 00 00 00 ea 92
+d2h: d2
+h2d: a5 02 a8
+h2d: 69 00 10
+d2h: 4b 00 00
+h2d: d2
+
+
+# get device descriptor 64
+h2d: a5 03 50
+h2d: 2d 06 90
+h2d: c3 80 06 00 01 00 00 40 00 dd 94
+d2h: d2
+h2d: a5 04 28
+h2d: 69 06 90
+d2h: 4b 12 01 00 02 00 00 00 40 d0 16 3b 0f 00 00 01 02 03 01 93 54
+h2d: d2
+
+# second get device descriptor
+h2d: a5 05 d0
+h2d: 2d 06 90
+h2d: c3 80 06 00 01 00 00 12 00 e0 f4
+d2h: d2
+h2d: a5 06 90
+h2d: 69 06 90
