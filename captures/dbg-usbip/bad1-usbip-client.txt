@@ -1,0 +1,46 @@
+(max10-usb) jevin@rumblebeast [03:22:41 PM] [~/code/eda/max10-usb/liteluna/examples/build/sim/gateware]  [main *]
+->  % sudo /usr/lib/linux-tools-5.15.0-35/usbip --debug --log attach -r 127.0.0.1 -b 47-43.0
+usbip: debug: usbip.c:129:[run_command] running command: `attach'
+libusbip: debug: vhci_driver.c:269:[usbip_vhci_driver_open] available ports: 16
+libusbip: debug: vhci_driver.c:281:[usbip_vhci_driver_open] available controllers: 1
+libusbip: debug: vhci_driver.c:128:[refresh_imported_device_list] controller 0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 0 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 1 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 2 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 3 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 4 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 5 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 6 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub hs port 7 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 8 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 9 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 10 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 11 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 12 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 13 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 14 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:67:[parse_status] hub ss port 15 status 4 speed 0 devid 0
+libusbip: debug: vhci_driver.c:69:[parse_status] sockfd 0 lbusid 0-0
+libusbip: debug: vhci_driver.c:104:[parse_status] exit
+usbip: debug: usbip_attach.c:100:[import_device] got free port 0
+libusbip: debug: vhci_driver.c:367:[usbip_vhci_attach_device2] writing: 0 4 3080235 3
+libusbip: debug: vhci_driver.c:372:[usbip_vhci_attach_device2] attach attribute path: /sys/devices/platform/vhci_hcd.0/attach
+libusbip: debug: vhci_driver.c:380:[usbip_vhci_attach_device2] attached port: 0
+(max10-usb) jevin@rumblebeast [03:23:56 PM] [~/code/eda/max10-usb/liteluna/examples/build/sim/gateware]  [main *]
+->  % 
+

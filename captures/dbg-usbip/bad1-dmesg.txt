@@ -1,0 +1,709 @@
+[55711.226539] dyndbg: bad flag-op p, at start of pflm
+[55711.226544] dyndbg: flags parse failed
+[55785.413904] vhci_hcd:vhci_hcd_probe:1345: vhci_hcd: vhci_hcd_probe:1345: name vhci_hcd id 0
+[55785.413911] vhci_hcd vhci_hcd.0: USB/IP Virtual Host Controller
+[55785.413913] vhci_hcd vhci_hcd.0: new USB bus registered, assigned bus number 9
+[55785.413917] vhci_hcd:vhci_start:1177: vhci_hcd: vhci_start:1177: enter vhci_start
+[55785.413921] vhci_hcd: vhci_start:1219: created sysfs vhci_hcd.0
+[55785.413950] usb usb9: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 5.15
+[55785.413952] usb usb9: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[55785.413953] usb usb9: Product: USB/IP Virtual Host Controller
+[55785.413954] usb usb9: Manufacturer: Linux 5.15.30 vhci_hcd
+[55785.413955] usb usb9: SerialNumber: vhci_hcd.0
+[55785.414038] hub 9-0:1.0: USB hub found
+[55785.414040] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a006 wValue 2900 wIndex 0
+[55785.414042] vhci_hcd:vhci_hub_control:406: vhci_hcd: vhci_hub_control:406:  GetHubDescriptor
+[55785.414043] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port -1
+[55785.414044] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414046] hub 9-0:1.0: 8 ports detected
+[55785.414049] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a000 wValue 0 wIndex 0
+[55785.414051] vhci_hcd:vhci_hub_control:429: vhci_hcd: vhci_hub_control:429:  GetHubStatus
+[55785.414051] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port -1
+[55785.414052] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414099] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 1
+[55785.414100] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414101] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55785.414102] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414103] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414104] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414105] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414108] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 2
+[55785.414109] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414110] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 1
+[55785.414111] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414112] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414113] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414114] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414116] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 3
+[55785.414117] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414118] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 2
+[55785.414119] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414120] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414120] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414121] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414124] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 4
+[55785.414125] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414125] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 3
+[55785.414126] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414127] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414128] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414129] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414131] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 5
+[55785.414132] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414133] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 4
+[55785.414133] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414134] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414135] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414136] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414138] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 6
+[55785.414139] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414140] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 5
+[55785.414141] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414142] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414143] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414143] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414146] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 7
+[55785.414147] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414147] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 6
+[55785.414148] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414149] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414150] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414151] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414153] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 8
+[55785.414154] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414155] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 7
+[55785.414156] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000100
+[55785.414157] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414157] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414158] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414190] vhci_hcd vhci_hcd.0: USB/IP Virtual Host Controller
+[55785.414191] vhci_hcd vhci_hcd.0: new USB bus registered, assigned bus number 10
+[55785.414193] vhci_hcd:vhci_start:1177: vhci_hcd: vhci_start:1177: enter vhci_start
+[55785.414196] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 8006 wValue f00 wIndex 0
+[55785.414198] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port -1
+[55785.414198] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414201] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 8006 wValue f00 wIndex 0
+[55785.414202] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port -1
+[55785.414203] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414205] usb usb10: We don't know the algorithms for LPM for this host, disabling LPM.
+[55785.414218] usb usb10: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 5.15
+[55785.414219] usb usb10: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[55785.414220] usb usb10: Product: USB/IP Virtual Host Controller
+[55785.414221] usb usb10: Manufacturer: Linux 5.15.30 vhci_hcd
+[55785.414221] usb usb10: SerialNumber: vhci_hcd.0
+[55785.414267] hub 10-0:1.0: USB hub found
+[55785.414268] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a006 wValue 2a00 wIndex 0
+[55785.414269] vhci_hcd:vhci_hub_control:406: vhci_hcd: vhci_hub_control:406:  GetHubDescriptor
+[55785.414270] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port -1
+[55785.414271] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414273] hub 10-0:1.0: 8 ports detected
+[55785.414276] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a000 wValue 0 wIndex 0
+[55785.414277] vhci_hcd:vhci_hub_control:429: vhci_hcd: vhci_hub_control:429:  GetHubStatus
+[55785.414278] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port -1
+[55785.414279] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414343] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 1
+[55785.414344] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414345] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55785.414345] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414347] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414347] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414348] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414351] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 2
+[55785.414352] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414353] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 1
+[55785.414353] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414354] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414355] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414356] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414358] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 3
+[55785.414360] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414360] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 2
+[55785.414361] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414362] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414363] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414364] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414366] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 4
+[55785.414367] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414368] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 3
+[55785.414368] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414369] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414370] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414371] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414373] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 5
+[55785.414374] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414375] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 4
+[55785.414376] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414377] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414378] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414378] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414381] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 6
+[55785.414382] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414383] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 5
+[55785.414383] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414384] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414385] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414386] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414388] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 7
+[55785.414389] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414390] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 6
+[55785.414391] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414392] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414393] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414393] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414396] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 8 wIndex 8
+[55785.414397] vhci_hcd:vhci_hub_control:548: vhci_hcd: vhci_hub_control:548:  SetPortFeature: USB_PORT_FEAT_POWER
+[55785.414397] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 7
+[55785.414398] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000000 -> 00000200
+[55785.414399] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +POWER
+[55785.414400] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.414401] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.414432] vhci_hcd:vhci_hcd_probe:1382: vhci_hcd: vhci_hcd_probe:1382: bye
+[55785.514550] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55785.514557] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55785.514558] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514558] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55785.514560] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55785.514562] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514565] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514566] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514567] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514569] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55785.514571] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514573] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55785.514574] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514577] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514578] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514580] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514581] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 2
+[55785.514585] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 2
+[55785.514586] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514588] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 1
+[55785.514589] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514591] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514592] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514593] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514596] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 2
+[55785.514600] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 2
+[55785.514601] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514603] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 1
+[55785.514604] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 3
+[55785.514604] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514607] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514608] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514610] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514611] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 3
+[55785.514613] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514614] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 2
+[55785.514615] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514617] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514618] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514619] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514621] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 3
+[55785.514624] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 3
+[55785.514625] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514626] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 2
+[55785.514626] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 4
+[55785.514628] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514630] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514632] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514633] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514634] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 4
+[55785.514636] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514637] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 3
+[55785.514638] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514640] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514640] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 4
+[55785.514641] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514643] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514645] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 4
+[55785.514647] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514648] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 3
+[55785.514649] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514651] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 5
+[55785.514651] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514653] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514654] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514656] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 5
+[55785.514657] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514659] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 4
+[55785.514660] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514661] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514662] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 5
+[55785.514663] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514664] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514666] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 5
+[55785.514667] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514669] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 4
+[55785.514670] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514672] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514672] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 6
+[55785.514673] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514675] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514676] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 6
+[55785.514678] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514679] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 5
+[55785.514680] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514681] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514682] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 6
+[55785.514683] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514684] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514686] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 6
+[55785.514688] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514689] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 5
+[55785.514690] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514692] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514692] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 7
+[55785.514694] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514695] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514697] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 7
+[55785.514698] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514700] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 6
+[55785.514701] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514702] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514703] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 7
+[55785.514704] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514706] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514707] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 7
+[55785.514708] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514710] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 6
+[55785.514711] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514713] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514712] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 8
+[55785.514715] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514717] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514718] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 8
+[55785.514720] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 200 0
+[55785.514721] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 7
+[55785.514722] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 00000200
+[55785.514723] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514724] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 8
+[55785.514724] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514726] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514727] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 8
+[55785.514729] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55785.514730] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 7
+[55785.514732] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55785.514733] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514734] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514736] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514740] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 1
+[55785.514742] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514744] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55785.514745] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514747] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514748] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514749] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514750] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514754] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 2
+[55785.514756] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514757] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 1
+[55785.514757] vhci_hcd:vhci_bus_suspend:1262: usb usb9: vhci_bus_suspend
+[55785.514759] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514761] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514762] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514763] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514764] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514767] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 3
+[55785.514769] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514770] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 2
+[55785.514771] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514772] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514773] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514774] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514775] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514778] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 4
+[55785.514779] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514780] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 3
+[55785.514781] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514782] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514783] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514784] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514785] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514788] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 5
+[55785.514790] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514791] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 4
+[55785.514791] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514793] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514794] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514795] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514796] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514798] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 6
+[55785.514800] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514801] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 5
+[55785.514801] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514803] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514804] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514805] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514805] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514808] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 7
+[55785.514809] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514810] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 6
+[55785.514811] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514812] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514813] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514814] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514815] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514818] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 1b wIndex 8
+[55785.514819] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 27
+[55785.514820] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 7
+[55785.514821] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000200 -> 08000200
+[55785.514822] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55785.514823] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +R27
+[55785.514824] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55785.514825] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55785.514832] vhci_hcd:vhci_bus_suspend:1262: usb usb10: vhci_bus_suspend
+
+
+
+
+
+
+
+
+
+
+[55888.616117] Bluetooth: Core ver 2.22
+[55888.616140] NET: Registered PF_BLUETOOTH protocol family
+[55888.616141] Bluetooth: HCI device and connection manager initialized
+[55888.616144] Bluetooth: HCI socket layer initialized
+[55888.616146] Bluetooth: L2CAP socket layer initialized
+[55888.616148] Bluetooth: SCO socket layer initialized
+
+
+
+
+
+[55978.800353] vhci_hcd:attach_store:334: vhci_hcd: attach_store:334: port(0) pdev(0) rhport(0)
+[55978.800357] vhci_hcd:attach_store:336: vhci_hcd: attach_store:336: sockfd(4) devid(3080235) speed(3)
+[55978.800449] vhci_hcd vhci_hcd.0: pdev(0) rhport(0) sockfd(4)
+[55978.800451] vhci_hcd vhci_hcd.0: devid(3080235) speed(3) speed_str(high-speed)
+[55978.800454] vhci_hcd:rh_port_connect:161: vhci_hcd: rh_port_connect:161: rh_port_connect 0
+[55978.800456] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55978.800457] vhci_hcd:vhci_rx_pdu:203: vhci_hcd: vhci_rx_pdu:203: Enter
+[55978.800459] vhci_hcd vhci_hcd.0: Device attached
+[55978.800460] usbip_core:usbip_recv:314: usbip_core: usbip_recv:314: enter
+[55978.800592] vhci_hcd:vhci_bus_resume:1277: usb usb9: vhci_bus_resume
+[55978.800601] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55978.800603] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55978.800604] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 501 1
+[55978.800606] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55978.800607] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010501 -> 00010501
+[55978.800608] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   CONNECTION
+[55978.800610] vhci_hcd:dump_port_status_diff:145: vhci_hcd: dump_port_status_diff:145:   USB_PORT_STAT_SPEED_5GBPS
+[55978.800611] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800612] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   HIGHSPEED
+[55978.800613] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55978.800614] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800615] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800616] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55978.800625] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2301 wValue 10 wIndex 1
+[55978.800626] vhci_hcd:vhci_hub_control:397: vhci_hcd: vhci_hub_control:397:  ClearPortFeature: default 10
+[55978.800627] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55978.800628] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010501 -> 00000501
+[55978.800630] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   CONNECTION
+[55978.800631] vhci_hcd:dump_port_status_diff:145: vhci_hcd: dump_port_status_diff:145:   USB_PORT_STAT_SPEED_5GBPS
+[55978.800632] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800633] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   HIGHSPEED
+[55978.800634] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -C_CONNECTION
+[55978.800635] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800636] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800641] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 2
+[55978.800642] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 2
+[55978.800643] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55978.800644] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 1
+[55978.800645] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55978.800647] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800648] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800648] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800653] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 3
+[55978.800654] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 3
+[55978.800655] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55978.800656] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 2
+[55978.800657] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55978.800658] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800659] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800660] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800664] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 4
+[55978.800666] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 4
+[55978.800666] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55978.800668] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 3
+[55978.800669] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55978.800670] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800671] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800672] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800676] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 5
+[55978.800677] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 5
+[55978.800678] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55978.800679] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 4
+[55978.800680] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55978.800681] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800682] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800683] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800687] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 6
+[55978.800689] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 6
+[55978.800690] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55978.800691] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 5
+[55978.800692] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55978.800693] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800694] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800695] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800699] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 7
+[55978.800700] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 7
+[55978.800701] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55978.800702] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 6
+[55978.800703] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55978.800704] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800705] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800706] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.800711] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 8
+[55978.800712] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 8
+[55978.800713] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55978.800714] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 7
+[55978.800715] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55978.800716] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.800717] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.800718] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.907082] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55978.907086] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55978.907088] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 501 0
+[55978.907090] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55978.907091] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000501 -> 00000501
+[55978.907093] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   CONNECTION
+[55978.907094] vhci_hcd:dump_port_status_diff:145: vhci_hcd: dump_port_status_diff:145:   USB_PORT_STAT_SPEED_5GBPS
+[55978.907096] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.907097] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   HIGHSPEED
+[55978.907098] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.907099] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.907111] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 4 wIndex 1
+[55978.907112] vhci_hcd:vhci_hub_control:574: vhci_hcd: vhci_hub_control:574:  SetPortFeature: USB_PORT_FEAT_RESET
+[55978.907114] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 4
+[55978.907115] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55978.907116] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000501 -> 00000511
+[55978.907117] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   CONNECTION
+[55978.907118] vhci_hcd:dump_port_status_diff:145: vhci_hcd: dump_port_status_diff:145:   USB_PORT_STAT_SPEED_5GBPS
+[55978.907119] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +RESET
+[55978.907120] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.907121] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   HIGHSPEED
+[55978.907122] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.907123] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.975062] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55978.975066] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55978.975067] vhci_hcd:vhci_hub_control:466: vhci_hcd: vhci_hub_control:466:  enable rhport 0 (status 5)
+[55978.975069] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 503 10
+[55978.975070] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55978.975072] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000511 -> 00100503
+[55978.975073] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   CONNECTION
+[55978.975075] vhci_hcd:dump_port_status_diff:145: vhci_hcd: dump_port_status_diff:145:   USB_PORT_STAT_SPEED_5GBPS
+[55978.975076] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +ENABLE
+[55978.975077] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -RESET
+[55978.975078] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.975079] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   HIGHSPEED
+[55978.975081] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +C_RESET
+[55978.975082] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.975083] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55978.975084] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55978.975095] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2301 wValue 14 wIndex 1
+[55978.975097] vhci_hcd:vhci_hub_control:397: vhci_hcd: vhci_hub_control:397:  ClearPortFeature: default 14
+[55978.975098] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55978.975099] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00100503 -> 00000503
+[55978.975101] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   CONNECTION
+[55978.975102] vhci_hcd:dump_port_status_diff:145: vhci_hcd: dump_port_status_diff:145:   USB_PORT_STAT_SPEED_5GBPS
+[55978.975103] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   ENABLE
+[55978.975104] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55978.975105] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   HIGHSPEED
+[55978.975106] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -C_RESET
+[55978.975107] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55978.975108] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55979.035073] usb 9-1: new high-speed USB device number 2 using vhci_hcd
+[55979.035080] vhci_hcd:vhci_urb_enqueue:781: vhci_hcd: vhci_urb_enqueue:781: Not yet?:Get_Descriptor to device 0 (get max pipe size)
+[55979.035099] vhci_hcd:vhci_tx_loop:252: vhci_hcd: vhci_tx_loop:252: pending urbs ?, now wake up
+[55979.035103] vhci_hcd:vhci_send_cmd_submit:77: vhci_hcd: vhci_send_cmd_submit:77: setup txdata urb seqnum 1
+[55979.035105] vhci_hcd:setup_cmd_submit_pdu:18: vhci_hcd: setup_cmd_submit_pdu:18: URB, local devnum 0, remote devid 3080235
+[55979.035147] vhci_hcd:vhci_send_cmd_submit:154: vhci_hcd: vhci_send_cmd_submit:154: send txdata
+
+
+
+[55984.163104] vhci_hcd:vhci_urb_dequeue:950: vhci_hcd: vhci_urb_dequeue:950: leave
+[55984.163107] vhci_hcd:vhci_tx_loop:252: vhci_hcd: vhci_tx_loop:252: pending urbs ?, now wake up
+[55984.163110] vhci_hcd:vhci_send_cmd_unlink:204: vhci_hcd: vhci_send_cmd_unlink:204: setup cmd unlink, 2
+[55984.163140] vhci_hcd:vhci_send_cmd_unlink:227: vhci_hcd: vhci_send_cmd_unlink:227: send txdata
+[55984.181243] vhci_hcd: vhci_rx_pdu:224: connection closed
+[55984.181253] usbip_core:event_handler:71: usbip_core: event_handler:71: pending event 5
+[55984.181258] vhci_hcd:vhci_shutdown_connection:1017: vhci_hcd: vhci_shutdown_connection:1017: shutdown tcp_socket 4
+[55984.181290] vhci_hcd:vhci_tx_loop:252: vhci_hcd: vhci_tx_loop:252: pending urbs ?, now wake up
+[55984.181295] vhci_hcd: vhci_shutdown_connection:1030: stop threads
+[55984.181297] vhci_hcd: vhci_shutdown_connection:1038: release socket
+[55984.181299] vhci_hcd:pickup_urb_and_free_priv:26: vhci_hcd: pickup_urb_and_free_priv:26: find urb seqnum 1
+[55984.181307] vhci_hcd:rh_port_disconnect:195: vhci_hcd: rh_port_disconnect:195: rh_port_disconnect 0
+[55984.181309] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.181312] vhci_hcd: vhci_shutdown_connection:1064: disconnect device
+[55984.181317] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2303 wValue 4 wIndex 1
+[55984.181320] vhci_hcd:vhci_hub_control:574: vhci_hcd: vhci_hub_control:574:  SetPortFeature: USB_PORT_FEAT_RESET
+[55984.181322] vhci_hcd:vhci_hub_control:597: vhci_hcd: vhci_hub_control:597:  SetPortFeature: default 4
+[55984.181323] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.181324] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010502 -> 00010110
+[55984.181326] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -ENABLE
+[55984.181327] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +RESET
+[55984.181328] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.181329] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -HIGHSPEED
+[55984.181329] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.181331] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.181331] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.181332] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.251110] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.251116] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.251117] vhci_hcd: vhci_hub_control:485: vhci_device speed not set
+[55984.251120] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 11
+[55984.251121] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.251122] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010110 -> 00110100
+[55984.251124] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -RESET
+[55984.251125] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.251126] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.251127] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  +C_RESET
+[55984.251128] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.251129] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.251131] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.319132] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.319135] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.319137] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 11
+[55984.319138] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.319139] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00110100 -> 00110100
+[55984.319141] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.319142] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.319143] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_RESET
+[55984.319145] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.319146] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.319147] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.527121] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.527128] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.527129] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 11
+[55984.527130] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.527131] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00110100 -> 00110100
+[55984.527133] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.527134] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.527136] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_RESET
+[55984.527137] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.527138] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.527139] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.739110] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.739116] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.739117] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 11
+[55984.739119] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.739120] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00110100 -> 00110100
+[55984.739121] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.739122] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.739123] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_RESET
+[55984.739124] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.739125] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.739126] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.951112] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.951117] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.951119] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 11
+[55984.951120] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.951121] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00110100 -> 00110100
+[55984.951123] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.951124] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.951125] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_RESET
+[55984.951126] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.951126] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.951127] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.951137] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2301 wValue 14 wIndex 1
+[55984.951138] vhci_hcd:vhci_hub_control:397: vhci_hcd: vhci_hub_control:397:  ClearPortFeature: default 14
+[55984.951139] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.951140] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00110100 -> 00010100
+[55984.951141] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.951142] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.951143] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -C_RESET
+[55984.951143] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.951144] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.951145] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.951149] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2301 wValue 1 wIndex 1
+[55984.951150] vhci_hcd:vhci_hub_control:397: vhci_hcd: vhci_hub_control:397:  ClearPortFeature: default 1
+[55984.951151] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.951152] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010100 -> 00010100
+[55984.951153] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.951154] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.951155] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.951156] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.951156] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.951163] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2301 wValue 1 wIndex 1
+[55984.951164] vhci_hcd:vhci_hub_control:397: vhci_hcd: vhci_hub_control:397:  ClearPortFeature: default 1
+[55984.951165] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.951166] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010100 -> 00010100
+[55984.951167] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.951168] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.951168] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.951169] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.951170] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.951179] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.951180] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.951181] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 1
+[55984.951182] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.951182] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010100 -> 00010100
+[55984.951183] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.951184] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   C_CONNECTION
+[55984.951185] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.951186] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.951187] vhci_hcd:vhci_hub_status:249: vhci_hcd: vhci_hub_status:249: port 0 status changed
+[55984.951195] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq 2301 wValue 10 wIndex 1
+[55984.951196] vhci_hcd:vhci_hub_control:397: vhci_hcd: vhci_hub_control:397:  ClearPortFeature: default 10
+[55984.951197] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.951198] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00010100 -> 00000100
+[55984.951199] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.951200] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:  -C_CONNECTION
+[55984.951201] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.951201] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.951206] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.951207] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.951208] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55984.951209] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.951210] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55984.951211] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.951212] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.951212] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55984.987124] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55984.987130] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55984.987131] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55984.987132] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55984.987133] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55984.987134] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55984.987135] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55984.987136] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55985.027134] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55985.027139] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55985.027141] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55985.027142] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55985.027144] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55985.027145] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55985.027147] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55985.027148] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55985.067111] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55985.067114] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55985.067115] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55985.067117] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55985.067118] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55985.067119] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55985.067121] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55985.067122] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55985.107112] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55985.107115] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55985.107116] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55985.107117] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55985.107118] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55985.107120] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55985.107121] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55985.107122] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55985.107134] vhci_hcd:vhci_hub_control:335: vhci_hcd: vhci_hub_control:335: typeReq a300 wValue 0 wIndex 1
+[55985.107135] vhci_hcd:vhci_hub_control:433: vhci_hcd: vhci_hub_control:433:  GetPortStatus port 1
+[55985.107136] vhci_hcd:vhci_hub_control:494: vhci_hcd: vhci_hub_control:494:  GetPortStatus bye 100 0
+[55985.107137] vhci_hcd:vhci_hub_control:644: vhci_hcd: vhci_hub_control:644: port 0
+[55985.107138] vhci_hcd:dump_port_status_diff:128: vhci_hcd: dump_port_status_diff:128: status prev -> new: 00000100 -> 00000100
+[55985.107139] vhci_hcd:dump_port_status_diff:142: vhci_hcd: dump_port_status_diff:142:   POWER
+[55985.107140] vhci_hcd:dump_port_status_diff:150: vhci_hcd: dump_port_status_diff:150: 
+[55985.107141] vhci_hcd:vhci_hub_control:652: vhci_hcd: vhci_hub_control:652:  bye
+[55985.107154] vhci_hcd:vhci_bus_suspend:1262: usb usb9: vhci_bus_suspend
+
+
+
+
+^C%                                                                                                                                                              jevin@rumblebeast [03:24:11 PM] [~/code/linux/git/linux]  [jev/v5.15/usbip-debug *]

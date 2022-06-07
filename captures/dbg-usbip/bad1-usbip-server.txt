@@ -1,0 +1,76 @@
+->  % usbiptk-sim-bridge --classic
+server running
+starting sim server
+waiting for sim client connection
+ended sim server
+starting usbip server
+waiting for usbip clinent connection
+ended usbip server
+got sim client connection
+got usbip client conection
+cmsg_ty: 1 cmsg: Container: 
+    version = 273
+    code = (enum) REQ_IMPORT 32771
+    status = 0
+    body = Container: 
+        busid = u'47-43.0' (total 7)
+smsg_ty: 1
+cmsg_ty: 2 cmsg: Container: 
+    command = (enum) CMD_SUBMIT 1
+    seqnum = 1
+    devid = 3080235
+    direction = 1
+    ep = 0
+    body = Container: 
+        transfer_flags = 512
+        transfer_buffer_length = 64
+        start_frame = 0
+        number_of_packets = 0
+        interval = 0
+        setup = b'\x80\x06\x00\x01\x00\x00@\x00' (total 8)
+        transfer_buffer = b'' (total 0)
+submit: Container: 
+    command = (enum) CMD_SUBMIT 1
+    seqnum = 1
+    devid = 3080235
+    direction = 1
+    ep = 0
+    body = Container: 
+        transfer_flags = 512
+        transfer_buffer_length = 64
+        start_frame = 0
+        number_of_packets = 0
+        interval = 0
+        setup = b'\x80\x06\x00\x01\x00\x00@\x00' (total 8)
+        transfer_buffer = b'' (total 0)
+h2d_raw: a5 00 10
+h2d_raw: a5 01 e8
+h2d_raw: 2d 00 10
+h2d_raw: c3 00 05 2b 00 00 00 00 00 ec ef
+d2h_raw: d2
+h2d_raw: a5 02 a8
+h2d_raw: 69 00 10
+d2h_raw: 4b 00 00
+setup_addr resp_data: 4b 00 00
+h2d_raw: d2
+h2d_raw: a5 03 50
+h2d_raw: 2d 2b a8
+h2d_raw: c3 80 06 00 01 00 00 12 00 e0 f4
+d2h_raw: d2
+setup_resp: d2
+in_token: 692ba8
+h2d_raw: a5 04 28
+h2d_raw: 69 2b a8
+d2h_raw: 4b 12 01 00 02 00 00 00 40 d0 16 3b 0f 00 00 01 02 03 01 93 54
+setup_resp_data: 12 01 00 02 00 00 00 40 d0 16 3b 0f 00 00 01 02 03 01
+h2d_raw: d2
+cmsg_ty: 2 cmsg: Container: 
+    command = (enum) CMD_UNLINK 2
+    seqnum = 2
+    devid = 3080235
+    direction = 0
+    ep = 0
+    body = Container: 
+        seqnum = 1
+got unlink!
+server done

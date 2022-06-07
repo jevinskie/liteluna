@@ -1,0 +1,86 @@
+->  % ./run_sim.sh 
+[serial2framed_tcp] loaded (0x55efb4d33090)
+[spdeeprom] loaded (addr = 0x0)
+[serial2console] loaded (0x55efb4d33090)
+[xgmii_ethernet] loaded (0x55efb4d33090)
+[gmii_ethernet] loaded (0x55efb4d33090)
+[clocker] loaded
+[serial2tcp] loaded (0x55efb4d33090)
+[serial2udp] loaded (0x55efb4d33090)
+[ethernet] loaded (0x55efb4d33090)
+[clocker] sys_clk: freq_hz=20000000, phase_deg=0
+h2d_raw: a5 00 10 
+time=3147125125000 old_state:   0 state:   1
+time=3147125175000 old_state:   1 state:   2
+time=3147125225000 old_state:   2 state:   4
+time=3147125275000 old_state:   4 state:   5
+time=3147125325000 old_state:   5 state:   0
+h2d_raw: a5 01 e8 
+time=3147150125000 old_state:   0 state:   1
+time=3147150175000 old_state:   1 state:   2
+time=3147150225000 old_state:   2 state:   4
+time=3147150275000 old_state:   4 state:   5
+time=3147150325000 old_state:   5 state:   0
+h2d_raw: 2d 00 10 
+time=3147175125000 old_state:   0 state:   1
+time=3147175175000 old_state:   1 state:   2
+time=3147175225000 old_state:   2 state:   4
+time=3147175275000 old_state:   4 state:   5
+time=3147175325000 old_state:   5 state:   0
+h2d_raw: c3 00 05 2b 00 00 00 00 00 ec ef 
+time=3147200125000 old_state:   0 state:   1
+time=3147200175000 old_state:   1 state:   3
+time=3147200725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 02 a8 
+time=3147225125000 old_state:   0 state:   1
+time=3147225175000 old_state:   1 state:   2
+time=3147225225000 old_state:   2 state:   4
+time=3147225275000 old_state:   4 state:   5
+time=3147225325000 old_state:   5 state:   0
+h2d_raw: 69 00 10 
+time=3147250125000 old_state:   0 state:   1
+time=3147250175000 old_state:   1 state:   2
+time=3147250225000 old_state:   2 state:   4
+time=3147250275000 old_state:   4 state:   5
+time=3147250325000 old_state:   5 state:   0
+d2h_raw: 4b 00 00 
+h2d_raw: d2 
+time=3147275125000 old_state:   0 state:   1
+time=3147275175000 old_state:   1 state:   3
+time=3147275225000 old_state:   3 state:   0
+h2d_raw: a5 03 50 
+time=3147300125000 old_state:   0 state:   1
+time=3147300175000 old_state:   1 state:   2
+time=3147300225000 old_state:   2 state:   4
+time=3147300275000 old_state:   4 state:   5
+time=3147300325000 old_state:   5 state:   0
+h2d_raw: 2d 2b a8 
+time=3147325125000 old_state:   0 state:   1
+time=3147325175000 old_state:   1 state:   2
+time=3147325225000 old_state:   2 state:   4
+time=3147325275000 old_state:   4 state:   5
+time=3147325325000 old_state:   5 state:   0
+h2d_raw: c3 80 06 00 01 00 00 12 00 e0 f4 
+time=3147350125000 old_state:   0 state:   1
+time=3147350175000 old_state:   1 state:   3
+time=3147350725000 old_state:   3 state:   0
+d2h_raw: d2 
+h2d_raw: a5 04 28 
+time=3147375125000 old_state:   0 state:   1
+time=3147375175000 old_state:   1 state:   2
+time=3147375225000 old_state:   2 state:   4
+time=3147375275000 old_state:   4 state:   5
+time=3147375325000 old_state:   5 state:   0
+h2d_raw: 69 2b a8 
+time=3147400125000 old_state:   0 state:   1
+time=3147400175000 old_state:   1 state:   2
+time=3147400225000 old_state:   2 state:   4
+time=3147400275000 old_state:   4 state:   5
+time=3147400325000 old_state:   5 state:   0
+d2h_raw: 4b 12 01 00 02 00 00 00 40 d0 16 3b 0f 00 00 01 02 03 01 93 54 
+h2d_raw: d2 
+time=3147425125000 old_state:   0 state:   1
+time=3147425175000 old_state:   1 state:   3
+time=3147425225000 old_state:   3 state:   0
+serial2framed_tcp: recv() of frame length field: Success
