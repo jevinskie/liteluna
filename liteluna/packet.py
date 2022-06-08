@@ -28,5 +28,6 @@ class InterpacketTimerInterface(Record):
                 ("tx_allowed", 1, DIR_S_TO_M),
                 ("tx_timeout", 1, DIR_S_TO_M),
                 ("rx_timeout", 1, DIR_S_TO_M),
+                ("counter", 64, DIR_S_TO_M),
             ]
         )

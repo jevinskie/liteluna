@@ -132,6 +132,9 @@ class SimSoC(SoCCore):
 
         from litescope import LiteScopeAnalyzer
 
+        nclks = Signal(64)
+        self.sync += nclks.eq(nclks + 1)
+
         if False:
             td_state = self.usb.td_la_state
             old_td_state = Signal.like(td_state)
@@ -178,13 +181,22 @@ class SimSoC(SoCCore):
             ]
 
         for name, _, _ in self.usb.rxtmr_la.layout:
+            if name == "counter":
+                continue
             sig = getattr(self.usb.rxtmr_la, name)
             old_sig = Signal.like(sig)
             self.sync += [
                 old_sig.eq(sig),
                 If(
                     old_sig != sig,
-                    Display(f"time=%0t {name}: old: %0d new: %0d", VerilogTime(), old_sig, sig),
+                    Display(
+                        f"time=%0t clk=%0d cnt:=%0d {name}: old: %0d new: %0d",
+                        VerilogTime(),
+                        nclks,
+                        self.usb.rxtmr_la.counter,
+                        old_sig,
+                        sig,
+                    ),
                 ),
             ]
 
@@ -223,7 +235,7 @@ def main():
     soc_core_args(parser)
     args = parser.parse_args()
 
-    sys_clk_freq = int(20e6 * 1_000)
+    sys_clk_freq = int(20e6)
 
     sim_config = SimConfig()
     sim_config.add_clocker("sys_clk", freq_hz=sys_clk_freq)
