@@ -142,6 +142,30 @@ class SimSoC(SoCCore):
             ),
         ]
 
+        tx_data = usb_sim_phy.sink.payload.data
+        old_tx_data = Signal.like(tx_data)
+        self.sync += [
+            old_tx_data.eq(tx_data),
+            If(
+                old_tx_data != tx_data,
+                Display(
+                    "time=%0t old_tx_data: %0x tx_data: %0x", VerilogTime(), old_tx_data, tx_data
+                ),
+            ),
+        ]
+
+        rx_data = usb_sim_phy.source.payload.data
+        old_rx_data = Signal.like(rx_data)
+        self.sync += [
+            old_rx_data.eq(rx_data),
+            If(
+                old_rx_data != rx_data,
+                Display(
+                    "time=%0t old_rx_data: %0x rx_data: %0x", VerilogTime(), old_rx_data, rx_data
+                ),
+            ),
+        ]
+
         analyzer_signals = list(
             set(
                 [
@@ -160,9 +184,9 @@ class SimSoC(SoCCore):
                 ]
             )
         )
-        self.submodules.analyzer = LiteScopeAnalyzer(
-            analyzer_signals, depth=4096, clock_domain="usb", csr_csv="analyzer.csv"
-        )
+        # self.submodules.analyzer = LiteScopeAnalyzer(
+        #     analyzer_signals, depth=4096, clock_domain="usb", csr_csv="analyzer.csv"
+        # )
 
 
 #
