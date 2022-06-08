@@ -46,7 +46,7 @@ class USBBulkStreamerDevice(Elaboratable):
     BULK_ENDPOINT_NUMBER = 1
     MAX_BULK_PACKET_SIZE = 512
 
-    def __init__(self, with_utmi=False, with_blinky=False, with_utmi_la=False):
+    def __init__(self, with_utmi=False, with_blinky=False, with_utmi_la=False, data_clock=None):
         self.with_utmi = with_utmi
         self.with_blinky = with_blinky
         self.with_utmi_la = with_utmi_la
@@ -87,7 +87,7 @@ class USBBulkStreamerDevice(Elaboratable):
             for name, nbit, _ in self.utmi.layout:
                 setattr(self, f"utmi_{name}", Signal(nbit, name=f"utmi_{name}"))
 
-        self.usb = USBDevice(bus=self.bus, handle_clocking=False)
+        self.usb = USBDevice(bus=self.bus, handle_clocking=False, data_clock=data_clock)
 
         self.connect = Signal()
 
@@ -221,9 +221,14 @@ class USBBulkStreamerDevice(Elaboratable):
         return m
 
     @staticmethod
-    def get_instance_and_ports(with_utmi=False, with_blinky=False, with_utmi_la=False):
+    def get_instance_and_ports(
+        with_utmi=False, with_blinky=False, with_utmi_la=False, data_clock=None
+    ):
         streamer = USBBulkStreamerDevice(
-            with_utmi=with_utmi, with_blinky=with_blinky, with_utmi_la=with_utmi_la
+            with_utmi=with_utmi,
+            with_blinky=with_blinky,
+            with_utmi_la=with_utmi_la,
+            data_clock=data_clock,
         )
         streamer_ports = [
             streamer.connect,
@@ -275,9 +280,12 @@ class USBBulkStreamerDevice(Elaboratable):
         return (streamer, streamer_ports)
 
     @staticmethod
-    def emit_verilog(path, with_utmi=False, with_blinky=False, with_utmi_la=False):
+    def emit_verilog(path, with_utmi=False, with_blinky=False, with_utmi_la=False, data_clock=None):
         streamer, streamer_ports = USBBulkStreamerDevice.get_instance_and_ports(
-            with_utmi=with_utmi, with_blinky=with_blinky, with_utmi_la=with_utmi_la
+            with_utmi=with_utmi,
+            with_blinky=with_blinky,
+            with_utmi_la=with_utmi_la,
+            data_clock=data_clock,
         )
         parser = amaranth.cli.main_parser()
         args = parser.parse_args(["generate", "-t", "v", path])

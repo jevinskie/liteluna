@@ -132,39 +132,61 @@ class SimSoC(SoCCore):
 
         from litescope import LiteScopeAnalyzer
 
-        td_state = self.usb.td_la_state
-        old_td_state = Signal.like(td_state)
-        self.sync += [
-            old_td_state.eq(td_state),
-            If(
-                old_td_state != td_state,
-                Display("time=%0t old_state: %d state: %d", VerilogTime(), old_td_state, td_state),
-            ),
-        ]
-
-        tx_data = usb_sim_phy.sink.payload.data
-        old_tx_data = Signal.like(tx_data)
-        self.sync += [
-            old_tx_data.eq(tx_data),
-            If(
-                old_tx_data != tx_data,
-                Display(
-                    "time=%0t old_tx_data: %0x tx_data: %0x", VerilogTime(), old_tx_data, tx_data
+        if False:
+            td_state = self.usb.td_la_state
+            old_td_state = Signal.like(td_state)
+            self.sync += [
+                old_td_state.eq(td_state),
+                If(
+                    old_td_state != td_state,
+                    Display(
+                        "time=%0t old_state: %d state: %d", VerilogTime(), old_td_state, td_state
+                    ),
                 ),
-            ),
-        ]
+            ]
 
-        rx_data = usb_sim_phy.source.payload.data
-        old_rx_data = Signal.like(rx_data)
-        self.sync += [
-            old_rx_data.eq(rx_data),
-            If(
-                old_rx_data != rx_data,
-                Display(
-                    "time=%0t old_rx_data: %0x rx_data: %0x", VerilogTime(), old_rx_data, rx_data
+        if False:
+            tx_data = usb_sim_phy.sink.payload.data
+            old_tx_data = Signal.like(tx_data)
+            self.sync += [
+                old_tx_data.eq(tx_data),
+                If(
+                    old_tx_data != tx_data,
+                    Display(
+                        "time=%0t old_tx_data: %0x tx_data: %0x",
+                        VerilogTime(),
+                        old_tx_data,
+                        tx_data,
+                    ),
                 ),
-            ),
-        ]
+            ]
+
+        if False:
+            rx_data = usb_sim_phy.source.payload.data
+            old_rx_data = Signal.like(rx_data)
+            self.sync += [
+                old_rx_data.eq(rx_data),
+                If(
+                    old_rx_data != rx_data,
+                    Display(
+                        "time=%0t old_rx_data: %0x rx_data: %0x",
+                        VerilogTime(),
+                        old_rx_data,
+                        rx_data,
+                    ),
+                ),
+            ]
+
+        for name, _, _ in self.usb.rxtmr_la.layout:
+            sig = getattr(self.usb.rxtmr_la, name)
+            old_sig = Signal.like(sig)
+            self.sync += [
+                old_sig.eq(sig),
+                If(
+                    old_sig != sig,
+                    Display(f"time=%0t {name}: old: %0d new: %0d", VerilogTime(), old_sig, sig),
+                ),
+            ]
 
         analyzer_signals = list(
             set(

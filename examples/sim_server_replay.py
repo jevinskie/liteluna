@@ -31,7 +31,7 @@ def write(bufs):
     for buf in bufs:
         smsg = len(buf).to_bytes(4, "big") + buf
         out_buf += smsg
-        time.sleep(0.001)
+        time.sleep(0.01)
         s.send(smsg)
         # print(f"h2d_raw: {buf.hex(' ')}", flush=True)
     # s.send(out_buf)

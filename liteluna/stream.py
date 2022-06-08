@@ -12,11 +12,20 @@ from liteluna.utmi import UTMIInterface
 
 
 class USBStreamer(Module):
-    def __init__(self, platform, pads, with_utmi=False, with_blinky=False, with_utmi_la=False):
+    def __init__(
+        self,
+        platform,
+        pads,
+        with_utmi=False,
+        with_blinky=False,
+        with_utmi_la=False,
+        data_clock=None,
+    ):
         self.platform = platform
         self.with_utmi = with_utmi
         self.with_blinky = with_blinky
         self.with_utmi_la = with_utmi_la
+        self.data_clock = data_clock
 
         self.inverted_reset = None
         if not set(["rst", "reset"]).isdisjoint(set(dir(pads))):
@@ -144,5 +153,6 @@ class USBStreamer(Module):
             with_utmi=self.with_utmi,
             with_blinky=self.with_blinky,
             with_utmi_la=self.with_utmi_la,
+            data_clock=self.data_clock,
         )
         self.platform.add_source(verilog_filename)
