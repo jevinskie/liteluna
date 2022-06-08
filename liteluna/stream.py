@@ -6,7 +6,7 @@ from migen.genlib.record import DIR_M_TO_S, DIR_S_TO_M, Record
 
 from liteluna.device import USBDeviceLAInterface
 from liteluna.luna_cores import bulk_streamer
-from liteluna.packet import TokenDetectorInterface
+from liteluna.packet import InterpacketTimerInterface, TokenDetectorInterface
 from liteluna.ulpi import ULPIInterface, ULPIPHYInterface
 from liteluna.utmi import UTMIInterface
 
@@ -130,6 +130,9 @@ class USBStreamer(Module):
                 o_td_la_state=self.td_la_state,
                 o_td_la_rx_data=self.td_la_rx_data,
             )
+            self.rxtmr_la = InterpacketTimerInterface()
+            for name, _, _ in self.rxtmr_la.layout:
+                port_map[f"o_rxtmr_la_{name}"] = getattr(self.rxtmr_la, name)
 
         self.specials += Instance("bulk_streamer", **port_map)
 

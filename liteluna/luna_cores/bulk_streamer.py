@@ -11,7 +11,10 @@ from amaranth import Cat, ClockSignal, Elaboratable, Module, ResetSignal, Signal
 from amaranth.hdl.rec import Direction
 from luna.gateware.interface.ulpi import ULPIInterface
 from luna.gateware.interface.utmi import UTMIInterface
-from luna.gateware.usb.usb2.packet import TokenDetectorInterface
+from luna.gateware.usb.usb2.packet import (
+    InterpacketTimerInterface,
+    TokenDetectorInterface,
+)
 from luna.usb2 import USBDevice, USBStreamInEndpoint, USBStreamOutEndpoint
 from usb_protocol.emitters import DeviceDescriptorCollection
 
@@ -103,6 +106,8 @@ class USBBulkStreamerDevice(Elaboratable):
             self.td_la_cnt_dbg = Signal(8)
             self.td_la_state = Signal(8)
             self.td_la_rx_data = Signal(8)
+            for name, nbit, _ in InterpacketTimerInterface().layout:
+                setattr(self, f"rxtmr_la_{name}", Signal(nbit, name=f"rxtmr_la_{name}"))
 
         if with_blinky:
             self.led = Signal()
@@ -209,6 +214,10 @@ class USBBulkStreamerDevice(Elaboratable):
                 self.td_la_state.eq(self.usb.token_detector.state),
                 self.td_la_rx_data.eq(self.usb.token_detector.rx_data),
             ]
+            for name, _, _ in InterpacketTimerInterface().layout:
+                m.d.comb += getattr(self, f"rxtmr_la_{name}").eq(
+                    getattr(self.usb.receiver.timer, name)
+                )
         return m
 
     @staticmethod
@@ -259,6 +268,8 @@ class USBBulkStreamerDevice(Elaboratable):
                 streamer.td_la_state,
                 streamer.td_la_rx_data,
             ]
+            for name, _, _ in InterpacketTimerInterface().layout:
+                streamer_ports.append(getattr(streamer, f"rxtmr_la_{name}"))
         if with_blinky:
             streamer_ports.append(streamer.led)
         return (streamer, streamer_ports)

@@ -81,7 +81,7 @@ class SimSoC(SoCCore):
             platform,
             clk_freq=sys_clk_freq,
             ident="liteluna bulk loopback simulation",
-            **kwargs
+            **kwargs,
         )
 
         # CRG --------------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ def main():
     soc_core_args(parser)
     args = parser.parse_args()
 
-    sys_clk_freq = int(20e6)
+    sys_clk_freq = int(20e6 * 1_000)
 
     sim_config = SimConfig()
     sim_config.add_clocker("sys_clk", freq_hz=sys_clk_freq)

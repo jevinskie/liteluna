@@ -18,3 +18,15 @@ class TokenDetectorInterface(Record):
                 ("is_ping", 1, DIR_S_TO_M),
             ]
         )
+
+
+class InterpacketTimerInterface(Record):
+    def __init__(self):
+        super().__init__(
+            [
+                ("start", 1, DIR_M_TO_S),
+                ("tx_allowed", 1, DIR_S_TO_M),
+                ("tx_timeout", 1, DIR_S_TO_M),
+                ("rx_timeout", 1, DIR_S_TO_M),
+            ]
+        )

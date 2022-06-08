@@ -2,6 +2,7 @@
 
 import socket
 import sys
+import time
 
 replay_lines = [l.strip() for l in open(sys.argv[1]).readlines()]
 
@@ -12,7 +13,7 @@ serv_sock.bind(("localhost", 2443))
 serv_sock.listen(1)
 
 s, _ = serv_sock.accept()
-s.settimeout(1)
+s.settimeout(10)
 
 
 def read():
@@ -28,9 +29,12 @@ def write(bufs):
         bufs = [bufs]
     out_buf = b""
     for buf in bufs:
-        out_buf += len(buf).to_bytes(4, "big") + buf
+        smsg = len(buf).to_bytes(4, "big") + buf
+        out_buf += smsg
+        time.sleep(0.001)
+        s.send(smsg)
         # print(f"h2d_raw: {buf.hex(' ')}", flush=True)
-    s.send(out_buf)
+    # s.send(out_buf)
 
 
 for rl in replay_lines:
@@ -52,6 +56,7 @@ for rl in replay_lines:
         if ibuf != ibuf_gold:
             print("MISMATCH")
 
+s.settimeout(1)
 i = 0
 while True:
     try:
