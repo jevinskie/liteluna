@@ -20,7 +20,7 @@ def read():
     sz_buf = s.recv(4)
     sz = int.from_bytes(sz_buf, "big")
     buf = s.recv(sz)
-    if all([b == 0 for b in buf]):
+    if all([b == 0 for b in buf]) and len(buf) > 64:
         return
     # print(f"d2h_raw: {buf.hex(' ')}", flush=True)
     return buf
