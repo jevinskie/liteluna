@@ -65,17 +65,20 @@ class USBStreamer(Module):
                 else:
                     self.comb += getattr(pads, name).eq(getattr(utmi, name))
 
-        self.source_usb = s2h_usb = stream.Endpoint([("data", 8)])
         self.sink_usb = s2d_usb = stream.Endpoint([("data", 8)])
+        self.source_usb = s2h_usb = stream.Endpoint([("data", 8)])
+        self.sink = stream.Endpoint([("data", 8)])
+        self.source = stream.Endpoint([("data", 8)])
         if cd != cd_usb:
-            self.submodules.sink = stream.ClockDomainCrossing(
+            self.submodules.sink_cdc = stream.ClockDomainCrossing(
                 self.sink_usb.payload.layout, cd_from=cd_usb, cd_to=cd, depth=cdc_fifo_depth
             )
-            self.submodules.sink_pipeline = stream.Pipeline(self.sink_usb, self.sink)
-            self.submodules.source = stream.ClockDomainCrossing(
+            self.comb += self.sink_cdc.source.connect(self.sink)
+            self.submodules.source_cdc = stream.ClockDomainCrossing(
                 self.source_usb.payload.layout, cd_from=cd, cd_to=cd_usb, depth=cdc_fifo_depth
             )
-            self.submodules.source_pipeline = stream.Pipeline(self.source, self.source_usb)
+            self.comb += self.source.connect(self.source_cdc.sink)
+            self.submodules.source_pipeline = stream.Pipeline(self.source, self.source_cdc)
         else:
             self.sink = self.sink_usb
             self.source = self.source_usb
