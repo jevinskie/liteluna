@@ -20,6 +20,8 @@ def read():
     sz_buf = s.recv(4)
     sz = int.from_bytes(sz_buf, "big")
     buf = s.recv(sz)
+    if all([b == 0 for b in buf]):
+        return
     # print(f"d2h_raw: {buf.hex(' ')}", flush=True)
     return buf
 
@@ -31,7 +33,7 @@ def write(bufs):
     for buf in bufs:
         smsg = len(buf).to_bytes(4, "big") + buf
         out_buf += smsg
-        time.sleep(0.01)
+        time.sleep(0.1)
         s.send(smsg)
         # print(f"h2d_raw: {buf.hex(' ')}", flush=True)
     # s.send(out_buf)

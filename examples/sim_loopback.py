@@ -235,7 +235,8 @@ def main():
     soc_core_args(parser)
     args = parser.parse_args()
 
-    sys_clk_freq = int(20e6)
+    # sys_clk_freq = int(60e6)
+    sys_clk_freq = 1000000000000 / 16680
 
     sim_config = SimConfig()
     sim_config.add_clocker("sys_clk", freq_hz=sys_clk_freq)
