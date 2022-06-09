@@ -182,25 +182,23 @@ class SimSoC(SoCCore):
                 ),
             ]
 
-        for name, _, _ in self.usb.rxtmr_la.layout:
-            if name == "counter":
-                continue
-            sig = getattr(self.usb.rxtmr_la, name)
-            old_sig = Signal.like(sig)
-            self.sync += [
-                old_sig.eq(sig),
-                If(
-                    old_sig != sig,
-                    Display(
-                        f"time=%0t clk=%0d cnt:=%0d {name}: old: %0d new: %0d",
-                        VerilogTime(),
-                        nclks,
-                        self.usb.rxtmr_la.counter,
-                        old_sig,
-                        sig,
+        if False:
+            for name, _, _ in self.usb.rxtmr_la.layout:
+                sig = getattr(self.usb.rxtmr_la, name)
+                old_sig = Signal.like(sig)
+                self.sync += [
+                    old_sig.eq(sig),
+                    If(
+                        old_sig != sig,
+                        Display(
+                            f"time=%0t clk=%0d {name}: old: %0d new: %0d",
+                            VerilogTime(),
+                            nclks,
+                            old_sig,
+                            sig,
+                        ),
                     ),
-                ),
-            ]
+                ]
 
         analyzer_signals = list(
             set(
@@ -253,7 +251,7 @@ def main():
     soc_kwargs = soc_core_argdict(args)
     builder_kwargs = builder_argdict(args)
 
-    soc_kwargs["sys_clk_freq"] = sys_clk_freq
+    soc_kwargs["sys_clk_freq"] = int(sys_clk_freq)
     soc_kwargs["cpu_type"] = "None"
     soc_kwargs["uart_name"] = "stub"
     soc_kwargs["ident_version"] = True
