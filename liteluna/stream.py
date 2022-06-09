@@ -70,15 +70,22 @@ class USBStreamer(Module):
         self.sink = stream.Endpoint([("data", 8)])
         self.source = stream.Endpoint([("data", 8)])
         if cd != cd_usb:
+            # host to fpga
             self.submodules.sink_cdc = stream.ClockDomainCrossing(
                 self.sink_usb.payload.layout, cd_from=cd_usb, cd_to=cd, depth=cdc_fifo_depth
             )
-            self.comb += self.sink_cdc.source.connect(self.sink)
+            # self.comb += self.sink_cdc.source.connect(self.sink)
+            self.submodules.sink_pipeline = stream.Pipeline(self.sink_usb, self.sink_cdc, self.sink)
+
+            # fpga to host
             self.submodules.source_cdc = stream.ClockDomainCrossing(
                 self.source_usb.payload.layout, cd_from=cd, cd_to=cd_usb, depth=cdc_fifo_depth
             )
-            self.comb += self.source.connect(self.source_cdc.sink)
-            self.submodules.source_pipeline = stream.Pipeline(self.source, self.source_cdc)
+            # self.comb += self.source.connect(self.source_cdc.sink)
+            self.submodules.source_pipeline = stream.Pipeline(
+                self.source, self.source_cdc, self.source_usb
+            )
+
         else:
             self.sink = self.sink_usb
             self.source = self.source_usb
