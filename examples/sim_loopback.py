@@ -12,6 +12,7 @@ from litex.build.sim import SimPlatform
 from litex.build.sim.config import SimConfig
 from litex.gen.fhdl.utils import get_signals
 from litex.gen.fhdl.verilog import VerilogTime
+from litex.soc.cores.clock.common import ClockFrequency
 from litex.soc.cores.uart import RS232PHYModel
 from litex.soc.integration.builder import *
 from litex.soc.integration.soc_core import *
@@ -89,6 +90,7 @@ class SimSoC(SoCCore):
 
         # USB --------------------------------------------------------------------------------------
         self.clock_domains.cd_usb = ClockDomain()
+        ClockFrequency("usb", set_freq=60e6)
         self.comb += [
             ClockSignal("usb").eq(ClockSignal()),
             ResetSignal("usb").eq(ResetSignal()),
