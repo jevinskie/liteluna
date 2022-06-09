@@ -116,7 +116,7 @@ class SimSoC(SoCCore):
 
         self.submodules.fixup = SimUTMIStreamFixup(usb_sim_phy)
         self.submodules.usb = usb = USBStreamer(
-            platform, self.fixup.utmi, with_utmi=True, with_utmi_la=True, data_clock=sys_clk_freq
+            platform, self.fixup.utmi, with_utmi_la=True, data_clock=sys_clk_freq
         )
 
         self.submodules.stream_inverter = StreamPayloadInverter()

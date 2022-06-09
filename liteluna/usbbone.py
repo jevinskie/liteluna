@@ -28,9 +28,9 @@ def add_usbbone(
 
 
 class LiteLUNAUSBbonePacket(Module):
-    def __init__(self, udp, udp_port, cd="sys"):
-        self.submodules.tx = tx = LiteEthEtherbonePacketTX(udp_port)
-        self.submodules.rx = rx = LiteEthEtherbonePacketRX()
+    def __init__(self, usb):
+        self.submodules.tx = tx = LiteLUNAUSBbonePacketTX()
+        self.submodules.rx = rx = LiteLUNAUSBbonePacketRX()
         udp_port = udp.crossbar.get_port(udp_port, dw=32, cd=cd)
         self.comb += [tx.source.connect(udp_port.sink), udp_port.source.connect(rx.sink)]
         self.sink, self.source = self.tx.sink, self.rx.source
