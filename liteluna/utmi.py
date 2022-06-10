@@ -1,6 +1,8 @@
 from enum import IntEnum
 
+from litex.soc.cores.clock.common import ClockFrequency
 from migen import *
+from migen.genlib.misc import WaitTimer
 from migen.genlib.record import DIR_M_TO_S, DIR_S_TO_M, Record
 
 
@@ -47,13 +49,13 @@ class UTMIInterface(Record):
 
 
 class SimUTMIStreamFixup(Module):
-    def __init__(self, usb_sim_phy):
+    def __init__(self, usb_sim_phy, cd="sys", cd_usb="usb"):
         self.utmi = utmi = UTMIInterface()
         self.rx_data_out = rx_data_out = Signal(8)
         self.rx_valid_out = rx_valid_out = Signal()
         self.rx_active_out = rx_active_out = Signal()
 
-        self.hs_activated = hs_activated = Signal()
+        self.hs_activated = hs_activated = Signal(reset=1)
 
         self.comb += [
             # source
@@ -75,5 +77,12 @@ class SimUTMIStreamFixup(Module):
         ]
         self.comb += rx_active_out.eq(usb_sim_phy.source.valid | rx_valid_out)
 
-        self.reset_fsm = fsm = FSM(reset_state="INIT")
-        fsm.act("INIT")
+        self.submodules.reset_wait_timer = rst_tmr = WaitTimer(int(ClockFrequency(cd_usb) * 2.5e-3))
+        self.reset_fsm = fsm = ClockDomainsRenamer({cd: cd_usb})(FSM(reset_state="RESET"))
+        fsm.act(
+            "RESET",
+            rst_tmr.wait.eq(1),
+            utmi.line_state.eq(LineState.SE0),
+            If(rst_tmr.done, NextState("FS")),
+        )
+        fsm.act("FS", utmi.line_state.eq(LineState.FS_HS_J))

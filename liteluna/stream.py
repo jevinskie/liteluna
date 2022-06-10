@@ -1,5 +1,6 @@
 import os
 
+from litex.soc.cores.clock.common import ClockFrequency
 from litex.soc.interconnect import stream
 from migen import *
 from migen.genlib.record import DIR_M_TO_S, DIR_S_TO_M, Record
@@ -21,13 +22,12 @@ class USBStreamer(Module):
         cdc_fifo_depth=None,
         with_blinky=False,
         with_utmi_la=False,
-        data_clock=None,
     ):
         self.platform = platform
         self.with_utmi = with_utmi = hasattr(pads, "rx_data")
         self.with_blinky = with_blinky
         self.with_utmi_la = with_utmi_la
-        self.data_clock = data_clock
+        self.data_clock = ClockFrequency(cd_usb)
 
         self.inverted_reset = None
         if not set(["rst", "reset"]).isdisjoint(set(dir(pads))):

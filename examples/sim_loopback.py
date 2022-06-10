@@ -103,7 +103,7 @@ class SimSoC(SoCCore):
 
         # USB --------------------------------------------------------------------------------------
         self.clock_domains.cd_usb = ClockDomain()
-        ClockFrequency("usb", set_freq=60e6)
+        ClockFrequency("usb", set_freq=sys_clk_freq)
         self.comb += [
             ClockSignal("usb").eq(ClockSignal()),
             ResetSignal("usb").eq(ResetSignal()),
@@ -128,9 +128,7 @@ class SimSoC(SoCCore):
         # )
 
         self.submodules.fixup = SimUTMIStreamFixup(usb_sim_phy)
-        self.submodules.usb = usb = USBStreamer(
-            platform, self.fixup.utmi, with_utmi_la=True, data_clock=sys_clk_freq
-        )
+        self.submodules.usb = usb = USBStreamer(platform, self.fixup.utmi, with_utmi_la=True)
 
         self.submodules.stream_inverter = StreamPayloadInverter()
         self.submodules.pipeline = stream.Pipeline(
@@ -150,156 +148,15 @@ class SimSoC(SoCCore):
         self.nclks = nclks = Signal(64)
         self.sync += nclks.eq(nclks + 1)
 
-        if False:
-            self.sync += [
-                If(
-                    nclks < 1024,
-                    Display(
-                        "time=%0t clk=%0d source valid: %0d",
-                        VerilogTime(),
-                        nclks,
-                        usb_sim_phy.source.valid,
-                    ),
-                )
-            ]
-
-        if False:
-            xcvr_select = self.fixup.utmi.xcvr_select
-            old_xcvr_select = Signal.like(xcvr_select)
-            self.sync += [
-                old_xcvr_select.eq(xcvr_select),
-                If(
-                    old_xcvr_select != xcvr_select,
-                    Display(
-                        "time=%0t clk=%0d xcvr_select: %02b", VerilogTime(), nclks, xcvr_select
-                    ),
-                ),
-            ]
         display_signal(self, self.fixup.utmi.xcvr_select)
+        display_signal(self, self.usb.reset_detected)
+        display_signal(self, self.usb.suspended)
+        display_signal(self, self.usb.current_speed)
+        display_signal(self, self.usb.operating_mode)
+        display_signal(self, self.usb.termination_select)
 
-        if True:
-            reset_detected = self.usb.reset_detected
-            old_reset_detected = Signal.like(reset_detected)
-            self.sync += [
-                old_reset_detected.eq(reset_detected),
-                If(
-                    old_reset_detected != reset_detected,
-                    Display(
-                        "time=%0t clk=%0d reset_detected: %0d", VerilogTime(), nclks, reset_detected
-                    ),
-                ),
-            ]
-
-        if True:
-            suspended = self.usb.suspended
-            old_suspended = Signal.like(suspended)
-            self.sync += [
-                old_suspended.eq(suspended),
-                If(
-                    old_suspended != suspended,
-                    Display("time=%0t clk=%0d suspended: %0d", VerilogTime(), nclks, suspended),
-                ),
-            ]
-
-        if False:
-            source_valid = usb_sim_phy.source.valid
-            old_source_valid = Signal.like(source_valid)
-            self.sync += [
-                old_source_valid.eq(source_valid),
-                If(
-                    old_source_valid != source_valid,
-                    Display(
-                        "time=%0t clk=%0d source valid: %0d", VerilogTime(), nclks, source_valid
-                    ),
-                ),
-            ]
-
-        if False:
-            self.sync += [
-                If(
-                    nclks < 2048,
-                    Display(
-                        "time=%0t clk=%0d sink valid: %0d",
-                        VerilogTime(),
-                        nclks,
-                        usb_sim_phy.sink.valid,
-                    ),
-                )
-            ]
-
-        if True:
-            sink_valid = usb_sim_phy.source.valid
-            old_sink_valid = Signal.like(sink_valid)
-            self.sync += [
-                old_sink_valid.eq(sink_valid),
-                If(
-                    old_sink_valid != sink_valid,
-                    Display("time=%0t clk=%0d sink valid: %0d", VerilogTime(), nclks, sink_valid),
-                ),
-            ]
-
-        if False:
-            td_state = self.usb.td_la_state
-            old_td_state = Signal.like(td_state)
-            self.sync += [
-                old_td_state.eq(td_state),
-                If(
-                    old_td_state != td_state,
-                    Display(
-                        "time=%0t old_state: %d state: %d", VerilogTime(), old_td_state, td_state
-                    ),
-                ),
-            ]
-
-        if False:
-            tx_data = usb_sim_phy.sink.payload.data
-            old_tx_data = Signal.like(tx_data)
-            self.sync += [
-                old_tx_data.eq(tx_data),
-                If(
-                    old_tx_data != tx_data,
-                    Display(
-                        "time=%0t old_tx_data: %0x tx_data: %0x",
-                        VerilogTime(),
-                        old_tx_data,
-                        tx_data,
-                    ),
-                ),
-            ]
-
-        if False:
-            rx_data = usb_sim_phy.source.payload.data
-            old_rx_data = Signal.like(rx_data)
-            self.sync += [
-                old_rx_data.eq(rx_data),
-                If(
-                    old_rx_data != rx_data,
-                    Display(
-                        "time=%0t old_rx_data: %0x rx_data: %0x",
-                        VerilogTime(),
-                        old_rx_data,
-                        rx_data,
-                    ),
-                ),
-            ]
-
-        if False:
-            for name, _, _ in self.usb.rxtmr_la.layout:
-                sig = getattr(self.usb.rxtmr_la, name)
-                old_sig = Signal.like(sig)
-                self.sync += [
-                    old_sig.eq(sig),
-                    If(
-                        old_sig != sig,
-                        Display(
-                            f"time=%0t clk=%0d {name}: old: %0d new: %0d",
-                            VerilogTime(),
-                            nclks,
-                            old_sig,
-                            sig,
-                        ),
-                    ),
-                ]
+        # display_signal(self, usb_sim_phy.source.valid)
+        # display_signal(self, usb_sim_phy.sink.valid)
 
         analyzer_signals = list(
             set(
@@ -352,7 +209,7 @@ def main():
     soc_kwargs = soc_core_argdict(args)
     builder_kwargs = builder_argdict(args)
 
-    soc_kwargs["sys_clk_freq"] = int(sys_clk_freq)
+    soc_kwargs["sys_clk_freq"] = sys_clk_freq
     soc_kwargs["cpu_type"] = "None"
     soc_kwargs["uart_name"] = "stub"
     soc_kwargs["ident_version"] = True
