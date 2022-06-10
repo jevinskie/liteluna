@@ -92,6 +92,9 @@ class USBBulkStreamerDevice(Elaboratable):
         self.connect = Signal()
         self.reset_detected = Signal()
         self.suspended = Signal()
+        self.current_speed = Signal(2)
+        self.operating_mode = Signal(2)
+        self.termination_select = Signal()
 
         if with_utmi_la:
             for name, nbit, _ in UTMIInterface().layout:
@@ -162,6 +165,9 @@ class USBBulkStreamerDevice(Elaboratable):
             self.usb.connect.eq(self.connect),
             self.reset_detected.eq(self.usb.reset_detected),
             self.suspended.eq(self.usb.suspended),
+            self.current_speed.eq(self.usb.reset_sequencer.current_speed),
+            self.operating_mode.eq(self.usb.reset_sequencer.operating_mode),
+            self.termination_select.eq(self.usb.reset_sequencer.termination_select),
         ]
 
         if not self.with_utmi:
@@ -240,6 +246,9 @@ class USBBulkStreamerDevice(Elaboratable):
             streamer.connect,
             streamer.reset_detected,
             streamer.suspended,
+            streamer.current_speed,
+            streamer.operating_mode,
+            streamer.termination_select,
             streamer.stream_out_payload,
             streamer.stream_out_valid,
             streamer.stream_out_ready,

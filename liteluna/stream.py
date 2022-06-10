@@ -90,6 +90,9 @@ class USBStreamer(Module):
         self.connect = Signal()
         self.reset_detected = Signal()
         self.suspended = Signal()
+        self.current_speed = Signal(2)
+        self.operating_mode = Signal(2)
+        self.termination_select = Signal()
 
         port_map = {
             "i_usb_clk": ClockSignal(cd_usb),
@@ -97,6 +100,9 @@ class USBStreamer(Module):
             "i_connect": self.connect,
             "o_reset_detected": self.reset_detected,
             "o_suspended": self.suspended,
+            "o_current_speed": self.current_speed,
+            "o_operating_mode": self.operating_mode,
+            "o_termination_select": self.termination_select,
             "o_stream_out_payload": s2d_usb.payload.data,
             "o_stream_out_valid": s2d_usb.valid,
             "i_stream_out_ready": s2d_usb.ready,
