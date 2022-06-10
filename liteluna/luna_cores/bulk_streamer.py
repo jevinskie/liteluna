@@ -90,6 +90,8 @@ class USBBulkStreamerDevice(Elaboratable):
         self.usb = USBDevice(bus=self.bus, handle_clocking=False, data_clock=data_clock)
 
         self.connect = Signal()
+        self.reset_detected = Signal()
+        self.suspended = Signal()
 
         if with_utmi_la:
             for name, nbit, _ in UTMIInterface().layout:
@@ -156,7 +158,11 @@ class USBBulkStreamerDevice(Elaboratable):
         stream_out = self.stream_out_ep.stream
         stream_in = self.stream_in_ep.stream
 
-        m.d.comb += self.usb.connect.eq(self.connect)
+        m.d.comb += [
+            self.usb.connect.eq(self.connect),
+            self.reset_detected.eq(self.usb.reset_detected),
+            self.suspended.eq(self.usb.suspended),
+        ]
 
         if not self.with_utmi:
             ulpi = self.ulpi
@@ -232,6 +238,8 @@ class USBBulkStreamerDevice(Elaboratable):
         )
         streamer_ports = [
             streamer.connect,
+            streamer.reset_detected,
+            streamer.suspended,
             streamer.stream_out_payload,
             streamer.stream_out_valid,
             streamer.stream_out_ready,

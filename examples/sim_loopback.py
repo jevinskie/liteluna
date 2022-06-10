@@ -138,6 +138,93 @@ class SimSoC(SoCCore):
         self.sync += nclks.eq(nclks + 1)
 
         if False:
+            self.sync += [
+                If(
+                    nclks < 1024,
+                    Display(
+                        "time=%0t clk=%0d source valid: %0d",
+                        VerilogTime(),
+                        nclks,
+                        usb_sim_phy.source.valid,
+                    ),
+                )
+            ]
+
+        if True:
+            xcvr_select = self.fixup.utmi.xcvr_select
+            old_xcvr_select = Signal.like(xcvr_select)
+            self.sync += [
+                old_xcvr_select.eq(xcvr_select),
+                If(
+                    old_xcvr_select != xcvr_select,
+                    Display(
+                        "time=%0t clk=%0d xcvr_select: %02b", VerilogTime(), nclks, xcvr_select
+                    ),
+                ),
+            ]
+
+        if True:
+            reset_detected = self.usb.reset_detected
+            old_reset_detected = Signal.like(reset_detected)
+            self.sync += [
+                old_reset_detected.eq(reset_detected),
+                If(
+                    old_reset_detected != reset_detected,
+                    Display(
+                        "time=%0t clk=%0d reset_detected: %0d", VerilogTime(), nclks, reset_detected
+                    ),
+                ),
+            ]
+
+        if True:
+            suspended = self.usb.suspended
+            old_suspended = Signal.like(suspended)
+            self.sync += [
+                old_suspended.eq(suspended),
+                If(
+                    old_suspended != suspended,
+                    Display("time=%0t clk=%0d suspended: %0d", VerilogTime(), nclks, suspended),
+                ),
+            ]
+
+        if False:
+            source_valid = usb_sim_phy.source.valid
+            old_source_valid = Signal.like(source_valid)
+            self.sync += [
+                old_source_valid.eq(source_valid),
+                If(
+                    old_source_valid != source_valid,
+                    Display(
+                        "time=%0t clk=%0d source valid: %0d", VerilogTime(), nclks, source_valid
+                    ),
+                ),
+            ]
+
+        if False:
+            self.sync += [
+                If(
+                    nclks < 2048,
+                    Display(
+                        "time=%0t clk=%0d sink valid: %0d",
+                        VerilogTime(),
+                        nclks,
+                        usb_sim_phy.sink.valid,
+                    ),
+                )
+            ]
+
+        if True:
+            sink_valid = usb_sim_phy.source.valid
+            old_sink_valid = Signal.like(sink_valid)
+            self.sync += [
+                old_sink_valid.eq(sink_valid),
+                If(
+                    old_sink_valid != sink_valid,
+                    Display("time=%0t clk=%0d sink valid: %0d", VerilogTime(), nclks, sink_valid),
+                ),
+            ]
+
+        if False:
             td_state = self.usb.td_la_state
             old_td_state = Signal.like(td_state)
             self.sync += [

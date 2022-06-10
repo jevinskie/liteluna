@@ -83,17 +83,20 @@ class USBStreamer(Module):
             self.submodules.source_pipeline = stream.Pipeline(
                 self.source, self.source_cdc, self.source_usb
             )
-
         else:
             self.sink = self.sink_usb
             self.source = self.source_usb
 
         self.connect = Signal()
+        self.reset_detected = Signal()
+        self.suspended = Signal()
 
         port_map = {
             "i_usb_clk": ClockSignal(cd_usb),
             "i_usb_rst": ResetSignal(cd_usb),
             "i_connect": self.connect,
+            "o_reset_detected": self.reset_detected,
+            "o_suspended": self.suspended,
             "o_stream_out_payload": s2d_usb.payload.data,
             "o_stream_out_valid": s2d_usb.valid,
             "i_stream_out_ready": s2d_usb.ready,
