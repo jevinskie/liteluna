@@ -71,6 +71,19 @@ class Platform(SimPlatform):
 # Bench SoC ----------------------------------------------------------------------------------------
 
 
+def display_signal(mod, sig, name=None, fmt="%b"):
+    old_sig = Signal.like(sig)
+    if name is None:
+        name = sig.backtrace[-1][0]
+    mod.sync += [
+        old_sig.eq(sig),
+        If(
+            old_sig != sig,
+            Display(f"time=%0t clk=%0d {name}: {fmt}", VerilogTime(), mod.nclks, sig),
+        ),
+    ]
+
+
 class SimSoC(SoCCore):
     def __init__(self, sys_clk_freq=None, **kwargs):
         platform = Platform()
@@ -134,7 +147,7 @@ class SimSoC(SoCCore):
 
         from litescope import LiteScopeAnalyzer
 
-        nclks = Signal(64)
+        self.nclks = nclks = Signal(64)
         self.sync += nclks.eq(nclks + 1)
 
         if False:
@@ -150,7 +163,7 @@ class SimSoC(SoCCore):
                 )
             ]
 
-        if True:
+        if False:
             xcvr_select = self.fixup.utmi.xcvr_select
             old_xcvr_select = Signal.like(xcvr_select)
             self.sync += [
@@ -162,6 +175,7 @@ class SimSoC(SoCCore):
                     ),
                 ),
             ]
+        display_signal(self, self.fixup.utmi.xcvr_select)
 
         if True:
             reset_detected = self.usb.reset_detected
