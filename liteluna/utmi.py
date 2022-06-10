@@ -1,5 +1,6 @@
 from enum import IntEnum
 
+from litex.gen.fhdl.timer import *
 from litex.soc.cores.clock.common import ClockFrequency
 from migen import *
 from migen.genlib.misc import WaitTimer
@@ -55,7 +56,7 @@ class SimUTMIStreamFixup(Module):
         self.rx_valid_out = rx_valid_out = Signal()
         self.rx_active_out = rx_active_out = Signal()
 
-        self.hs_activated = hs_activated = Signal(reset=1)
+        self.hs_activated = hs_activated = Signal()
 
         self.comb += [
             # source
@@ -77,12 +78,69 @@ class SimUTMIStreamFixup(Module):
         ]
         self.comb += rx_active_out.eq(usb_sim_phy.source.valid | rx_valid_out)
 
-        self.submodules.reset_wait_timer = rst_tmr = WaitTimer(int(ClockFrequency(cd_usb) * 2.5e-3))
-        self.reset_fsm = fsm = ClockDomainsRenamer({cd: cd_usb})(FSM(reset_state="RESET"))
+        self.submodules.timer = tmr = MultiWaitTimer(
+            {
+                "bus_reset": int(ClockFrequency(cd_usb) * 10e-6),
+                "chirp": int(ClockFrequency(cd_usb) * 5e-6),
+                "toggle": int(ClockFrequency(cd_usb) * 125e-6),
+            }
+        )
+        self.submodules.reset_fsm = fsm = ClockDomainsRenamer(cd_usb)(FSM(reset_state="RESET"))
         fsm.act(
             "RESET",
-            rst_tmr.wait.eq(1),
+            Display("RESET"),
+            hs_activated.eq(0),
+            NextValue(hs_activated, 0),
+            tmr.wait.eq(1),
             utmi.line_state.eq(LineState.SE0),
-            If(rst_tmr.done, NextState("FS")),
+            If(tmr.bus_reset_done, NextState("FS")),
         )
-        fsm.act("FS", utmi.line_state.eq(LineState.FS_HS_J))
+        fsm.act(
+            "FS",
+            Display("FS"),
+            utmi.line_state.eq(LineState.FS_HS_J),
+            If(utmi.tx_valid, NextState("GET_CHIRP")),
+        )
+        self.n_kj = n_kj = Signal(max=3)
+        fsm.act(
+            "GET_CHIRP",
+            Display("GET_CHIRP"),
+            utmi.line_state.eq(LineState.FS_HS_J),
+            If(~utmi.tx_valid, NextValue(n_kj, 0), NextState("PRE_SEND_K")),
+        )
+        fsm.act("PRE_SEND_K", tmr.wait.eq(0), NextState("SEND_K"))
+        fsm.act(
+            "SEND_K",
+            tmr.wait.eq(1),
+            utmi.line_state.eq(LineState.FS_HS_K),
+            If(tmr.chirp_done, NextState("PRE_SEND_J")),
+        )
+        fsm.act("PRE_SEND_J", tmr.wait.eq(0), NextState("SEND_J"))
+        fsm.act(
+            "SEND_J",
+            tmr.wait.eq(1),
+            utmi.line_state.eq(LineState.FS_HS_J),
+            If(
+                tmr.chirp_done,
+                NextValue(n_kj, n_kj + 1),
+                If(n_kj == 3, NextState("PRE_HS_ACTIVATED")).Else(NextState("PRE_SEND_K")),
+            ),
+        )
+        fsm.act("PRE_HS_ACTIVATED", tmr.wait.eq(0), NextState("HS_ACTIVATED"))
+        fsm.act(
+            "HS_ACTIVATED",
+            If(1, Display("HS_ACTIVATED IF")),
+            Display("HS_ACTIVATED"),
+            tmr.wait.eq(1),
+            hs_activated.eq(1),
+            NextValue(hs_activated, 1),
+            utmi.line_state.eq(LineState.FS_HS_J),
+            If(tmr.toggle_done, NextState("TOGGLE_K")),
+        )
+        fsm.act("TOGGLE_K", utmi.line_state.eq(LineState.FS_HS_K), NextState("TOGGLE_J"))
+        fsm.act(
+            "TOGGLE_J",
+            tmr.wait.eq(0),
+            utmi.line_state.eq(LineState.FS_HS_J),
+            NextState("HS_ACTIVATED"),
+        )
