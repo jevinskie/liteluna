@@ -221,7 +221,7 @@ def main():
         builder = Builder(soc, **builder_kwargs)
         for i in range(2):
             build = i == 0
-            run = i == 1
+            run = i == 1 and builder.compile_gateware
             builder.build(
                 build=build,
                 run=run,

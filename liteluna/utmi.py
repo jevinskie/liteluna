@@ -131,7 +131,9 @@ class SimUTMIStreamFixup(Module):
         fsm.act(
             "HS_ACTIVATED",
             If(rx_data_out == 0xAA, Display("HS_ACTIVATED IF"), self.fart.eq(1)),
-            Display("HS_ACTIVATED"),
+            Display("HS_ACTIVATED comb"),
+            DisplaySync("HS_ACTIVATED sync"),
+            DisplayEnter("HS_ACTIVATED enter"),
             tmr.wait.eq(1),
             hs_activated.eq(1),
             NextValue(hs_activated, 1),
