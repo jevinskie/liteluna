@@ -10,6 +10,7 @@ from liteeth.phy.model import LiteEthPHYModel
 from litex.build.generic_platform import *
 from litex.build.sim import SimPlatform
 from litex.build.sim.config import SimConfig
+from litex.gen.fhdl.sim import Monitor, MonitorArg, MonitorFSMState
 from litex.gen.fhdl.utils import get_signals
 from litex.gen.fhdl.verilog import VerilogTime
 from litex.soc.cores.clock.common import ClockFrequency
@@ -154,6 +155,20 @@ class SimSoC(SoCCore):
         display_signal(self, self.usb.current_speed)
         display_signal(self, self.usb.operating_mode)
         display_signal(self, self.usb.termination_select)
+
+        # Monitor("tx_data: %0b rx_data: %0b", tx_data, rx_data)
+        # Monitor("tick: {tck} tx_data: {txd} rx_data: %0b",
+        #     MonitorArg("tck", nclks, "%0d", False),
+        #     MonitorArg("txd", tx_data, "%0b"),
+        #     rx_data,
+        # )
+
+        # self.submodules.mon1 = Monitor("suspended: %0b cs: %0b", self.usb.suspended, self.usb.current_speed)
+        # self.submodules.mon2 = Monitor("clk: %0d rx_data: {rxd} tx_data: %0b",
+        #     MonitorArg(self.nclks, on_change=False),
+        #     MonitorArg(self.fixup.utmi.rx_data, "rxd", "%0b"),
+        #     self.fixup.utmi.tx_data
+        # )
 
         # display_signal(self, usb_sim_phy.source.valid)
         # display_signal(self, usb_sim_phy.sink.valid)

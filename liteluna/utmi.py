@@ -1,5 +1,6 @@
 from enum import IntEnum
 
+from litex.gen.fhdl.sim import Monitor, MonitorArg, MonitorFSMState
 from litex.gen.fhdl.timer import *
 from litex.soc.cores.clock.common import ClockFrequency
 from migen import *
@@ -88,7 +89,6 @@ class SimUTMIStreamFixup(Module):
         self.submodules.reset_fsm = fsm = ClockDomainsRenamer(cd_usb)(FSM(reset_state="RESET"))
         fsm.act(
             "RESET",
-            Display("RESET"),
             hs_activated.eq(0),
             NextValue(hs_activated, 0),
             tmr.wait.eq(1),
@@ -97,14 +97,12 @@ class SimUTMIStreamFixup(Module):
         )
         fsm.act(
             "FS",
-            Display("FS"),
             utmi.line_state.eq(LineState.FS_HS_J),
             If(utmi.tx_valid, NextState("GET_CHIRP")),
         )
         self.n_kj = n_kj = Signal(max=3)
         fsm.act(
             "GET_CHIRP",
-            Display("GET_CHIRP"),
             utmi.line_state.eq(LineState.FS_HS_J),
             If(~utmi.tx_valid, NextValue(n_kj, 0), NextState("PRE_SEND_K")),
         )
@@ -127,13 +125,8 @@ class SimUTMIStreamFixup(Module):
             ),
         )
         fsm.act("PRE_HS_ACTIVATED", tmr.wait.eq(0), NextState("HS_ACTIVATED"))
-        self.fart = Signal()
         fsm.act(
             "HS_ACTIVATED",
-            If(rx_data_out == 0xAA, Display("HS_ACTIVATED IF"), self.fart.eq(1)),
-            Display("HS_ACTIVATED comb"),
-            DisplaySync("HS_ACTIVATED sync"),
-            DisplayEnter("HS_ACTIVATED enter"),
             tmr.wait.eq(1),
             hs_activated.eq(1),
             NextValue(hs_activated, 1),
@@ -147,3 +140,5 @@ class SimUTMIStreamFixup(Module):
             utmi.line_state.eq(LineState.FS_HS_J),
             NextState("HS_ACTIVATED"),
         )
+
+        self.submodules += MonitorFSMState(fsm, "USB reset FSM", time=True, ticks=True)
